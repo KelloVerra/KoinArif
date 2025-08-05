@@ -3,7 +3,7 @@
 // Components
 import Footer from '../comps/Footer'
 
-function NotFound() {
+export default function NotFound() {
 
   return (
     <>
@@ -11,5 +11,3 @@ function NotFound() {
     </>
   )
 }
-
-export default NotFound

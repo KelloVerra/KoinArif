@@ -8,7 +8,7 @@ import Footer from '../comps/Footer'
 // import { useDispatch, useSelector } from 'react-redux'
 // import { dec, inc } from '../glob/state'
 
-function Landing() {
+export default function Landing() {
   // const [count, setCount] = useState(0)
   // const t = useSelector(s => s.test.value);
   // const dispatch = useDispatch();
@@ -23,5 +23,3 @@ function Landing() {
     </>
   )
 }
-
-export default Landing

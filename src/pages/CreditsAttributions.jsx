@@ -6,7 +6,7 @@ import { useState } from 'react'
 import Navbar from '../comps/Navbar'
 import Footer from '../comps/Footer'
 
-function CreditsAttributions() {
+export default function CreditsAttributions() {
   const [count, setCount] = useState(0)
 
   return (
@@ -26,5 +26,3 @@ function CreditsAttributions() {
     </>
   )
 }
-
-export default CreditsAttributions
