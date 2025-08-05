@@ -89,16 +89,16 @@ export const {incrementMaterialLevel, addFamiliarTerms} = materialSlice.actions;
 const userSlice = createSlice({
     name: 'user',
     initialState: { value: {
-        has_started: false,
-        has_finish_tutorial: false,
+        hasStarted: false,
+        hasFinishedTutorial: false,
     }},
     reducers: {
         setUserHasStarted: (state, action) => {
-            state.value.has_started = action.payload
+            state.value.hasStarted = action.payload
         },
 
         setUserHasFinishTutorial: (state, action) => {
-            state.value.has_finish_tutorial = action.payload;
+            state.value.hasFinishedTutorial = action.payload;
         },
     }
 });

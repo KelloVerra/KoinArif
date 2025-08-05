@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router'
 
-import { appStore, persistAppStore } from './glob/state'
-
 
 // Import Pages
 import Landing from './pages/Landing'
@@ -14,32 +12,26 @@ import NotFound from './pages/NotFound'
 
 
 // Utils
-import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
+import { useSelector } from 'react-redux'
 
 
 
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const userState = useSelector(state => state.user.value);
 
   return (
     <>
-      <Provider store={appStore}>
-        <PersistGate loading={null} persistor={persistAppStore}>
-          <BrowserRouter>
-            <Routes>
-              <Route path='/' element={<Landing />} />
-              <Route path='/home' element={<Home />} />
-              <Route path='/material' element={<Material />} />
-              <Route path='/quiz' element={<QuizPage />} />
-              <Route path='/credit' element={<CreditsAttributions />} />
-              <Route path='*' element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </PersistGate>
-      </Provider>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={userState.hasStarted ? <Home /> : <Landing />} />
+          <Route path='/material' element={<Material />} />
+          <Route path='/quiz' element={<QuizPage />} />
+          <Route path='/credit' element={<CreditsAttributions />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
