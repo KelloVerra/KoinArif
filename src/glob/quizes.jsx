@@ -1,6 +1,22 @@
 
-// INIT
-const QUIZES = {}
+// QUIZ MATERIAL 0
+const QUIZES = {
+    'q_m_0_0': _ =>{ return {
+        error: false,
+        element: (<>
+            <h1>Quiz Material 0 Variant 0</h1>
+        </>)
+        }
+    },
+    'q_m_0_1': _ =>{ return {
+        error: false,
+        element: (<>
+            <h1>Quiz Material 0 Variant 1</h1>
+        </>)
+        }
+    }
+}
+
 
 // UNKNOWN QUIZ
 function q_unknown() {
@@ -13,40 +29,10 @@ function q_unknown() {
 }
 
 
-// QUIZ MATERIAL 0
-function q_m_0_0() {
-    return {
-        error: false,
-        element: (<>
-            <h1>Quiz Material 0 Variant 0</h1>
-        </>)
-    }
-}
-function q_m_0_1() {
-    return {
-        error: false,
-        element: (<>
-            <h1>Quiz Material 0 Variant 1</h1>
-        </>)
-    }
-}
-registerQuizes(
-    q_m_0_0, 
-    q_m_0_1
-)
-
-
 // GET
 export function getQuizById(id) {
     // Gatekeep unknown materials
     if(!Object.keys(QUIZES).includes(id)) return q_unknown()
 
     return QUIZES[id]()
-}
-
-function registerQuizes(...func) {
-    let i = 0
-    func.forEach(v =>
-        QUIZES[v.name] = v
-    )
 }

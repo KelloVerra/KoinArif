@@ -1,6 +1,20 @@
-
-// INIT
-const MATERIALS = []
+// MATERIALS
+const MATERIALS = [
+    _ => { return { // material 1
+        error: false,
+        element: (<>
+            <h1>Material 1</h1>
+        </>)
+        }
+    },
+    _ => { return { // material 2
+        error: false,
+        element: (<>
+            <h1>Material 2</h1>
+        </>)
+        }
+    }
+]
 
 // UNKNOWN MATERIAL
 function m_unknown() {
@@ -11,19 +25,6 @@ function m_unknown() {
         </>)
     }
 }
-
-
-
-// MATERIAL 0
-function m_0() {
-    return {
-        error: false,
-        element: (<>
-            <h1>Material 1</h1>
-        </>)
-    }
-}
-MATERIALS.push(m_0)
 
 
 // GET

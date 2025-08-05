@@ -9,7 +9,7 @@ import Landing from './pages/Landing'
 import CreditsAttributions from './pages/CreditsAttributions'
 import Home from './pages/Home'
 import Material from './pages/Material'
-import Quiz from './pages/Quiz'
+import QuizPage from './pages/QuizPage'
 import NotFound from './pages/NotFound'
 
 
@@ -33,7 +33,7 @@ function App() {
               <Route path='/' element={<Landing />} />
               <Route path='/home' element={<Home />} />
               <Route path='/material' element={<Material />} />
-              <Route path='/quiz' element={<Quiz />} />
+              <Route path='/quiz' element={<QuizPage />} />
               <Route path='/credit' element={<CreditsAttributions />} />
               <Route path='*' element={<NotFound />} />
             </Routes>

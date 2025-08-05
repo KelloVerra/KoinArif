@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import persistReducer from "redux-persist/es/persistReducer"
+import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import storage from "redux-persist/lib/storage"
 
@@ -14,22 +14,104 @@ const persistConfig = {
 
 
 // Reducer slices
-// const testSlice = createSlice({
-//     name: 'test',
-//     initialState: { value: 0 },
-//     reducers: {
-//         inc: s => {s.value += 1},
-//         dec: s => {s.value -= 1},
-//     }
-// });
-// export const {inc, dec} = testSlice.actions;
+const quizSlice = createSlice({
+    name: 'quiz',
+    initialState: { value: {
+        currentGeneratedQuizIndex: 0,
+        generatedQuizes: [],
+        familiarQuizes: [],
+        savedData: [],
+    }},
+    reducers: {
+        advanceQuiz: (state, action) => { //  advance quiz index
+            const nextIndex = state.value.currentGeneratedQuizIndex + 1;
+            if(nextIndex < state.value.generatedQuizes.length)
+                state.value.currentGeneratedQuizIndex = nextIndex
+            // else TODO: trigger finish
+        },
+
+        resetQuiz: (state, action) => { //no payload
+                state.value.currentGeneratedQuizIndex = 0
+            state.value.generatedQuizes.length = 0
+        },
+
+        generateQuiz: (state, action) => { // payload is quiz generation rules
+            // TBD
+        },
+
+        addFamiliarQuizID: (state, action) => {// payload is quiz type
+            action.payload.forEach(v => {
+                if (!state.value.familiarQuizes.includes(v)) // if new quiz type, then push
+                    state.value.familiarQuizes.push(v)
+            });
+        },
+
+        addSavedQuizData: (state, action) => {  // payload is quiz data
+            action.payload.forEach(v => {
+                if (!state.value.savedData.includes(v)) // prevent duplicate  quiz type
+                    state.value.savedData.push(v);
+            });
+            
+        },
+
+        clearSavedQuizData: (state, action) => { // no payload
+            state.value.savedData.length = 0
+        },
+    }
+});
+export const {generateQuiz, addFamiliarQuizID, addSavedQuizData, clearSavedQuizData} = quizSlice.actions;
+
+const materialSlice = createSlice({
+    name: 'material',
+    initialState: { value: {
+        materialLevel: 0,
+        familiarTerms: [],
+    }},
+    reducers: {
+        incrementMaterialLevel: (state, action) => { // payload is addition of levels
+            state.value.materialLevel += action.payload;
+        },
+
+        resetMaterialLevel: (state, action) => { // no payload
+            state.value.materialLevel = 0
+        },
+
+        addFamiliarTerms: (state, action) => { // payload is a list of new terms
+            action.payload.forEach(v => {
+                if (!state.value.familiarTerms.includes(v)) // if new term, then push
+                    state.value.familiarTerms.push(v)
+            });
+        },
+    }
+});
+export const {incrementMaterialLevel, addFamiliarTerms} = materialSlice.actions;
+
+const userSlice = createSlice({
+    name: 'user',
+    initialState: { value: {
+        has_started: false,
+        has_finish_tutorial: false,
+    }},
+    reducers: {
+        setUserHasStarted: (state, action) => {
+            state.value.has_started = action.payload
+        },
+
+        setUserHasFinishTutorial: (state, action) => {
+            state.value.has_finish_tutorial = action.payload;
+        },
+    }
+});
+export const {setUserHasStarted, setUserHasFinishTutorial} = userSlice.actions;
 
 
 
 
 // Combine
 const rootReducers = combineReducers({
-    // test: testSlice.reducer
+    quiz: quizSlice.reducer,
+    material: materialSlice.reducer,
+    user: userSlice.reducer,
 });
 const persistentReducers = persistReducer(
     persistConfig,
