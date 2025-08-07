@@ -21,22 +21,37 @@ const quizSlice = createSlice({
         generatedQuizes: [],
         familiarQuizes: [],
         savedData: [],
+        quizCompletionRecapData: {finished: false},
     }},
     reducers: {
-        advanceQuiz: (state, action) => { //  advance quiz index
+        advanceQuiz: (state, action) => { // TODO: budget logic when answer quiz
             const nextIndex = state.value.currentGeneratedQuizIndex + 1;
             if(nextIndex < state.value.generatedQuizes.length)
-                state.value.currentGeneratedQuizIndex = nextIndex
-            // else TODO: trigger finish
+                state.value.currentGeneratedQuizIndex = nextIndex;
+        },
+
+        completeQuiz: (state, action) => { // TODO: Budget received calculations etc
+            state.value.quizCompletionRecapData = {finished: true};
         },
 
         resetQuiz: (state, action) => { //no payload
-                state.value.currentGeneratedQuizIndex = 0
-            state.value.generatedQuizes.length = 0
+            state.value.currentGeneratedQuizIndex = 0;
+            state.value.generatedQuizes.length = 0;
+            state.value.quizCompletionRecapData = {finished: false};
         },
 
-        generateQuiz: (state, action) => { // payload is quiz generation rules
-            // TBD
+        generateQuiz: (state, action) => { // payload is quiz generation rules, TBD
+            const questions = [];
+            const quizLen = 5; // TBD
+
+            const data = action.payload;
+
+            for (let i = 0; i < quizLen; i++) {
+                const question = {materialId: data.materialId, quizVariant: 0, data: {}}; // generative questions TBD
+                questions.push(question);
+            }
+            
+            state.value.generatedQuizes = [...questions]
         },
 
         addFamiliarQuizID: (state, action) => {// payload is quiz type
@@ -59,7 +74,7 @@ const quizSlice = createSlice({
         },
     }
 });
-export const {generateQuiz, addFamiliarQuizID, addSavedQuizData, clearSavedQuizData} = quizSlice.actions;
+export const {advanceQuiz, resetQuiz, completeQuiz, generateQuiz, addFamiliarQuizID, addSavedQuizData, clearSavedQuizData} = quizSlice.actions;
 
 const materialSlice = createSlice({
     name: 'material',

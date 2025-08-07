@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getMaterialByIndex } from '../glob/materials'
-import { addHistory, incrementMaterialLevel} from '../glob/state'
+import { addHistory, generateQuiz, incrementMaterialLevel, resetQuiz} from '../glob/state'
 
 // import './Material.css'
 
@@ -40,9 +40,13 @@ export default function material() {
     dispatch(addHistory({
         type: 'quiz',
         data: {
-          material_id: receivedMaterialData.id,
+          materialId: receivedMaterialData.id,
         },
       }));
+    dispatch(resetQuiz())
+    dispatch(generateQuiz({
+      materialId: receivedMaterialData.id,
+    }))
     navigate("/quiz");
   };
 
