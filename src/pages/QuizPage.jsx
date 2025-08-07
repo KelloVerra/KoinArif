@@ -13,6 +13,8 @@ import Navbar from '../comps/Navbar'
 
 export default function Quiz() {
 
+  // TODO: navigate to landing if user hasnt started
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const quizState = useSelector(state => state.quiz.value)
 

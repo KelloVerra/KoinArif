@@ -91,14 +91,22 @@ const userSlice = createSlice({
     initialState: { value: {
         hasStarted: false,
         hasFinishedTutorial: false,
+        history: [],
     }},
     reducers: {
-        setUserHasStarted: (state, action) => {
+        setUserHasStarted: (state, action) => { // Set user activity
             state.value.hasStarted = action.payload
         },
 
-        setUserHasFinishTutorial: (state, action) => {
+        setUserHasFinishTutorial: (state, action) => { // Set user activity
             state.value.hasFinishedTutorial = action.payload;
+        },
+        
+        addHistory: (state, action) => { // Records user activity, maximum of 2 actions recorded
+            // PAYLOAD FORMAT {type:'quiz',data:{}}
+            if (state.value.history.length >= 3)
+                state.value.history.pop();
+            state.value.history.append(action.payload);
         },
     }
 });

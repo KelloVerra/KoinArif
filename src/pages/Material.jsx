@@ -13,8 +13,9 @@ import Navbar from '../comps/Navbar'
 
 export default function material() {
 
-  const dispatch = useDispatch();
+  // TODO: navigate to landing if user hasnt started
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const materialState = useSelector(state => state.material.value)
 
   const [receivedMaterialData, setReceivedMaterialData] = useState(getMaterialByIndex(getMaterialByIndex(materialState.materialLevel)));
