@@ -16,7 +16,10 @@ export default function Quiz() {
   // TODO: navigate to landing if user hasnt started
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const quizState = useSelector(state => state.quiz.value)
+  
+  const userState = useSelector(stat => stat.user.value);
+  const materialState = useSelector(stat => stat.material.value);
+  const quizState = useSelector(stat => stat.quiz.value);
 
   // TODO: change quiz data formatting
   const [receivedQuizData, setReceivedQuizData] = useState(getQuizById(quizState.generatedQuizes[quizState.currentGeneratedQuizIndex]));

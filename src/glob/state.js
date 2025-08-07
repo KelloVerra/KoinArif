@@ -84,13 +84,14 @@ const materialSlice = createSlice({
         },
     }
 });
-export const {incrementMaterialLevel, addFamiliarTerms} = materialSlice.actions;
+export const {incrementMaterialLevel, resetMaterialLevel, addFamiliarTerms} = materialSlice.actions;
 
 const userSlice = createSlice({
     name: 'user',
     initialState: { value: {
         hasStarted: false,
         hasFinishedTutorial: false,
+        budget: 10,
         history: [],
     }},
     reducers: {
@@ -101,16 +102,28 @@ const userSlice = createSlice({
         setUserHasFinishTutorial: (state, action) => { // Set user activity
             state.value.hasFinishedTutorial = action.payload;
         },
+
+        addUserBudget: (state, action) => { // Adds certain amount of budget points
+            state.value.budget += action.payload
+        },
+
+        resetUserBudget: (state, action) => { // No playload
+            state.value.budget = 10;
+        },
         
         addHistory: (state, action) => { // Records user activity, maximum of 2 actions recorded
             // PAYLOAD FORMAT {type:'quiz',data:{}}
             if (state.value.history.length >= 3)
                 state.value.history.pop();
-            state.value.history.append(action.payload);
+            state.value.history.unshift(action.payload);
+        },
+
+        resetHistory: (state, action) => { // no payloda
+            state.value.history.length = 0
         },
     }
 });
-export const {setUserHasStarted, setUserHasFinishTutorial} = userSlice.actions;
+export const {setUserHasStarted, setUserHasFinishTutorial, addUserBudget, resetUserBudget, addHistory, resetHistory} = userSlice.actions;
 
 
 
@@ -139,3 +152,14 @@ export const appStore = configureStore({
     })
 });
 export const persistAppStore = persistStore(appStore);
+
+
+
+// Resetter
+export const resetStore = _ => {
+    appStore.dispatch(setUserHasStarted(false))
+    appStore.dispatch(setUserHasFinishTutorial(false))
+    appStore.dispatch(resetMaterialLevel())
+    appStore.dispatch(resetUserBudget(10))
+    appStore.dispatch(resetHistory())
+}

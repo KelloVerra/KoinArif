@@ -1,17 +1,19 @@
 // MATERIALS
 const MATERIALS = [
     _ => { return { // material 1
+        id:0,
         error: false,
         element: (<>
             <h1>Material 1</h1>
-        </>)
+        </>),
         }
     },
     _ => { return { // material 2
+        id:1,
         error: false,
         element: (<>
             <h1>Material 2</h1>
-        </>)
+        </>),
         }
     }
 ]

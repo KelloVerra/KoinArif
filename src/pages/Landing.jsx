@@ -27,7 +27,7 @@ export default function Landing() {
         <h1>Pengalaman Literasi Finansial Dibikin seru.</h1>
         <h2>Bersama Koin Arif, mari mengasah pengetahuan literasimu dengan cara yang menyenangkan.</h2>
         <button onClick={startLearning}>Mulai belajar</button>
-      <button onClick={goToCredits}>Kredit & Atribusi</button>
+        <button onClick={goToCredits}>Kredit & Atribusi</button>
       </main>
       <Footer />
     </>

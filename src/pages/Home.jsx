@@ -1,6 +1,6 @@
 // import './Home.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserHasStarted } from '../glob/state';
+import { addHistory, resetStore, setUserHasStarted } from '../glob/state';
 import { useNavigate } from 'react-router';
 
 // Components
@@ -16,19 +16,28 @@ export default function Home() {
   const dispatch = useDispatch();
 
   const quitLearning = () => {
-    dispatch(setUserHasStarted(false))
-  };
-  const enterMaterial = () => {
-    navigate("/material");
+    resetStore();
   };
   const goToCredits = () => {
     navigate("/credit");
   };
 
+  // Start material
+  const startMaterial = (id) => {
+    dispatch(addHistory({
+        type: 'material',
+        data: {
+          material_id: id,
+        },
+      }));
+    navigate("/material");
+  };
+
   return (
     <>
       <h1>Home</h1>
-      <button onClick={enterMaterial}>Masuk Materi</button>
+      <button onClick={_ => startMaterial(0)}>Masuk Materi 1</button>
+      <button onClick={_ => startMaterial(1)}>Masuk Materi 2</button>
       <button onClick={goToCredits}>Kredit & Atribusi</button>
       <button onClick={quitLearning}>DEBUG Keluar</button>
     </>
