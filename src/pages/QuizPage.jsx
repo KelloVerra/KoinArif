@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { buildQuizId, getQuizById } from '../glob/quizes'
+import { getQuizFormatProcessorByFormatIndex, getQuizTemplateByIndex } from '../glob/quizes'
 import { advanceQuiz, completeQuiz, generateQuiz, resetQuiz } from '../glob/state';
 
 // import './QuizPage.css'
@@ -22,27 +22,10 @@ export default function QuizPage() {
   const materialState = useSelector(stat => stat.material.value);
   const quizState = useSelector(stat => stat.quiz.value);
 
-  // TODO: change quiz data formatting
-  const [receivedQuizData, setReceivedQuizData] = useState(getQuizById(quizState.generatedQuizes[quizState.currentGeneratedQuizIndex]));
-
-  // quiz logic
-  useEffect(_ => {
-
-    const qIndex = quizState.currentGeneratedQuizIndex;
-    const genQuizData = quizState.generatedQuizes[qIndex];
-    const quizExtraData = genQuizData.data;
-    const quizId = buildQuizId(genQuizData.materialId, genQuizData.quizVariant);
-
-    const processedQuizData = getQuizById(quizId);
-    
-    if (processedQuizData.error)
-      console.log(`error while obtaining quiz id of ${quizId || 'undefined'}`)
-
-    setReceivedQuizData(processedQuizData);
-  }, [quizState]);
+  const currentQuiz = quizState.generatedQuizes[quizState.currentGeneratedQuizIndex];
 
 
-  // TODO: Answer options
+  // TODO: Collect budget
   const nextQuestion = () => {
     dispatch(advanceQuiz())
     
@@ -54,24 +37,51 @@ export default function QuizPage() {
     navigate("/");
   };
 
-
   return (
     <>
       {
         quizState.quizCompletionRecapData.finished ?
         <Finish onConfirmEnd={confirmEnd} /> :
-        <Quiz index={quizState.currentGeneratedQuizIndex} quizData={receivedQuizData} onNextQuestion={nextQuestion} />
+        <QuizInterface state={quizState} quiz={currentQuiz} onNextQuestion={nextQuestion} />
       }
     </>
   )
 }
 
-function Quiz({index, quizData, onNextQuestion}) {
-  return (<>
-      <h1>Q. {index+1}</h1>
-        {quizData.element}
-      <button onClick={_ => onNextQuestion()}>Next</button>
-  </>);
+function QuizInterface({state, quiz, onNextQuestion}) {
+  const selectQuizFormat = () => {
+    switch (quiz.format) {
+      case 0:
+        return <MultipleChoiceQuiz data={quiz} onNextQuestion={onNextQuestion} />
+      case 1:
+        return <JodohkanQuiz data={quiz} onNextQuestion={onNextQuestion} />;
+    }
+  }
+
+  return (
+    <>
+      <h1>Q. {state.currentGeneratedQuizIndex+1}</h1>
+      {selectQuizFormat()}
+    </>
+  );
+}
+
+function MultipleChoiceQuiz({data, onNextQuestion}) {
+  const choose = ind => {
+    const selOption = data.options[ind];
+    const processor = getQuizFormatProcessorByFormatIndex(selOption.parent_format);
+    console.log(processor.is_options_correct(selOption));
+    onNextQuestion();
+  }
+  
+  return (
+    <>
+      <h1>{data.question}</h1>
+      <button onClick={_ => choose(0)}>{data.options[0].option} {data.options[0].desc} </button>
+      <button onClick={_ => choose(1)}>{data.options[1].option} {data.options[1].desc} </button>
+      <button onClick={_ => choose(2)}>{data.options[2].option} {data.options[2].desc} </button>
+    </>
+  );
 }
 
 function Finish({onConfirmEnd}) {

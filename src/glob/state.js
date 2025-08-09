@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import storage from "redux-persist/lib/storage"
+import { getAllQuizTemplates, getQuizFormatProcessorByFormatIndex, getQuizTemplateByIndex } from "./quizes";
 
 
 // Config (NOTE: No modify)
@@ -30,7 +31,7 @@ const quizSlice = createSlice({
                 state.value.currentGeneratedQuizIndex = nextIndex;
         },
 
-        completeQuiz: (state, action) => { // TODO: Budget received calculations etc
+        completeQuiz: (state, action) => { // TODO: Budget received calculations etc w/ payload infos
             state.value.quizCompletionRecapData = {finished: true};
         },
 
@@ -45,12 +46,33 @@ const quizSlice = createSlice({
             const quizLen = 5; // TBD
 
             const data = action.payload;
+            const quizDatabase = getAllQuizTemplates();
+            
 
             for (let i = 0; i < quizLen; i++) {
-                const question = {materialId: data.materialId, quizVariant: 0, data: {}}; // generative questions TBD
+                // RANDOMIZATION TBD
+                const selectedQuestion = getQuizTemplateByIndex(Math.round(Math.random()));
+                const selectedTermData = data.material.terms[Math.round(Math.random())];
+                
+
+                // Process selected quiz
+                const processor = getQuizFormatProcessorByFormatIndex(selectedQuestion.format);
+
+                const optionsData = processor.options_generator({questionData: selectedQuestion, termData: selectedTermData, familiarTermData: data.material.terms});
+                const questionString = processor.question_template_processor({questionType: selectedQuestion.type, templates: selectedQuestion.templates, materialTermsData: selectedTermData});
+
+                
+                // generative questions TBD (TODO: QUESTION LOAD CALCULATION & REFERENCE OLDER MATERIALS)
+                const question = {
+                    format: selectedQuestion.format,
+                    type: selectedQuestion.type,
+                    question: questionString,
+                    options: optionsData,
+                };
                 questions.push(question);
             }
             
+            console.log(questions);
             state.value.generatedQuizes = [...questions]
         },
 

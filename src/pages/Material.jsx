@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getMaterialByIndex } from '../glob/materials'
+import { getMaterialByIndex } from '../glob/materials/main'
 import { addHistory, generateQuiz, incrementMaterialLevel, resetQuiz} from '../glob/state'
 
 // import './Material.css'
@@ -21,7 +21,7 @@ export default function material() {
   const materialState = useSelector(stat => stat.material.value);
   const quizState = useSelector(stat => stat.quiz.value);
 
-  const [receivedMaterialData, setReceivedMaterialData] = useState({});
+  const [receivedMaterialData, setReceivedMaterialData] = useState({id: null, error: false, component: _ => {}});
 
   // update material
   useEffect(_ => {
@@ -38,14 +38,21 @@ export default function material() {
   // Callback
   const startQuiz = () => {
     dispatch(addHistory({
-        type: 'quiz',
-        data: {
-          materialId: receivedMaterialData.id,
+      type: 'quiz',
+      data: {
+        material: {
+          id: receivedMaterialData.id,
+          terms: receivedMaterialData.terms,
         },
-      }));
+      },
+    }));
+
     dispatch(resetQuiz())
     dispatch(generateQuiz({
-      materialId: receivedMaterialData.id,
+        material: {
+          id: receivedMaterialData.id,
+          terms: receivedMaterialData.terms,
+        },
     }))
     navigate("/quiz");
   };
@@ -53,10 +60,11 @@ export default function material() {
   const goHome = () => {
     navigate("/");
   };
+  
 
   return (
     <>
-      {receivedMaterialData.element}
+      {receivedMaterialData.component()}
       <button onClick={startQuiz}>Latihan Kuis</button>
       <button onClick={goHome}>Balik</button>
     </>
