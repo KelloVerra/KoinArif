@@ -13,6 +13,8 @@ import NotFound from './pages/NotFound'
 
 // Utils
 import { useSelector } from 'react-redux'
+import Navbar from './comps/Navbar'
+import Footer from './comps/Footer'
 
 
 
@@ -24,6 +26,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <Navbar />
         <Routes>
           <Route path='/' element={userState.hasStarted ? <Home /> : <Landing />} />
           <Route path='/material' element={<Material />} />
@@ -31,6 +34,7 @@ function App() {
           <Route path='/credit' element={<CreditsAttributions />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   )

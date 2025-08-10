@@ -1,6 +1,6 @@
 // import './Home.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { addHistory, resetStore, setUserHasStarted } from '../glob/state';
+import { addHistory, } from '../glob/state';
 import { useNavigate } from 'react-router';
 
 // Components
@@ -15,9 +15,6 @@ export default function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const quitLearning = () => {
-    resetStore();
-  };
   const goToCredits = () => {
     navigate("/credit");
   };
@@ -39,7 +36,6 @@ export default function Home() {
       <button onClick={_ => startMaterial(0)}>Masuk Materi 1</button>
       <button onClick={_ => startMaterial(1)}>Masuk Materi 2</button>
       <button onClick={goToCredits}>Kredit & Atribusi</button>
-      <button onClick={quitLearning}>DEBUG Keluar</button>
     </>
   )
 }

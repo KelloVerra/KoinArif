@@ -8,12 +8,24 @@
   --col-accent0: #B444FF; 
   --col-accent1: #FFC370; 
   color-scheme: dark;
-  background-color: var(--primary);
+  background-color: var(--col-primary);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  margin: 0 auto;
+  padding-top: 2.75rem;
+  
+  width: 100vw;
+  max-width: 1280px;
+  height: fit-content;
+  min-height: 100vh;
+  
+  text-align: center;
 }
 
 body {
