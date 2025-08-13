@@ -7,6 +7,10 @@
   --col-secondary: #ffffff;
   --col-accent0: #B444FF; 
   --col-accent1: #FFC370; 
+
+  --header-font: "Days One", Verdana, Geneva, sans-serif;
+  --paragraph-font: "Kodchasan", Helvetica, Arial, sans-serif;
+
   color-scheme: dark;
   background-color: var(--col-primary);
 
@@ -18,7 +22,7 @@
 
 #root {
   margin: 0 auto;
-  padding-top: 2.75rem;
+  padding-top: 5rem;
   
   width: 100vw;
   max-width: 1280px;

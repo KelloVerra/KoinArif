@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetStore, setUserHasStarted } from '../glob/state';
 
-import './Navbar.css'
+import styles from './Navbar.module.css'
 
 import logo from '/CompactLogo.svg'
 import budgetLogo from '/Budget3D.svg'
@@ -16,8 +16,8 @@ export default function Navbar() {
 
   return (
     <header>
-      <div className="content">
-        <img className="logo" src={logo}/>
+      <div className={styles["content"]}>
+        <img className={styles["logo"]} src={logo}/>
         {userState.hasStarted ? <LoggedIn /> : <LoggedOut />}
       </div>
     </header>
@@ -36,9 +36,9 @@ function LoggedOut({}) {
   };
 
   return (
-    <div className="right-content">
-      <button className="credits" onClick={goToCredits}>Kredit & Atribusi</button>
-      <button className="start-button" onClick={startLearning}>Mulai Belajar</button>
+    <div className={styles["right-content"]}>
+      <a className={styles["credits"]} onClick={goToCredits}>Kredit & Atribusi</a>
+      <a className={styles["start"]} onClick={startLearning}>Mulai Belajar</a>
     </div>
   )
 }
@@ -54,10 +54,10 @@ function LoggedIn({}) {
   };
 
   return (
-    <div className="right-content">
+    <div className={styles["right-content"]}>
       <UserStat />
-      <button className="credits" onClick={goToCredits}>Kredit & Atribusi</button>
-      <button className="quit-button" onClick={quitLearning}>Keluar</button>
+      <a className={styles["credits"]} onClick={goToCredits}>Kredit & Atribusi</a>
+      <a className={styles["quit"]} onClick={quitLearning}>Log Out</a>
     </div>
   )
 }
@@ -68,12 +68,12 @@ function UserStat({}) {
   const materialState = useSelector(state => state.material.value);
 
   return (
-    <div className="user-stat-container">
-      <div className='stat-container'>
+    <div className={styles["user-stat-container"]}>
+      <div className={styles["stat-container"]}>
         <img src={budgetLogo} />
         <p>{userState.budget} Budget</p>
       </div>
-      <div className='stat-container'>
+      <div className={styles["stat-container"]}>
         <img src={materialLevelLogo} />
         <p>Level {materialState.materialLevel+1}</p>
       </div>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetStore, setUserHasStarted } from '../glob/state';
 
-import './Footer.css'
+import styles from './Footer.module.css'
 
 import logo from '/CompactLogo.svg'
 import budgetLogo from '/Budget3D.svg'
@@ -27,18 +27,18 @@ export default function Footer() {
 
   return (
     <footer>
-      <div className="content">
-        <div className='upper'>
-          <img className="logo" src={logo}/>
+      <div className={styles['content']}>
+        <div className={styles['upper']}>
+          <img className={styles["logo"]} src={logo}/>
           <p>Koin Arif adalah platform financial education yang dapat mengasah pengetahuan literasimu dalam cara yang menyenangkan dan engaging.</p>
         </div>
         { userState.hasStarted ?
-          <button className='quit-button' onClick={quitLearning}>Keluar</button> :
-          <button className='start-button' onClick={startLearning}>Mulai Belajar</button>
+          <a className={styles['quit']} onClick={quitLearning}>Keluar</a> :
+          <a className={styles['start']} onClick={startLearning}>Mulai Belajar</a>
         }
         <hr />
-        <div className='lower'>
-          <button className='credit' onClick={goToCredits}>Kredit & Atribusi</button>
+        <div className={styles['lower']}>
+          <a className={styles['credits']} onClick={goToCredits}>Kredit & Atribusi</a>
           <p>IntechFest 2025 Web Design Competition Submission</p>
         </div>
       </div>
