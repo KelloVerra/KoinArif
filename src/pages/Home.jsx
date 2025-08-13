@@ -1,4 +1,5 @@
 // import './Home.css'
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addHistory, } from '../glob/state';
 import { useNavigate } from 'react-router';
@@ -15,9 +16,7 @@ export default function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const goToCredits = () => {
-    navigate("/credit");
-  };
+  const [greetings, setGreetings] = useState("Selamat Pagi");
 
   // Start material
   const startMaterial = (id) => {
@@ -30,12 +29,36 @@ export default function Home() {
     navigate("/material");
   };
 
+  // Render first time
+  useEffect(_ => {
+    // Sambutan di waktu
+    const hour = new Date().getHours();
+    if (hour <= 9) setGreetings("Selamat Pagi")
+    else if (hour <= 14) setGreetings("Selamat Siang")
+    else if (hour <= 18) setGreetings("Selamat Sore")
+    else setGreetings("Selamat Malam")
+  }, []);
+
   return (
-    <>
-      <h1>Home</h1>
-      <button onClick={_ => startMaterial(0)}>Masuk Materi 1</button>
-      <button onClick={_ => startMaterial(1)}>Masuk Materi 2</button>
-      <button onClick={goToCredits}>Kredit & Atribusi</button>
-    </>
+    <main>
+      <div>
+        <div>
+          <h1>{greetings}!</h1>
+          <h2>[stats]</h2>
+        </div>
+        <ContinueLastActivityButton />
+      </div>
+      {/* Mascot here */}
+      <div>
+        <button onClick={_ => startMaterial(0)}>Masuk Materi 1</button>
+        <button onClick={_ => startMaterial(1)}>Masuk Materi 2</button>
+      </div>
+    </main>
+  )
+}
+
+function ContinueLastActivityButton({continueLastActivity}) {
+  return (
+    <button onClick={continueLastActivity}>Lanjut __</button>
   )
 }

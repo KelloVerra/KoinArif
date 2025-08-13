@@ -16,18 +16,38 @@ export default function Landing() {
 
   const startLearning = () => dispatch(setUserHasStarted(true));
 
-  const goToCredits = () => {
-    navigate("/credit");
-  };
-
   return (
-    <>
-      <main>
+    <main>
+      <div>
         <h1>Pengalaman Literasi Finansial Dibikin seru.</h1>
         <h2>Bersama Koin Arif, mari mengasah pengetahuan literasimu dengan cara yang menyenangkan.</h2>
-        <button onClick={startLearning}>Mulai belajar</button>
-        <button onClick={goToCredits}>Kredit & Atribusi</button>
-      </main>
-    </>
+      </div>
+      <StartLearningButton startLearning={startLearning} />
+
+
+      <div>
+        <h1>Siapkah kamu dengan Masa Depanmu?.</h1>
+        <h2>Banyak hal yang sulit diprediksi seiring jaman. Sudah yakin keadaan finansialmu pasti aman kedepannya?</h2>
+      </div>
+
+      <div>
+        <h1>Berharap agar Belajar serasa Scrolling Sosmed?</h1>
+        <h2>Andai mengasah literasi finansial gak ngebosenin dan bikin pusing seperti belajar matematika di sekolah.</h2>
+      </div>
+
+      <div>
+        <h1>Salam Kenal.. Namaku Arif</h1>
+        <h2>Aku siap nemenin kamu mengasah kemampuan literasimu!</h2>
+        <h2>Ayo, langsung aja mulai petualangan finansial kita!</h2>
+      </div>
+
+      <StartLearningButton startLearning={startLearning} />
+    </main>
   )
+}
+
+function StartLearningButton({startLearning}) {
+  return (
+    <button onClick={startLearning}>Mulai belajar</button>
+  );
 }
