@@ -1,0 +1,46 @@
+.content {
+    margin: 0 auto;
+    width: 45rem;
+}
+
+.splash-container {
+  position: relative;
+  pointer-events: none;
+  width: 100%;
+  height: 30rem;
+  margin: -4rem 0 0 -1.5rem; /* gambar nakal */
+}
+.splash-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100%;
+}
+.splash-fg {
+  position: absolute;
+  top: 26%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  pointer-events: none;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  width: 65%;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 779 269'%3E%3Cpath d='M683.617 11.135C683.617 5.06675 678.697 0.147491 672.629 0.147491H526.862C520.793 0.147491 515.874 5.06676 515.874 11.135V156.902C515.874 162.971 520.793 167.89 526.862 167.89H672.629C678.697 167.89 683.617 162.971 683.617 156.902V11.135Z' fill='white'/%3E%3Cpath d='M258.767 11.135C258.767 5.06677 253.848 0.147491 247.78 0.147491H195.772C189.704 0.147491 184.785 5.06676 184.785 11.135V63.1425C184.785 69.2107 189.704 74.13 195.772 74.13H247.78C253.848 74.13 258.767 69.2107 258.767 63.1425V11.135Z' fill='white'/%3E%3Cpath d='M184.785 227.222C184.785 221.154 179.865 216.235 173.797 216.235H143.032C136.964 216.235 132.045 221.154 132.045 227.222V257.987C132.045 264.056 136.964 268.975 143.032 268.975H173.797C179.865 268.975 184.785 264.056 184.785 257.987V227.222Z' fill='white'/%3E%3Cpath d='M489.505 156.902C489.505 152.048 485.569 148.112 480.715 148.112H413.325C408.47 148.112 404.535 152.048 404.535 156.902V224.292C404.535 229.147 408.47 233.082 413.325 233.082H480.715C485.569 233.082 489.505 229.147 489.505 224.292V156.902Z' fill='white'/%3E%3Cpath d='M122.522 71.9325C122.522 67.0779 118.587 63.1425 113.732 63.1425H9.71746C4.86288 63.1425 0.92746 67.0779 0.92746 71.9325V175.948C0.92746 180.802 4.86288 184.738 9.71746 184.738H113.732C118.587 184.738 122.522 180.802 122.522 175.948V71.9325Z' fill='white'/%3E%3Cpath d='M778.842 193.527C778.842 188.673 774.906 184.737 770.052 184.737H715.114C710.26 184.737 706.324 188.673 706.324 193.527V248.465C706.324 253.32 710.26 257.255 715.114 257.255H770.052C774.906 257.255 778.842 253.32 778.842 248.465V193.527Z' fill='white'/%3E%3C/svg%3E");  
+}
+
+.back-button {
+  cursor: pointer;
+  display: block;
+  padding: .5rem 1rem;
+  margin: 0 auto;
+  font-family: var(--header-font);
+  font-size: 1.75rem;
+  color: var(--col-primary);
+  background-color: var(--col-accent0);
+  border: none;
+  border-radius: 10px;
+}
