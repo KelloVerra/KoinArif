@@ -25,7 +25,7 @@ export default function Home() {
     // Sambutan di waktu
     const hour = new Date().getHours();
     if (hour <= 9) setGreetings("Pagi");
-    else if (hour <= 14) setGreetings("Siang");
+    else if (hour <= 15) setGreetings("Siang");
     else if (hour <= 18) setGreetings("Sore");
     else setGreetings("Malam");
 
@@ -57,7 +57,7 @@ export default function Home() {
 function ContinueLastActivityButton({}) {
 
   const continueLastActivity = _ => {
-
+    
   };
 
   return (
