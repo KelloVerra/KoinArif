@@ -2,16 +2,14 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
+import NotFound from './NotFound'
+
 import { getMaterialByIndex } from '../glob/materials/main'
 import { addHistory, generateQuiz, incrementMaterialLevel, resetQuiz} from '../glob/state'
 
-// import './Material.css'
+import styles from './Material.module.css'
 
-// Components
-import Footer from '../comps/Footer'
-import Navbar from '../comps/Navbar'
-
-export default function material() {
+export default function Material() {
 
   // TODO: navigate to landing if user hasnt started
   const navigate = useNavigate();
@@ -64,9 +62,28 @@ export default function material() {
 
   return (
     <>
-      {receivedMaterialData.component()}
-      <button onClick={startQuiz}>Latihan Kuis</button>
-      <button onClick={goHome}>Balik</button>
+        {receivedMaterialData.error ? <NotFound /> : <DefaultDisplay receivedMaterialData={receivedMaterialData} goHome={goHome} startQuiz={startQuiz} />}
     </>
   )
+}
+
+function DefaultDisplay({receivedMaterialData, goHome, startQuiz}) {
+  return (
+  <div className={styles['content']}>
+    <div className={styles['header-container']}>
+      <div className={styles['textart']}>
+        <p className={styles['lvl']}>
+          Materi Level {receivedMaterialData.id + 1}
+        </p>
+        <h1 className={styles['header']}>
+          {receivedMaterialData.title}
+        </h1>
+      </div>
+    </div>
+    <div className={styles['material-container']}>
+      {receivedMaterialData.component()}
+    </div>
+    <button onClick={startQuiz} className={styles['start-quiz-btn']}>Latihan Kuis</button>
+    <button className={styles['back-btn']} onClick={goHome}>Kembali ke halaman utama</button>
+  </div>);
 }

@@ -18,3 +18,6 @@ export function getMaterialByIndex(index) {
 
     return MATERIALS_REGISTRY.at(index)()
 }
+export function getMaterials() {
+    return [...MATERIALS_REGISTRY];
+}
