@@ -5,10 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setUserHasStarted } from '../glob/state'
 import styles from  './Landing.module.css'
 
-// Components
-import Navbar from '../comps/Navbar'
-import Footer from '../comps/Footer'
-
 export default function Landing() {
   const userState = useSelector(stat => stat.user.value);
   const dispatch = useDispatch();

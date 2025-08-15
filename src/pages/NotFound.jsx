@@ -1,7 +1,4 @@
-
-// Components
 import { useNavigate } from 'react-router'
-import Footer from '../comps/Footer'
 
 import styles from './NotFound.module.css'
 import notFoundArtBG from '/NotFoundArt.svg'

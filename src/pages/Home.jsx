@@ -7,22 +7,21 @@ import styles from './Home.module.css'
 import budgetLogo from '/Budget3D.svg'
 import materialLevelLogo from '/Level.svg'
 
-// Components
-import Footer from '../comps/Footer'
-import Navbar from '../comps/Navbar'
+import { getMaterials } from '../glob/materials/main';
 
 export default function Home() {
   const userState = useSelector(stat => stat.user.value);
   const materialState = useSelector(stat => stat.material.value);
   const quizState = useSelector(stat => stat.quiz.value);
 
-  const [greetings, setGreetings] = useState("Pagi");
+  const [greetings, setGreetings] = useState("");
+  const [materials, setMaterials] = useState(getMaterials());
 
 
   // Render first time
   useEffect(_ => {
 
-    // Sambutan di waktu
+    // Time based greetings
     const hour = new Date().getHours();
     if (hour <= 9) setGreetings("Pagi");
     else if (hour <= 15) setGreetings("Siang");
@@ -45,8 +44,10 @@ export default function Home() {
         <div className={styles['material-container']}>
           <h1>Materi</h1>
           <div className={styles['material-card-container']}>
-            <MaterialCard id={0} />
-            <MaterialCard id={1} />
+            {materials.map(v => {
+              const material = v()();
+              return <MaterialCard key={material.id} material={material} />
+            })}
           </div>
         </div>
       </div>
@@ -65,7 +66,7 @@ function ContinueLastActivityButton({}) {
   )
 }
 
-function MaterialCard({id}) {
+function MaterialCard({material}) {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -74,7 +75,7 @@ function MaterialCard({id}) {
     dispatch(addHistory({
         type: 'material',
         data: {
-          material_id: id,
+          material_id: material.id,
         },
       }));
     navigate("/material");
@@ -82,8 +83,9 @@ function MaterialCard({id}) {
 
   return (
     <div className={styles['material-card']} onClick={startMaterial}>
-      <p className={styles['code']}>Kode Materi {id}</p>
-      <h1 className={styles['title']}>Materi {id+1}</h1>
+      <p className={styles['lvl']}>Materi Level {material.id+1}</p>
+      <h1 className={styles['title']}>{material.title}</h1>
+      <p className={styles['desc']}>{material.desc}</p>
     </div>
   )
 }
@@ -95,11 +97,11 @@ function UserStat({}) {
   return (
     <div className={styles["user-stat-container"]}>
       <div className={styles["stat-container"]}>
-        <img src={budgetLogo} />
+        <img src={budgetLogo} height="20px"/>
         <p>{userState.budget} Budget</p>
       </div>
       <div className={styles["stat-container"]}>
-        <img src={materialLevelLogo} />
+        <img src={materialLevelLogo} height="80px"/>
         <p>Level {materialState.materialLevel+1}</p>
       </div>
     </div>

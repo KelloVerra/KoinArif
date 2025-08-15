@@ -1,11 +1,7 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router';
 
 import styles from './CreditsAttributions.module.css'
-
-// Components
-import Navbar from '../comps/Navbar'
-import Footer from '../comps/Footer'
-import { useNavigate } from 'react-router';
 
 export default function CreditsAttributions() {
 

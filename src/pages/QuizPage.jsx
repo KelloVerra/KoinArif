@@ -7,10 +7,6 @@ import { advanceQuiz, completeQuiz, generateQuiz, resetQuiz } from '../glob/stat
 
 // import './QuizPage.css'
 
-// Components
-import Footer from '../comps/Footer'
-import Navbar from '../comps/Navbar'
-
 
 export default function QuizPage() {
 
@@ -50,11 +46,11 @@ export default function QuizPage() {
 
 function QuizInterface({state, quiz, onNextQuestion}) {
   const selectQuizFormat = () => {
-    switch (quiz.format) {
+    switch (quiz.display_format) {
       case 0:
-        return <MultipleChoiceQuiz data={quiz} onNextQuestion={onNextQuestion} />
+        return <MultipleChoiceQuestion data={quiz} onNextQuestion={onNextQuestion} />
       case 1:
-        return <JodohkanQuiz data={quiz} onNextQuestion={onNextQuestion} />;
+        return <MatchingQuestion data={quiz} onNextQuestion={onNextQuestion} />;
     }
   }
 
@@ -66,7 +62,7 @@ function QuizInterface({state, quiz, onNextQuestion}) {
   );
 }
 
-function MultipleChoiceQuiz({data, onNextQuestion}) {
+function MultipleChoiceQuestion({data, onNextQuestion}) {
   const choose = ind => {
     const selOption = data.options[ind];
     const processor = getQuizFormatProcessorByFormatIndex(selOption.parent_format);
