@@ -3,16 +3,18 @@ const QUIZ_TEMPLATE_REGISTRY = [
     {
         id: 0,
         format: 0,
+        display_format: 0,
         load: 0,
         type: 'reverse-definition',
-        templates: ['apakah yang disebut sebagai $..','$ disebut juga sebagai..'],
+        templates: ['apakah yang disebut sebagai $?','$ disebut sebagai..','$ pengertian dari..','$ sebutan dari..'],
     },
     {
         id: 1,
         format: 0,
+        display_format: 0,
         load: 1,
         type: 'definition',
-        templates: ['$ merupakan..','$ sebutan dari..','$ adalah..'],
+        templates: ['$ merupakan..','$ ialah sebutan dari..','$ adalah..','apakah definisi dari $?','penjelasan dari $ ialah..'],
     },
 ];
 
@@ -21,7 +23,7 @@ const QUIZ_TEMPLATE_REGISTRY = [
 const QUIZ_FORMAT_PROCESSOR_REGISTRY = [
     {
         id: 0,
-        type: "multiple_choice",
+        type: "definitive_multiple_choice",
         options_generator: ({optionsRule, questionData, termData, familiarTermData}) => {
             const optionsData = [];
             const correctOptionIndex = Math.round(Math.random() * 2); // PROCESSING USING OPTIONSRULES TBD
@@ -92,7 +94,7 @@ const UNKNOWN_QUIZ_TEMPLATE = {
     load: -1,
     format: -1,
     type: 'unknown',
-    templates: ['rusak'],
+    templates: [''],
 };
 
 

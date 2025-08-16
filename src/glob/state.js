@@ -65,6 +65,7 @@ const quizSlice = createSlice({
                 // generative questions TBD (TODO: QUESTION LOAD CALCULATION & REFERENCE OLDER MATERIALS)
                 const question = {
                     format: selectedQuestion.format,
+                    display_format: selectedQuestion.display_format,
                     type: selectedQuestion.type,
                     question: questionString,
                     options: optionsData,

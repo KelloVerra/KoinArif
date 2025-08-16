@@ -1,0 +1,109 @@
+.content {
+	margin: 0 auto;
+	width: 45rem;
+}
+
+.quiz-header {
+	margin: 0 auto;
+	display: flex;
+	align-items: end;
+	gap: 1rem;
+	width: fit-content;
+}
+.quiz-stat-container {
+	display:flex;
+	align-items: baseline;
+	gap: 0.5rem;
+	font-family: var(--header-font);
+}
+.quiz-stat-container h1 {
+	margin: 0;
+	color: var(--col-accent0);
+	font-size: 3.5rem;
+}
+.quiz-stat-container h2 {
+	margin: 0;
+	color: color-mix(in srgb, var(--col-accent0) 20%, transparent);
+	-webkit-text-stroke: .75px color-mix(in srgb, var(--col-accent0) 65%, transparent);
+	letter-spacing: 3px;
+	font-size: 2.75rem;
+}
+
+.quiz-question-container {
+	padding: 1rem;
+	display:flex;
+	gap: 1rem;
+	border: solid 1px var(--col-accent0);
+	border-radius: 8px;
+}
+.quiz-question-container p {
+	margin: 0;
+	width: 100%;
+	text-align: left;
+	font-size: 1.125rem;
+	line-height: 1.325rem;
+}
+.quiz-question-container img {
+	cursor: pointer;
+	pointer-events: all;
+	margin: 0;
+	width: 1.125rem;
+}
+
+.quiz-confirm-btn {
+	cursor: pointer;
+	display: flex;
+	gap: .5rem;
+	align-items: center;
+	padding: .5rem 1rem;
+	margin: 0 auto;
+	font-family: var(--header-font);
+	font-size: 1.75rem;
+	letter-spacing: 1px;
+	color: var(--col-secondary);
+	background: linear-gradient(to bottom, color-mix(in srgb, var(--col-accent0) 25%, transparent), transparent);
+	border: solid 1.25px var(--col-accent0);
+	border-radius: 8px;
+}
+.quiz-reward-display {
+    display: flex;
+    padding: .125rem .25rem;
+    align-items: center;
+    height: fit-content;
+    gap: .5rem;
+    color: var(--col-accent1);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--col-accent1) 10%, transparent);
+    border: solid 1.125px color-mix(in srgb, var(--col-accent1) 50%, transparent);
+  	font-family: var(--paragraph-font);
+}
+.quiz-reward-display p,img {
+    pointer-events: none;
+    margin: 0;
+    height: 100%;
+    font-weight: 500;
+	font-size: 1rem;
+    text-align: left;
+}
+
+/* ======================================= MATCHING QUESTION CSS ======================================= */
+.matching-quiz-option-container {
+	padding: 1rem 0;
+	display: grid;
+	gap: 1rem;
+	/* TODO: MAKE DYNAMIC */
+	grid-template-columns: repeat(3, 1fr);
+}
+.matching-quiz-option {
+	cursor: pointer;
+	display: block;
+    padding: .25rem .5rem .5rem;
+    color: var(--col-secondary);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--col-accent1) 10%, transparent);
+    border: solid 1.125px color-mix(in srgb, var(--col-accent1) 50%, transparent);
+	margin: 0;
+  	font-family: var(--paragraph-font);
+	font-size: 1rem;
+	text-align: center;
+}

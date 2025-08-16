@@ -39,13 +39,22 @@
     border-radius: 8px;
     border: solid 1px var(--col-accent0);
 }
-.greetings-content > h1 {
+.greetings-content h1 {
     color: var(--col-secondary);
     margin: 0 0 1.25rem;
     padding: 0;
     line-height: 2.5rem;
     font-size: 2.5rem;
     font-family: var(--header-font);
+    text-align: left;
+    width: 100%;
+}
+.greetings-content p {
+    color: var(--col-accent1);
+    margin: 0;
+    padding: 0;
+    line-height: 1.75rem;
+    font-size: 1rem;
     text-align: left;
     width: 100%;
 }

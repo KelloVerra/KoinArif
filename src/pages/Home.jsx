@@ -36,7 +36,8 @@ export default function Home() {
         <div className={styles['greetings-container']}>
           <div className={styles['greetings-content']}>
             <h1>Selamat <span style={{color:'var(--col-accent1)'}}>{greetings}</span>!</h1>
-            <UserStat />
+            <p>" Tunggu apa lagi? Yuk, luangkan waktu untuk belajar! "</p>
+            <p>- Arif</p>
           </div>
           <ContinueLastActivityButton />
         </div>
@@ -90,20 +91,21 @@ function MaterialCard({material}) {
   )
 }
 
-function UserStat({}) {
-  const userState = useSelector(state => state.user.value);
-  const materialState = useSelector(state => state.material.value);
+// TODO: DEPRECATED
+// function UserStat({}) {
+//   const userState = useSelector(state => state.user.value);
+//   const materialState = useSelector(state => state.material.value);
 
-  return (
-    <div className={styles["user-stat-container"]}>
-      <div className={styles["stat-container"]}>
-        <img src={budgetLogo} height="20px"/>
-        <p>{userState.budget} Budget</p>
-      </div>
-      <div className={styles["stat-container"]}>
-        <img src={materialLevelLogo} height="80px"/>
-        <p>Level {materialState.materialLevel+1}</p>
-      </div>
-    </div>
-  )
-}
+//   return (
+//     <div className={styles["user-stat-container"]}>
+//       <div className={styles["stat-container"]}>
+//         <img src={budgetLogo} height="20px"/>
+//         <p>{userState.budget} Budget</p>
+//       </div>
+//       <div className={styles["stat-container"]}>
+//         <img src={materialLevelLogo} height="80px"/>
+//         <p>Level {materialState.materialLevel+1}</p>
+//       </div>
+//     </div>
+//   )
+// }
