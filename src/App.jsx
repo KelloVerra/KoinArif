@@ -15,6 +15,7 @@ import NotFound from './pages/NotFound'
 import { useSelector } from 'react-redux'
 import Navbar from './comps/Navbar'
 import Footer from './comps/Footer'
+import ScrollToTop from './comps/ScrollToTop'
 
 
 
@@ -26,6 +27,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <ScrollToTop />
         <Navbar />
         <Routes>
           <Route path='/' element={userState.hasStarted ? <Home /> : <Landing />} />
