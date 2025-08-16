@@ -17,7 +17,7 @@ export default function Navbar() {
   return (
     <header>
       <div className={styles["content"]}>
-        <img className={styles["logo"]} src={logo}/>
+        <img className={styles["logo"]} alt='logo' src={logo} height="20"/>
         {userState.hasStarted ? <LoggedIn /> : <LoggedOut />}
       </div>
     </header>
@@ -70,11 +70,11 @@ function UserStat({}) {
   return (
     <div className={styles["user-stat-container"]}>
       <div className={styles["stat-container"]}>
-        <img src={budgetLogo} />
-        <p>{userState.budget} Budget</p>
+        <img src={budgetLogo} alt="coinLogo" height="20" />
+        <p>{userState.budget} Coins</p>
       </div>
       <div className={styles["stat-container"]}>
-        <img src={materialLevelLogo} />
+        <img src={materialLevelLogo} alt="levelLogo" height="20" />
         <p>Level {materialState.materialLevel+1}</p>
       </div>
     </div>

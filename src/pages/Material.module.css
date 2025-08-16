@@ -142,7 +142,7 @@
     cursor: pointer;
     border: solid 1px var(--col-accent1);
     border-radius: 8px;
-    background-color: color-mix(in srgb, var(--col-accent1) 15%, transparent);
+    background-color: color-mix(in srgb, var(--col-accent1) 5%, transparent);
 }
 .submodule-coin-claim-btn p {
     margin: 0;

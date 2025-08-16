@@ -23,13 +23,15 @@ header > .content {
 
 .logo {
     align-self: center;
-    max-height: 65%;
+    pointer-events: none;
+    height: 65%;
 }
 
 
 header > .content > .right-content {
     margin: 0 0 0 auto;
     
+    text-wrap-mode: nowrap;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -58,10 +60,12 @@ header > .content > .right-content {
 }
 .stat-container img {
     height: 100%;
+    pointer-events: none;
 }
 .stat-container p {
     margin: 0;
     color: var(--col-accent1);
+    text-wrap-mode:nowrap;
 }
 
 .start {

@@ -9,7 +9,7 @@ import budgetLogo from '/Budget3D.svg'
 export default function SubModuleContainer({children, id, minimizedMaxContentCount, minimizedHeight}) {
 
     const [expanded, setExpanded] = useState(false);
-    const [containerHeight, setContainerHeight] = useState(100);
+    const containerHeight = useRef(100);
     const [hasClaimed, setHasClaimed] = useState(false); // todo: permastate
     const containerRef = useRef(null);
 
@@ -46,7 +46,7 @@ export default function SubModuleContainer({children, id, minimizedMaxContentCou
     });
     useEffect(_ => {
         if (containerRef.current)
-            setContainerHeight(containerRef.current.scrollHeight + 20);
+            containerHeight.current = containerRef.current.scrollHeight + 20;
     }, []);
     
 
@@ -62,11 +62,11 @@ export default function SubModuleContainer({children, id, minimizedMaxContentCou
 
 
     return (<>
-        <div className={styles['submodule-container']} ref={containerRef} style={{maxHeight: expanded ? `${containerHeight}px` : minimizedHeight}}>
+        <div className={styles['submodule-container']} ref={containerRef} style={{maxHeight: expanded ? `${containerHeight.current}px` : minimizedHeight}}>
             {processedChildren}
             {   !hasClaimed ?
                 <button onClick={claimCoin} className={styles['submodule-coin-claim-btn']} >
-                    <img src={budgetLogo} width='30px' />
+                    <img src={budgetLogo} width='30px' alt='coinLogo' />
                     <p>Klaim {20} Koin</p>
                 </button> : null
             }
