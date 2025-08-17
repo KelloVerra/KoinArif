@@ -71,7 +71,7 @@ function UserStat({}) {
     <div className={styles["user-stat-container"]}>
       <div className={styles["stat-container"]}>
         <img src={budgetLogo} alt="coinLogo" height="20" />
-        <p>{userState.budget} Coins</p>
+        <p>{userState.budget} Koin</p>
       </div>
       <div className={styles["stat-container"]}>
         <img src={materialLevelLogo} alt="levelLogo" height="20" />

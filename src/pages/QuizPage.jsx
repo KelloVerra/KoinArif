@@ -8,6 +8,7 @@ import { advanceQuiz, completeQuiz, generateQuiz, resetQuiz } from '../glob/stat
 import styles from './QuizPage.module.css'
 import bookmarkIcon from '/Bookmark.svg';
 import coinIcon from '/Budget3D.svg';
+import checkBadgeIcon from '/CheckBadge.svg';
 
 
 export default function QuizPage() {
@@ -109,8 +110,30 @@ function MultipleChoiceQuestion({data, onNextQuestion}) {
 }
 
 function Finish({onConfirmEnd}) {
+
+  const msg = 'Waw! Kamu Keren banget!';
+  const coins = 80;
+  const accuracy = 12./14.;
+
   return (<>
-      <h1 className={styles['']}>yey menank</h1>
-      <button onClick={_ => onConfirmEnd()}>Balik</button>
+    <div className={styles['quiz-fin-header']}>
+      <img src={coinIcon} alt='mascot' width='150px' />
+      <h1>{msg}</h1>
+    </div>
+    <div className={styles['quiz-fin-content']}>
+      <div className={styles['quiz-fin-stat-container']}>
+        <div className={styles['quiz-fin-stat-coin']}>
+          <img src={coinIcon} alt="coinIcon" width='40px' />
+          <h2>+{coins} Koin</h2>
+        </div>
+        <div className={styles['quiz-fin-stat-accuracy']}>
+          <img src={checkBadgeIcon} alt="accuracyIcon" width='40px' />
+          <h2>{Math.round(accuracy*100)}%</h2>
+        </div>
+      </div>
+      <button onClick={onConfirmEnd} className={styles['quiz-fin-btn']}>
+        Selesai
+      </button>
+    </div>
   </>);
 }

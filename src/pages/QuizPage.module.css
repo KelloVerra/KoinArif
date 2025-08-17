@@ -107,3 +107,77 @@
 	font-size: 1rem;
 	text-align: center;
 }
+
+
+
+/* ======================================= FINISH PAGE CSS ======================================= */
+.quiz-fin-header {
+	margin-bottom: 2rem;
+}	
+.quiz-fin-header h1 {
+	margin: .5rem 0 0;
+	font-family: var(--header-font);
+	font-size: 2rem;
+}
+
+.quiz-fin-content {
+	width: fit-content;
+	margin: 1rem auto 2rem;
+}
+.quiz-fin-stat-container {
+	margin: 1rem 0 2rem;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	align-items: center;
+	gap: 1rem;
+}
+.quiz-fin-stat-coin {
+	padding: 1rem 2rem;
+	border: solid 3px color-mix(in srgb, var(--col-accent1) 50%, transparent);
+	border-radius: 8px;
+}
+.quiz-fin-stat-coin img {
+	pointer-events: none;
+	margin: 0;
+	width: 6rem;
+}
+.quiz-fin-stat-coin h2 {
+	margin: 0;
+	width: 100%;
+	color: var(--col-accent1);
+	font-weight: 500;
+	font-size: 1.625rem;
+}
+.quiz-fin-stat-accuracy {
+	padding: 1rem 2rem;
+	border: solid 3px color-mix(in srgb, var(--col-accent0) 50%, transparent);
+	border-radius: 8px;
+}
+.quiz-fin-stat-accuracy img {
+	pointer-events: none;
+	margin: 0;
+	width: 5rem;
+}
+.quiz-fin-stat-accuracy h2 {
+	margin: 0;
+	width: 100%;
+	color: var(--col-accent0);
+	font-weight: 500;
+	font-size: 1.625rem;
+}
+
+.quiz-fin-btn {
+	display: block;
+	margin: 0 auto;
+	width: 100%;
+	cursor: pointer;
+	padding: .5rem 2rem;
+	font-family: var(--header-font);
+	font-size: 1.75rem;
+	letter-spacing: 1px;
+	color: var(--col-secondary);
+	background: linear-gradient(to bottom, color-mix(in srgb, var(--col-accent0) 25%, transparent), transparent);
+	border: solid 1.25px var(--col-accent0);
+	border-radius: 8px;
+}
