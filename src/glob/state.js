@@ -103,6 +103,7 @@ const materialSlice = createSlice({
     name: 'material',
     initialState: { value: {
         materialLevel: 0,
+        submoduleRewardsTaken: [],
         familiarTerms: [],
     }},
     reducers: {
@@ -120,9 +121,20 @@ const materialSlice = createSlice({
                     state.value.familiarTerms.push(v)
             });
         },
+        
+        addSubmoduleRewardClaimed: (state, action) => { // payload =  {material_id, submodule_id}
+            if (!state.value.submoduleRewardsTaken.includes(action.payload)) // if new term, then push
+                state.value.submoduleRewardsTaken.push(action.payload)
+        },
+        
+        resetMaterialState: (state, action) => {
+            state.value.materialLevel = 0;
+            state.value.submoduleRewardsTaken.length = 0;
+            state.value.familiarTerms.length = 0;
+        },
     }
 });
-export const {incrementMaterialLevel, resetMaterialLevel, addFamiliarTerms} = materialSlice.actions;
+export const {incrementMaterialLevel, resetMaterialLevel, addFamiliarTerms, addSubmoduleRewardClaimed, resetMaterialState, } = materialSlice.actions;
 
 const userSlice = createSlice({
     name: 'user',
@@ -197,7 +209,7 @@ export const persistAppStore = persistStore(appStore);
 export const resetStore = _ => {
     appStore.dispatch(setUserHasStarted(false));
     appStore.dispatch(setUserHasFinishTutorial(false));
-    appStore.dispatch(resetMaterialLevel());
+    appStore.dispatch(resetMaterialState());
     appStore.dispatch(resetUserBudget(10));
     appStore.dispatch(resetHistory());
     appStore.dispatch(resetQuiz());

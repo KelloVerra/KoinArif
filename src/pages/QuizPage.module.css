@@ -6,9 +6,9 @@
 .quiz-header {
 	margin: 0 auto;
 	display: flex;
-	align-items: end;
+	align-items: start;
 	gap: 1rem;
-	width: fit-content;
+	width: 100%;
 }
 .quiz-stat-container {
 	display:flex;
@@ -30,7 +30,8 @@
 }
 
 .quiz-question-container {
-	padding: 1rem;
+	width: calc(100% - 2rem);
+	padding: 1rem 1rem;
 	display:flex;
 	gap: 1rem;
 	border: solid 1px var(--col-accent0);

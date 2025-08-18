@@ -56,11 +56,11 @@ export default function Material() {
         },
     }))
     navigate("/quiz");
-  });
+  }, [receivedMaterialData]);
 
   const goHome = useCallback(_ => {
     navigate("/");
-  });
+  }, []);
   
 
   return (

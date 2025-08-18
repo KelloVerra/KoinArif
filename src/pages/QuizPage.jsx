@@ -33,15 +33,15 @@ export default function QuizPage() {
     
     if (quizState.currentGeneratedQuizIndex >= quizState.generatedQuizes.length-1)
       dispatch(completeQuiz({}));
-  });
+  }, [quizState.currentGeneratedQuizIndex]);
   
   const confirmEnd = useCallback(_ => {
     navigate("/");
-  });
+  }, []);
 
   const onQuestionBookmarked = useCallback(_ => {
     console.log('bookmarked');
-  });
+  }, []);
 
   return (
     <>
@@ -74,7 +74,7 @@ function QuizInterface({state, quiz, onNextQuestion, onQuestionBookmarked}) {
     <>
       <div className={styles['quiz-header']}>
         <img src={coinIcon} width='150px' />
-        <div>
+        <div style={{width:'100%'}}>
           <div className={styles['quiz-stat-container']}>
             <h1>Quiz {state.currentGeneratedQuizIndex+1}</h1>
             <h2>/{state.generatedQuizes.length}</h2>

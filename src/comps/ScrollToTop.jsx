@@ -9,7 +9,7 @@ export default function ScrollToTop() {
     
     useEffect(_ => {
         window.scrollTo({behavior: "instant", left: 0, top: 0});
-    }, [pathname, userState])
+    }, [pathname, userState.hasStarted])
     
     return null;
 }

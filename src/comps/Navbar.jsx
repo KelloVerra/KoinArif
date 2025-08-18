@@ -29,11 +29,11 @@ function LoggedOut({}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const startLearning = useCallback(_ => dispatch(setUserHasStarted(true)));
+  const startLearning = useCallback(_ => dispatch(setUserHasStarted(true)), []);
 
   const goToCredits = useCallback(_ => {
     navigate("/credit");
-  });
+  }, []);
 
   return (
     <div className={styles["right-content"]}>
@@ -50,11 +50,11 @@ function LoggedIn({}) {
   const quitLearning = useCallback(() => {
     resetStore();
     navigate("/");
-  });
+  }, []);
 
   const goToCredits = useCallback(() => {
     navigate("/credit");
-  });
+  }, []);
 
   return (
     <div className={styles["right-content"]}>
