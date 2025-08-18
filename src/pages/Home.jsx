@@ -24,6 +24,16 @@ export default function Home() {
     else if (hour <= 18) return "Sore";
     else return "Malam";
   };
+  const motivQuote = _ => {
+    const quotes = [
+      'Tunggu apa lagi? Yuk, luangkan waktu untuk belajar!',
+      'Jangan menunggu motivasi, langsung saja mulai!',
+      'Kata pepatah, waktu adalah uang..',
+      'Menginvestasikan dirimu dengan belajar, hargai masa depanmu..',
+      'Belajar Literasi Finansial 5 menit setiap hari hasilnya sangatlah dahsyat dibandingkan dengan tidak belajar sama sekali',
+    ];
+    return quotes[Math.floor(Math.random()*quotes.length)];
+  }
 
   return (
     <main>
@@ -31,7 +41,7 @@ export default function Home() {
         <div className={styles['greetings-container']}>
           <div className={styles['greetings-content']}>
             <h1>Selamat <span style={{color:'var(--col-accent1)'}}>{greetings()}</span>!</h1>
-            <p>" Tunggu apa lagi? Yuk, luangkan waktu untuk belajar! "</p>
+            <p>" {motivQuote()} "</p>
             <p>- Arif</p>
           </div>
           <ContinueLastActivityButton />
@@ -42,6 +52,8 @@ export default function Home() {
           <div className={styles['material-card-container']}>
             {materials.current.map(v => {
               const material = v()();
+              if(material.id > materialState.materialLevel)
+                return <LockedMaterialCard key={material.id} material={material} />
               return <MaterialCard key={material.id} material={material} />
             })}
           </div>
@@ -80,6 +92,23 @@ function MaterialCard({material}) {
   return (
     <div className={styles['material-card']} onClick={startMaterial}>
       <p className={styles['lvl']}>Materi Level {material.id+1}</p>
+      <h1 className={styles['title']}>{material.title}</h1>
+      <p className={styles['desc']}>{material.desc}</p>
+    </div>
+  )
+}
+function LockedMaterialCard({material}) {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const startMaterial = _ => {
+    console.log('terkunci')
+  };
+
+  return (
+    <div className={`${styles['material-card']} ${styles['material-card-locked']}`} onClick={startMaterial}>
+      <p className={styles['lvl']}>Materi Level {material.id+1} (Terkunci)</p>
       <h1 className={styles['title']}>{material.title}</h1>
       <p className={styles['desc']}>{material.desc}</p>
     </div>
