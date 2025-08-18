@@ -195,9 +195,10 @@ export const persistAppStore = persistStore(appStore);
 
 // Resetter
 export const resetStore = _ => {
-    appStore.dispatch(setUserHasStarted(false))
-    appStore.dispatch(setUserHasFinishTutorial(false))
-    appStore.dispatch(resetMaterialLevel())
-    appStore.dispatch(resetUserBudget(10))
-    appStore.dispatch(resetHistory())
+    appStore.dispatch(setUserHasStarted(false));
+    appStore.dispatch(setUserHasFinishTutorial(false));
+    appStore.dispatch(resetMaterialLevel());
+    appStore.dispatch(resetUserBudget(10));
+    appStore.dispatch(resetHistory());
+    appStore.dispatch(resetQuiz());
 }

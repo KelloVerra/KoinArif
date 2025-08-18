@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addHistory, } from '../glob/state';
 import { useNavigate } from 'react-router';
@@ -14,28 +14,23 @@ export default function Home() {
   const materialState = useSelector(stat => stat.material.value);
   const quizState = useSelector(stat => stat.quiz.value);
 
-  const [greetings, setGreetings] = useState("");
-  const [materials, setMaterials] = useState(getMaterials());
+  const materials = useRef(getMaterials());
 
-
-  // Render first time
-  useEffect(_ => {
-
+  const greetings = _ => {
     // Time based greetings
     const hour = new Date().getHours();
-    if (hour <= 9) setGreetings("Pagi");
-    else if (hour <= 15) setGreetings("Siang");
-    else if (hour <= 18) setGreetings("Sore");
-    else setGreetings("Malam");
-
-  }, []);
+    if (hour <= 9) return "Pagi";
+    else if (hour <= 15) return "Siang";
+    else if (hour <= 18) return "Sore";
+    else return "Malam";
+  };
 
   return (
     <main>
       <div className={styles['content']}>
         <div className={styles['greetings-container']}>
           <div className={styles['greetings-content']}>
-            <h1>Selamat <span style={{color:'var(--col-accent1)'}}>{greetings}</span>!</h1>
+            <h1>Selamat <span style={{color:'var(--col-accent1)'}}>{greetings()}</span>!</h1>
             <p>" Tunggu apa lagi? Yuk, luangkan waktu untuk belajar! "</p>
             <p>- Arif</p>
           </div>
@@ -45,7 +40,7 @@ export default function Home() {
         <div className={styles['material-container']}>
           <h1>Materi</h1>
           <div className={styles['material-card-container']}>
-            {materials.map(v => {
+            {materials.current.map(v => {
               const material = v()();
               return <MaterialCard key={material.id} material={material} />
             })}

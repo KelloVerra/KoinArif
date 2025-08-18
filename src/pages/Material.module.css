@@ -152,5 +152,6 @@
     font-size: .85rem;
 }
 .submodule-coin-claim-btn img {
+    pointer-events: none;
     height: 100%;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,6 +9,7 @@ import styles from './QuizPage.module.css'
 import bookmarkIcon from '/Bookmark.svg';
 import coinIcon from '/Budget3D.svg';
 import checkBadgeIcon from '/CheckBadge.svg';
+import NotFound from './NotFound';
 
 
 export default function QuizPage() {
@@ -22,27 +23,31 @@ export default function QuizPage() {
   const quizState = useSelector(stat => stat.quiz.value);
 
   const currentQuiz = quizState.generatedQuizes[quizState.currentGeneratedQuizIndex];
+  const invalidState = !userState.hasStarted || !currentQuiz;
 
 
   // TODO: Collect budget
-  const nextQuestion = _ => {
+  const nextQuestion = useCallback(_ => {
     window.scrollTo(0, 0);
     dispatch(advanceQuiz())
     
     if (quizState.currentGeneratedQuizIndex >= quizState.generatedQuizes.length-1)
       dispatch(completeQuiz({}));
-  };
+  });
   
-  const confirmEnd = _ => {
+  const confirmEnd = useCallback(_ => {
     navigate("/");
-  };
+  });
 
-  const onQuestionBookmarked = _ => {
+  const onQuestionBookmarked = useCallback(_ => {
     console.log('bookmarked');
-  }
+  });
 
   return (
     <>
+      {
+      invalidState ? 
+      <NotFound /> :
       <div className={styles['content']}>
         {
           quizState.quizCompletionRecapData.finished ?
@@ -50,6 +55,7 @@ export default function QuizPage() {
           <QuizInterface state={quizState} quiz={currentQuiz} onNextQuestion={nextQuestion} onQuestionBookmarked={onQuestionBookmarked} />
         }
       </div>
+      }
     </>
   )
 }

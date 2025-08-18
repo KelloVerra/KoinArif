@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback } from 'react'
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetStore, setUserHasStarted } from '../glob/state';
@@ -29,11 +29,11 @@ function LoggedOut({}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const startLearning = () => dispatch(setUserHasStarted(true));
+  const startLearning = useCallback(_ => dispatch(setUserHasStarted(true)));
 
-  const goToCredits = () => {
+  const goToCredits = useCallback(_ => {
     navigate("/credit");
-  };
+  });
 
   return (
     <div className={styles["right-content"]}>
@@ -47,11 +47,14 @@ function LoggedOut({}) {
 function LoggedIn({}) {
   const navigate = useNavigate();
 
-  const quitLearning = () => resetStore();
+  const quitLearning = useCallback(() => {
+    resetStore();
+    navigate("/");
+  });
 
-  const goToCredits = () => {
+  const goToCredits = useCallback(() => {
     navigate("/credit");
-  };
+  });
 
   return (
     <div className={styles["right-content"]}>

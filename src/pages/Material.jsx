@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,22 +19,25 @@ export default function Material() {
   const materialState = useSelector(stat => stat.material.value);
   const quizState = useSelector(stat => stat.quiz.value);
 
-  const [receivedMaterialData, setReceivedMaterialData] = useState({id: null, error: false, component: _ => {}});
+  const invalidState = !userState.hasStarted || userState.history.length === 0;
 
-  // update material
-  useEffect(_ => {
+  const getMaterialData = _ => {
+    if (invalidState)
+      return {id: -1, error: 1, component: null};
+
     const materialIndex = userState.history[0].data.material_id;
     const materialData = getMaterialByIndex(materialIndex);
 
-    if(receivedMaterialData.error)
-      console.log(`error while obtaining material index of ${materialIndex}`)
+    if(materialData.error)
+      console.error(`error while obtaining material index of ${materialIndex}`);
 
-    setReceivedMaterialData(materialData);
-  }, [materialState])
+    return materialData;
+  };
 
+  const [receivedMaterialData, setReceivedMaterialData] = useState(getMaterialData());
 
-  // Callback
-  const startQuiz = () => {
+  
+  const startQuiz = useCallback(_ => {
     dispatch(addHistory({
       type: 'quiz',
       data: {
@@ -53,11 +56,11 @@ export default function Material() {
         },
     }))
     navigate("/quiz");
-  };
+  });
 
-  const goHome = () => {
+  const goHome = useCallback(_ => {
     navigate("/");
-  };
+  });
   
 
   return (
