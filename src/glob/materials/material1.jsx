@@ -3,8 +3,8 @@ export default function material1() {
         id: 1,
         load: 1,
         error: false,
-        title: 'Budgeting',
-        desc: 'Mempelajari pengelolaan keuangan',
+        title: 'Pengenalan dengan Aset',
+        desc: 'Membahas pengertian dari aset serta hal yang berinteraksi terhadap aset.',
         category : 'keuangan',
         component: _ => (
             <>

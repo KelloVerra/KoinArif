@@ -51,7 +51,7 @@ export default function Home() {
           <h1>Materi</h1>
           <div className={styles['material-card-container']}>
             {materials.current.map(v => {
-              const material = v()();
+              const material = v();
               if(material.id > materialState.materialLevel)
                 return <LockedMaterialCard key={material.id} material={material} />
               return <MaterialCard key={material.id} material={material} />

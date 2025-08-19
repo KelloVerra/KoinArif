@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import NotFound from './NotFound'
 
 import { getMaterialByIndex } from '../glob/materials/main'
-import { addHistory, generateQuiz, incrementMaterialLevel, resetQuiz} from '../glob/state'
+import { addHistory, createQuizList, incrementMaterialLevel, resetQuiz} from '../glob/state'
 
 import styles from './Material.module.css'
 
@@ -49,11 +49,8 @@ export default function Material() {
     }));
 
     dispatch(resetQuiz())
-    dispatch(generateQuiz({
-        material: {
-          id: receivedMaterialData.id,
-          terms: receivedMaterialData.terms,
-        },
+    dispatch(createQuizList({
+        material: receivedMaterialData,
     }))
     navigate("/quiz");
   }, [receivedMaterialData]);

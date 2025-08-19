@@ -9,35 +9,106 @@ export default function material0() {
         load: 0,
         error: false,
         title: 'Dasar-Dasar Keuangan',
-        desc: 'Mempelajari dasar-dasar keunangan',
-        category : 'keuangan',
-        terms: [
+        desc: 'Membahas uang dari dasar, pembagian uang dengan bijak serta psikologi manusia terhadap uang.',
+        submoduleData: [
             {
-                name: ['uang', ],
-                definition: [
-                    'alat penukar',
-                    'alat tukar',
-                    'bentuk fisik dari nilai',
-                    'aset',
-                    'benda yang dapat ditukarkan dalam bentuk jasa atau barang',
+                id: 0,
+                desc: 'uang',
+                terms: [
+                    {
+                        name: ['uang', 'harta', 'duit', 'mata uang', 'rupiah', ],
+                        definition: [
+                            'nilai tukar',
+                            'alat penukar',
+                            'standar pengukur nilai yang dapat dihitung',
+                            'suatu benda yang nilainya diterima oleh semua orang',
+                            'benda yang dapat ditukarkan dalam bentuk jasa atau barang',
+                        ],
+                    },
                 ],
+                facts: {
+                    'true': [
+                        'uang yang disimpan di bank termasuk uang giral',
+                        'uang kartal dikeluarkan oleh negara',
+                    ],
+                    'false': [
+                        'e-money termasuk uang kartal',
+                        'uang giral adalah uang yang dikeluarkan oleh negara',
+                        'uang hanyalah kertas / objek berisi angka yang tak bermakna',
+                    ],
+                },
             },
             {
-                name: ['budget', 'penganggaran', ],
-                definition: [
-                    'pembagian bijak dari uang sesuai kebutuhan',
-                    'pengelompokkan nilai yang membatasi pengeluaran',
+                id: 1,
+                desc: 'budget',
+                terms: [
+                    {
+                        name: ['budget', 'anggaran', 'dana', 'pencatatan anggaran',  ],
+                        definition: [
+                            'pencatatan dari keluar masuknya uang',
+                            'pengelompokkan pemasukkan maupun pengeluaran uang',
+                            'perkiraan pemasukan & pengeluaran uang di periode tertentu',
+                        ],
+                    },
+                    {
+                        name: ['budgeting', 'penganggaran', 'perencanaan keuangan', 'pengaturan dana', 'manajemen anggaran', 'alokasi keuangan', 'strategi pendanaan' ],
+                        definition: [
+                            'rencana anggaran di masa mendatang',
+                            'perencanaan pengeluaran maupun pemasukkan uang',
+                            'pengelompokkan uang yang membatasi pengeluaran',
+                            'pembagian bijak dari uang sesuai kebutuhan dan rencana',
+                            'metode untuk mengevaluasi dan menganalisis keluar masuknya uang',
+                        ],
+                    },
                 ],
+                facts: {
+                    'true': [
+                        'sisa dari budget dapat digunakan sebagai tabungan',
+                        'budgeting yang efektif adalah budgeting yang realistis',
+                        'salah satu manfaat dari budgeting ialah membasmi pemborosan',
+                        'budgeting yang realistis adalah budgeting yang sesuai dengan keadaan finansial seseorang',
+                    ],
+                    'false': [
+                        'budgeting bermanfaat agar boros pengeluaran',
+                        'budgeting cocok untuk digunakan dalam membagi sedekah', // todo: think more
+                        'sisa dari budget dapat dihabiskan untuk aktivitas rekreasi',
+                    ],
+                },
+            },
+            {
+                id: 2,
+                desc: 'kebutuhan & keinginan',
+                terms: [
+                    {
+                        name: ['kebutuhan', 'keperluan', 'keperluan pokok', 'dorongan hidup', ],
+                        definition: [
+                            'hal mutlak yang diperlukan untuk hidup',
+                            'dorongan seseorang agar bisa mencukupi kebutuhan hidupnya',
+                        ],
+                    },
+                    {
+                        name: ['keinginan', 'kemauan', 'harapan', 'hasrat', ],
+                        definition: [
+                            'dorongan seseorang demi melengkapi hidupnya',
+                            'dorongan untuk memiliki maupun mengalami sesuatu',
+                        ],
+                    },
+                ],
+                facts: {
+                    'true': [
+                        'makanan, air bersih dan tempat tinggal termasuk suatu kebutuhan',
+                        'villa, tiket bioskop, dan vr headset termasuk contoh dari suatu keinginan',
+                        'jika kebutuhanmu tidak dipenuhi, kualitas hidupmu akan hancur',
+                    ],
+                    'false': [
+                        'keinginan harus selalu diprioritaskan',
+                        'jika keinginanmu tidak terpenuhi, hidupmu akan hancur',
+                        'tiket bioskop, villa dan drone ialah sebuah kebutuhan',
+                        'agar kamu dapat hidup, kamu harus selalu mengprioritaskan keinginanmu',
+                    ],
+                },
             },
         ],
-        facts: {
-            'true': [
-                'budget dapat digunakan sebagai tabungan',
-            ],
-            'false': [
-                'budgeting bermanfaat agar boros pengeluaran',
-            ],
-        },
         component: _ => {
             return (
                 <>
@@ -62,8 +133,8 @@ export default function material0() {
                         <p>Tanpa penganggaran, kamu akan mem-boros uang, bahkan lupa kemana kamu menghabiskan uangmu .</p>
                         <img src={imgdebgu} alt="Ilustrasi pemborosan" width="200px" />
                         <p>Penganggaran yang efektif adalah penganggaran yang realistis, sesuai kebutuhan & keinginanmu dengan kondisi finansialmu.</p>
-                        <p>Oleh karena itu, bijaklah membagi uangmu, pilihlah salah satu hal yang akan kamu gunakan dengan uangmu.</p>
-                        <p></p>
+                        {/* <p>Oleh karena itu, bijaklah membagi uangmu, pilihlah salah satu hal yang akan kamu gunakan dengan uangmu.</p>
+                        <p></p> */}
                     </SubModuleContainer>
                     <MiniQuizContainer id={{material_id:0,submodule_id:1}} />
                     <SubModuleContainer id={{material_id:0,submodule_id:2}} minimizedMaxContentCount={4} minimizedHeight={'23rem'}>

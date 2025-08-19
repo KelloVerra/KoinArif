@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import storage from "redux-persist/lib/storage"
-import { getAllQuizTemplates, getQuizFormatProcessorByFormatIndex, getQuizTemplateByIndex } from "./quizes";
+import { generateQuiz, getAllQuizTemplates } from "./quizes";
 
 
 // Config (NOTE: No modify)
@@ -18,10 +18,10 @@ const persistConfig = {
 const quizSlice = createSlice({
     name: 'quiz',
     initialState: { value: {
+        correctQuizes: 0,
         currentGeneratedQuizIndex: 0,
         generatedQuizes: [],
-        familiarQuizes: [],
-        savedData: [],
+        savedQuizData: [],
         quizCompletionRecapData: {finished: false},
     }},
     reducers: {
@@ -38,10 +38,11 @@ const quizSlice = createSlice({
         resetQuiz: (state, action) => { //no payload
             state.value.currentGeneratedQuizIndex = 0;
             state.value.generatedQuizes.length = 0;
+            state.value.correctQuizes = 0;
             state.value.quizCompletionRecapData = {finished: false};
         },
 
-        generateQuiz: (state, action) => { // payload is quiz generation rules, TBD
+        createQuizList: (state, action) => { // payload is quiz generation rules, TBD
             const questions = [];
             const quizLen = 5; // TBD
 
@@ -50,27 +51,18 @@ const quizSlice = createSlice({
             
 
             for (let i = 0; i < quizLen; i++) {
-                // RANDOMIZATION TBD
-                const selectedQuestion = getQuizTemplateByIndex(Math.round(Math.random()));
-                const selectedTermData = data.material.terms[Math.round(Math.random())];
-                
-
-                // Process selected quiz
-                const processor = getQuizFormatProcessorByFormatIndex(selectedQuestion.format);
-
-                const optionsData = processor.options_generator({questionData: selectedQuestion, termData: selectedTermData, familiarTermData: data.material.terms});
-                const questionString = processor.question_template_processor({questionType: selectedQuestion.type, templates: selectedQuestion.templates, materialTermsData: selectedTermData});
-
+                const question = generateQuiz({material: data.material});
                 
                 // generative questions TBD (TODO: QUESTION LOAD CALCULATION & REFERENCE OLDER MATERIALS)
-                const question = {
-                    format: selectedQuestion.format,
-                    display_format: selectedQuestion.display_format,
-                    type: selectedQuestion.type,
-                    question: questionString,
-                    options: optionsData,
+                const questionData = {
+                    format: question.questionData.format,
+                    display_format: question.questionData.display_format,
+                    type: question.questionData.type,
+                    question: question.questionString,
+                    options: question.options,
+                    material: question.material,
                 };
-                questions.push(question);
+                questions.push(questionData);
             }
             
             console.log(questions);
@@ -86,18 +78,22 @@ const quizSlice = createSlice({
 
         addSavedQuizData: (state, action) => {  // payload is quiz data
             action.payload.forEach(v => {
-                if (!state.value.savedData.includes(v)) // prevent duplicate  quiz type
-                    state.value.savedData.push(v);
+                if (!state.value.savedQuizData.includes(v)) // prevent duplicate  quiz type
+                    state.value.savedQuizData.push(v);
             });
             
         },
+        
+        incrementCorrectQuiz: (state, action) => { // no payload
+            state.value.correctQuizes += 1;
+        },
 
         clearSavedQuizData: (state, action) => { // no payload
-            state.value.savedData.length = 0
+            state.value.savedQuizData.length = 0
         },
     }
 });
-export const {advanceQuiz, resetQuiz, completeQuiz, generateQuiz, addFamiliarQuizID, addSavedQuizData, clearSavedQuizData} = quizSlice.actions;
+export const {advanceQuiz, resetQuiz, completeQuiz, createQuizList, addFamiliarQuizID, addSavedQuizData, clearSavedQuizData, incrementCorrectQuiz} = quizSlice.actions;
 
 const materialSlice = createSlice({
     name: 'material',
