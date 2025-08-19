@@ -37,7 +37,6 @@ function LoggedOut({}) {
 
   return (
     <div className={styles["right-content"]}>
-      <a className={styles["credits"]} onClick={goToCredits}>Kredit & Atribusi</a>
       <a className={styles["start"]} onClick={startLearning}>Mulai Belajar</a>
     </div>
   )
@@ -59,7 +58,6 @@ function LoggedIn({}) {
   return (
     <div className={styles["right-content"]}>
       <UserStat />
-      <a className={styles["credits"]} onClick={goToCredits}>Kredit & Atribusi</a>
       <a className={styles["quit"]} onClick={quitLearning}>Log Out</a>
     </div>
   )
