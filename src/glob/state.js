@@ -4,6 +4,7 @@ import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import storage from "redux-persist/lib/storage"
 import { generateQuiz, getAllQuizTemplates } from "./quizes";
+import { randomLength } from "./util";
 
 
 // Config (NOTE: No modify)
@@ -18,7 +19,7 @@ const persistConfig = {
 const quizSlice = createSlice({
     name: 'quiz',
     initialState: { value: {
-        correctQuizes: 0,
+        answeredQuizes: [],
         currentGeneratedQuizIndex: 0,
         generatedQuizes: [],
         savedQuizData: [],
@@ -31,41 +32,54 @@ const quizSlice = createSlice({
                 state.value.currentGeneratedQuizIndex = nextIndex;
         },
 
-        completeQuiz: (state, action) => { // TODO: Budget received calculations etc w/ payload infos
-            state.value.quizCompletionRecapData = {finished: true};
+        completeQuiz: (state, action) => { // payload is {}
+            state.value.quizCompletionRecapData = {
+                finished: true,
+                totalReward: state.value.answeredQuizes.reduce((acc, v) => {
+                    return acc += v.gotReward;
+                }, 0),
+                accuracy: state.value.answeredQuizes.reduce((acc, v) => {
+                    return acc += v.accuracy;
+                }, 0) / state.value.generatedQuizes.length,
+            };
         },
 
         resetQuiz: (state, action) => { //no payload
             state.value.currentGeneratedQuizIndex = 0;
             state.value.generatedQuizes.length = 0;
-            state.value.correctQuizes = 0;
+            state.value.answeredQuizes.length = 0;
             state.value.quizCompletionRecapData = {finished: false};
         },
 
         createQuizList: (state, action) => { // payload is quiz generation rules, TBD
-            const questions = [];
-            const quizLen = 5; // TBD
-
             const data = action.payload;
+            const questions = [];
+
+            const quizMin = 5 + (data.level * 1.5);
+            const quizMax = quizMin + 3;
+            const quizLen = Math.floor(Math.random() * (quizMax - quizMin)) + quizMin;
+
             const quizDatabase = getAllQuizTemplates();
             
 
             for (let i = 0; i < quizLen; i++) {
                 const question = generateQuiz({material: data.material});
+                const qReward = randomLength(5) + 10;
                 
                 // generative questions TBD (TODO: QUESTION LOAD CALCULATION & REFERENCE OLDER MATERIALS)
                 const questionData = {
                     format: question.questionData.format,
                     display_format: question.questionData.display_format,
+
                     type: question.questionData.type,
                     question: question.questionString,
                     options: question.options,
+
+                    reward: qReward,
                     material: question.material,
                 };
                 questions.push(questionData);
             }
-            
-            console.log(questions);
             state.value.generatedQuizes = [...questions]
         },
 
@@ -84,8 +98,8 @@ const quizSlice = createSlice({
             
         },
         
-        incrementCorrectQuiz: (state, action) => { // no payload
-            state.value.correctQuizes += 1;
+        addAnsweredQuizData: (state, action) => { // payload {quiz_data,iscorrect,reward}
+            state.value.answeredQuizes.push(action.payload);
         },
 
         clearSavedQuizData: (state, action) => { // no payload
@@ -93,7 +107,7 @@ const quizSlice = createSlice({
         },
     }
 });
-export const {advanceQuiz, resetQuiz, completeQuiz, createQuizList, addFamiliarQuizID, addSavedQuizData, clearSavedQuizData, incrementCorrectQuiz} = quizSlice.actions;
+export const {advanceQuiz, resetQuiz, completeQuiz, createQuizList, addFamiliarQuizID, addSavedQuizData, clearSavedQuizData, addAnsweredQuizData} = quizSlice.actions;
 
 const materialSlice = createSlice({
     name: 'material',
@@ -138,7 +152,7 @@ const userSlice = createSlice({
         hasStarted: false,
         hasFinishedTutorial: false,
         budget: 10,
-        history: [],
+        history: [{type:'empty',data:{}}],
     }},
     reducers: {
         setUserHasStarted: (state, action) => { // Set user activity
@@ -150,7 +164,7 @@ const userSlice = createSlice({
         },
 
         addUserBudget: (state, action) => { // Adds certain amount of budget points
-            state.value.budget += action.payload
+            state.value.budget += action.payload;
         },
 
         resetUserBudget: (state, action) => { // No playload
@@ -164,12 +178,18 @@ const userSlice = createSlice({
             state.value.history.unshift(action.payload);
         },
 
+        addEmptyHistory: (state, action) => { // Adds an empty user activity, actions recorder limit still apply
+            if (state.value.history.length >= 3)
+                state.value.history.pop();
+            state.value.history.unshift({type:'empty',data:{}});
+        },
+
         resetHistory: (state, action) => { // no payloda
             state.value.history.length = 0
         },
     }
 });
-export const {setUserHasStarted, setUserHasFinishTutorial, addUserBudget, resetUserBudget, addHistory, resetHistory} = userSlice.actions;
+export const {setUserHasStarted, setUserHasFinishTutorial, addUserBudget, resetUserBudget, addHistory, addEmptyHistory, resetHistory} = userSlice.actions;
 
 
 

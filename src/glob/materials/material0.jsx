@@ -16,7 +16,7 @@ export default function material0() {
                 desc: 'uang',
                 terms: [
                     {
-                        name: ['uang', 'harta', 'duit', 'mata uang', 'rupiah', ],
+                        name: ['uang', 'duit', 'mata uang', 'rupiah', 'uang rupiah', '' ],
                         definition: [
                             'nilai tukar',
                             'alat penukar',

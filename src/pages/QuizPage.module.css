@@ -120,11 +120,13 @@
 	color: var(--col-semantic-success) !important;
     background: color-mix(in srgb, var(--col-semantic-success) 20%, transparent) !important;
     border: solid 2.125px color-mix(in srgb, var(--col-semantic-success) 30%, transparent) !important;
+	animation: anim-quiz-correct-option-0 250ms cubic-bezier(.14,.84,.72,1.33) 0ms forwards;
 }
 .matching-quiz-option-incorrect {
 	color: var(--col-semantic-failure) !important;
     background: color-mix(in srgb, var(--col-semantic-failure) 20%, transparent) !important;
     border: solid 2.125px color-mix(in srgb, var(--col-semantic-failure) 30%, transparent) !important;
+	animation: anim-quiz-incorrect-option-0 200ms ease-out 0ms forwards;
 }
 
 
@@ -156,6 +158,8 @@
 	padding: 1rem 2rem;
 	border: solid 3px color-mix(in srgb, var(--col-accent1) 50%, transparent);
 	border-radius: 8px;
+	opacity: 0;
+	animation: anim-quiz-fin-stat 400ms cubic-bezier(.42,1.9,.92,1.38) 0ms forwards;
 }
 .quiz-fin-stat-coin img {
 	pointer-events: none;
@@ -173,6 +177,8 @@
 	padding: 1rem 2rem;
 	border: solid 3px color-mix(in srgb, var(--col-accent0) 50%, transparent);
 	border-radius: 8px;
+	opacity: 0;
+	animation: anim-quiz-fin-stat 400ms cubic-bezier(.42,1.9,.92,1.38) 300ms forwards;
 }
 .quiz-fin-stat-accuracy img {
 	pointer-events: none;
@@ -200,4 +206,31 @@
 	background: linear-gradient(to bottom, color-mix(in srgb, var(--col-accent0) 25%, transparent), transparent);
 	border: solid 1.25px var(--col-accent0);
 	border-radius: 8px;
+}
+
+@keyframes anim-quiz-fin-stat {
+	from {
+		opacity: 0;
+		transform: translateY(50px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+
+
+@keyframes anim-quiz-correct-option-0 {
+	0% { transform: translateY(0); }
+	35% { transform: translateY(-5px); }
+	100% { transform: translateY(0); }
+}
+@keyframes anim-quiz-incorrect-option-0 {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
 }

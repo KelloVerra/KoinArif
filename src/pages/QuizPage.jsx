@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getQuizFormatProcessorByFormatIndex, getQuizTemplateByIndex } from '../glob/quizes'
-import { advanceQuiz, completeQuiz, incrementCorrectQuiz } from '../glob/state';
+import { advanceQuiz, completeQuiz, addAnsweredQuizData, addUserBudget, addEmptyHistory } from '../glob/state';
 import { randomLength } from '../glob/util';
 
 import styles from './QuizPage.module.css'
@@ -26,14 +26,16 @@ export default function QuizPage() {
   const currentQuiz = quizState.generatedQuizes[quizState.currentGeneratedQuizIndex];
   const invalidState = !userState.hasStarted || !currentQuiz;
 
-  const choiceAnswer = useRef(false);
-  const setChoiceAnswer = useCallback(v => {
-    choiceAnswer.current = v;
-    if (v) dispatch(incrementCorrectQuiz());
-	console.log(quizState.correctQuizes);
-  })
+  const hadReloaded = useRef(false);
+  useEffect(_ => {
+    if (hadReloaded.current) return;
+    if (quizState.answeredQuizes[quizState.currentGeneratedQuizIndex]) nextQuestion();
 
-  // TODO: Collect budget
+    hadReloaded.current = true;
+  }, []);
+
+  const addAnswerState = useCallback(v => dispatch(addAnsweredQuizData({...v})))
+
   const nextQuestion = useCallback(_ => {
     window.scrollTo(0, 0);
     dispatch(advanceQuiz())
@@ -63,7 +65,7 @@ export default function QuizPage() {
                           quiz={currentQuiz}
                           onNextQuestion={nextQuestion}
                           onQuestionBookmarked={onQuestionBookmarked}
-                          choiceAnswer={{state:choiceAnswer, set:setChoiceAnswer}}
+                          addAnswerState={addAnswerState}
           />
         }
       </div>
@@ -72,9 +74,10 @@ export default function QuizPage() {
   )
 }
 
-function QuizInterface({state, quiz, onNextQuestion, onQuestionBookmarked, choiceAnswer}) {
+function QuizInterface({state, quiz, onNextQuestion, onQuestionBookmarked, addAnswerState}) {
   const [confirmable, setConfirmable] = useState(false);
-
+  const reward = state.generatedQuizes[state.currentGeneratedQuizIndex].reward;
+  
   useEffect(_ => {
     setConfirmable(false);
   }, [quiz]);
@@ -85,18 +88,18 @@ function QuizInterface({state, quiz, onNextQuestion, onQuestionBookmarked, choic
         return <MultipleChoiceQuestion 
                   data={quiz}
                   confirmable={{state: confirmable, set: setConfirmable}}
-                  setAnswerChoiceState={choiceAnswer.set}
+                  addAnswerState={addAnswerState}
+                  reward={reward}
                 />
       case 1:
         return <MatchingQuestion 
                   data={quiz}
                   confirmable={{state: confirmable, set: setConfirmable}}
-                  setAnswerChoiceState={choiceAnswer.set}
+                  addAnswerState={addAnswerState}
+                  reward={reward}
                 />;
     }
   };
-
-  const rew = 60;
 
   return (
     <>
@@ -108,7 +111,7 @@ function QuizInterface({state, quiz, onNextQuestion, onQuestionBookmarked, choic
             <h2>/{state.generatedQuizes.length}</h2>
             <div className={styles['quiz-reward-display']}>
               <img src={coinIcon} alt='coinIcon' width='20' />
-              <p>+{rew} koin</p>
+              <p>+{reward} koin</p>
             </div>
           </div>
           <div className={styles['quiz-question-container']}>
@@ -125,7 +128,7 @@ function QuizInterface({state, quiz, onNextQuestion, onQuestionBookmarked, choic
   );
 }
 
-function MultipleChoiceQuestion({data, confirmable, setAnswerChoiceState}) {
+function MultipleChoiceQuestion({data, confirmable, addAnswerState, reward}) {
 
   const [answeredInd, setAnsweredInd] = useState(-1);
   const [answerState, setAnswerState] = useState('matching-quiz-option-incorrect');
@@ -134,12 +137,14 @@ function MultipleChoiceQuestion({data, confirmable, setAnswerChoiceState}) {
     if (answeredInd === -1) return;
     const selOption = data.options[answeredInd];
     const processor = getQuizFormatProcessorByFormatIndex(selOption.parent_format);
-	const correct = processor.is_options_correct(selOption);
-
-	console.log(correct);
+	  const correct = processor.is_options_correct(selOption);
 	
-    setAnswerChoiceState(correct);
     setAnswerState(correct ? 'matching-quiz-option-correct' : 'matching-quiz-option-incorrect');
+    addAnswerState({
+      quiz_data: data,
+      accuracy: correct ? 1 : 0,
+      gotReward: correct ? reward : 0,
+    });
 
     confirmable.set(true);
   }, [answeredInd]);
@@ -161,6 +166,7 @@ function MultipleChoiceQuestion({data, confirmable, setAnswerChoiceState}) {
 function Finish({onConfirmEnd}) {
 
   const quizState = useSelector(stat => stat.quiz.value);
+  const userState = useSelector(stat => stat.user.value);
   const dispatch = useDispatch();
 
   const msgs = [
@@ -173,8 +179,20 @@ function Finish({onConfirmEnd}) {
     'Kesalahan itu guru terbaik, terus belajar, terus tumbuh.',
     'Kamu nggak harus sempurna kok! cukup terus berkembang.',
   ];
-  const coins = 80;
-  const accuracy = quizState.correctQuizes / quizState.generatedQuizes.length;
+  const coins = quizState.quizCompletionRecapData.totalReward;
+  const accuracy = quizState.quizCompletionRecapData.accuracy;
+
+
+  const hadReloaded = useRef(false);
+  useEffect(_ => {
+    if (hadReloaded.current) return;
+    if (userState.history[0].type != 'quiz') return;
+
+    dispatch(addEmptyHistory());
+    dispatch(addUserBudget(coins));
+    hadReloaded.current = true;
+  }, []);
+
 
   return (<>
     <div className={styles['quiz-fin-header']}>

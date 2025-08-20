@@ -1,1 +1,1 @@
-export const randomLength = len => Math.round(Math.random() * (len-1));
+export const randomLength = len => Math.floor(Math.random() * (len-1));

@@ -50,6 +50,7 @@ export default function Material() {
 
     dispatch(resetQuiz())
     dispatch(createQuizList({
+        level: materialState.materialLevel,
         material: receivedMaterialData,
     }))
     navigate("/quiz");
