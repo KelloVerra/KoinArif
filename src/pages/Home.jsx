@@ -65,12 +65,52 @@ export default function Home() {
 
 function ContinueLastActivityButton({}) {
 
+  const userState = useSelector(stat => stat.user.value);
+  const materialState = useSelector(stat => stat.material.value);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const continueLastActivity = _ => {
-    
+    const history = userState.history[0];
+    switch(history.type) {
+      case 'empty':
+        dispatch(addHistory({
+          type: 'material',
+          data: {
+            material_id: materialState.materialLevel,
+          },
+        }));
+        navigate('/material');
+        break;
+      case 'material':
+        navigate('/material');
+        break;
+      case 'quiz':
+        navigate('/quiz');
+        break;
+    } 
   };
 
+  const formatHistory = _ => {
+    const history = userState.history[0];
+    let txt = "";
+
+    switch(history.type) {
+      case 'empty':
+        txt = `Mulai belajar materi ${getMaterials()[materialState.materialLevel]().title}`
+        break;
+      case 'material':
+        txt = `Lanjut belajar materi ${getMaterials()[history.data.material_id]().title}`
+        break;
+      case 'quiz':
+        txt = `Lanjut mengerjakan quiz ${getMaterials()[history.data.material.id]().title}`
+        break;
+    }
+    return txt;
+  }
+
   return (
-    <button className={styles['continue-activity-button']} onClick={continueLastActivity}>Lanjut __</button>
+    <button className={styles['continue-activity-button']} onClick={continueLastActivity}>{formatHistory()}</button>
   )
 }
 
@@ -114,22 +154,3 @@ function LockedMaterialCard({material}) {
     </div>
   )
 }
-
-// TODO: DEPRECATED
-// function UserStat({}) {
-//   const userState = useSelector(state => state.user.value);
-//   const materialState = useSelector(state => state.material.value);
-
-//   return (
-//     <div className={styles["user-stat-container"]}>
-//       <div className={styles["stat-container"]}>
-//         <img src={budgetLogo} height="20px"/>
-//         <p>{userState.budget} Budget</p>
-//       </div>
-//       <div className={styles["stat-container"]}>
-//         <img src={materialLevelLogo} height="80px"/>
-//         <p>Level {materialState.materialLevel+1}</p>
-//       </div>
-//     </div>
-//   )
-// }

@@ -185,7 +185,7 @@ const userSlice = createSlice({
         },
 
         resetHistory: (state, action) => { // no payloda
-            state.value.history.length = 0
+            state.value.history = [{type:'empty',data:{}}];
         },
     }
 });

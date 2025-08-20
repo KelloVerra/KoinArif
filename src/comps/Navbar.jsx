@@ -6,18 +6,19 @@ import { resetStore, setUserHasStarted } from '../glob/state';
 import styles from './Navbar.module.css'
 
 import logo from '/CompactLogo.svg'
-import budgetLogo from '/Budget3D.svg'
-import materialLevelLogo from '/Level.svg'
+import budgetIcon from '/Budget3D.svg'
+import materialLevelIcon from '/Level.svg'
 
 
 
 export default function Navbar() {
   const userState = useSelector(state => state.user.value);
+  const navigate = useNavigate();
 
   return (
     <header>
       <div className={styles["content"]}>
-        <img className={styles["logo"]} alt='logo' src={logo} height="20"/>
+        <img className={styles["logo"]} alt='logo' src={logo} width="20" onClick={_=>navigate("/")}/>
         {userState.hasStarted ? <LoggedIn /> : <LoggedOut />}
       </div>
     </header>
@@ -51,10 +52,6 @@ function LoggedIn({}) {
     navigate("/");
   }, []);
 
-  const goToCredits = useCallback(() => {
-    navigate("/credit");
-  }, []);
-
   return (
     <div className={styles["right-content"]}>
       <UserStat />
@@ -71,11 +68,11 @@ function UserStat({}) {
   return (
     <div className={styles["user-stat-container"]}>
       <div className={styles["stat-container"]}>
-        <img src={budgetLogo} alt="coinLogo" height="20" />
+        <img src={budgetIcon} alt="coinIcon" width="20" />
         <p>{userState.budget} Koin</p>
       </div>
       <div className={styles["stat-container"]}>
-        <img src={materialLevelLogo} alt="levelLogo" height="20" />
+        <img src={materialLevelIcon} alt="levelIcon" width="20" />
         <p>Level {materialState.materialLevel+1}</p>
       </div>
     </div>

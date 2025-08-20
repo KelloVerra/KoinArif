@@ -22,8 +22,10 @@ header > .content {
 
 
 .logo {
+    cursor: pointer;
     align-self: center;
-    pointer-events: none;
+    pointer-events:all;
+    width: auto;
     height: 65%;
 }
 
