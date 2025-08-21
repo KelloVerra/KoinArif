@@ -40,7 +40,7 @@ export default function QuizPage() {
 
   const nextQuestion = useCallback(_ => {
     window.scrollTo(0, 0);
-    dispatch(advanceQuiz())
+    dispatch(advanceQuiz());
     
     if (quizState.currentGeneratedQuizIndex >= quizState.generatedQuizes.length-1) {
       dispatch(unlockNextMaterial(
