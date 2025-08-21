@@ -21,7 +21,7 @@ export default function material0() {
                         definition: [
                             'nilai tukar',
                             'alat penukar',
-                            'standar pengukur nilai yang dapat dihitung',
+                            'standar pengukur nilai finansial yang dapat dihitung',
                             'suatu benda yang nilainya diterima oleh semua orang',
                             'benda yang dapat ditukarkan dalam bentuk jasa atau barang',
                         ],
@@ -31,11 +31,12 @@ export default function material0() {
                     'true': [
                         'uang yang disimpan di bank termasuk uang giral',
                         'uang kartal dikeluarkan oleh negara',
+                        'nilai uang diterima oleh banyak orang',
                     ],
                     'false': [
                         'e-money termasuk uang kartal',
                         'uang giral adalah uang yang dikeluarkan oleh negara',
-                        'uang hanyalah kertas / objek berisi angka yang tak bermakna',
+                        'uang hanyalah kertas berisi angka yang tak bermakna',
                     ],
                 },
             },

@@ -96,8 +96,7 @@
 	padding: 1rem 0;
 	display: grid;
 	gap: 1rem;
-	/* TODO: MAKE DYNAMIC */
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: 1fr;
 }
 .matching-quiz-option {
 	cursor: pointer;

@@ -143,6 +143,7 @@ function MultipleChoiceQuestion({data, confirmable, addAnswerState, reward}) {
   const [answeredInd, setAnsweredInd] = useState(-1);
   const [answerState, setAnswerState] = useState('matching-quiz-option-incorrect');
 
+
   useEffect(_ => {
     if (answeredInd === -1) return;
     const selOption = data.options[answeredInd];
@@ -165,10 +166,10 @@ function MultipleChoiceQuestion({data, confirmable, addAnswerState, reward}) {
   }, [confirmable.state]);
   
   return (
-    <div className={styles['matching-quiz-option-container']}>
-      <button className={`${styles[`matching-quiz-option`]} ${styles[answeredInd === 0 ? answerState : '']}`} onClick={_ => setAnsweredInd(0)} disabled={confirmable.state}> {data.options[0].desc} </button>
-      <button className={`${styles[`matching-quiz-option`]} ${styles[answeredInd === 1 ? answerState : '']}`} onClick={_ => setAnsweredInd(1)} disabled={confirmable.state}> {data.options[1].desc} </button>
-      <button className={`${styles[`matching-quiz-option`]} ${styles[answeredInd === 2 ? answerState : '']}`} onClick={_ => setAnsweredInd(2)} disabled={confirmable.state}> {data.options[2].desc} </button>
+    <div className={styles['matching-quiz-option-container']} deps={[confirmable, data, answeredInd, answerState]} style={{gridTemplateColumns:`repeat(${data.options.length}, 1fr)`}}>
+      {Array.from({length: data.options.length}).map((_, i) =>
+        <button key={i} className={`${styles[`matching-quiz-option`]} ${styles[answeredInd === i ? answerState : '']}`} onClick={_ => setAnsweredInd(i)} disabled={confirmable.state}> {data.options[i].desc} </button>
+      )}
     </div>
   );
 }
