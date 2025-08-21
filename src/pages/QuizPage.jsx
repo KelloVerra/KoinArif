@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getQuizFormatProcessorByFormatIndex, getQuizTemplateByIndex } from '../glob/quizes'
-import { advanceQuiz, completeQuiz, addAnsweredQuizData, addUserBudget, addEmptyHistory } from '../glob/state';
+import { advanceQuiz, completeQuiz, addAnsweredQuizData, addUserBudget, addEmptyHistory, unlockNextMaterial } from '../glob/state';
 import { randomLength } from '../glob/util';
 
 import styles from './QuizPage.module.css'
@@ -42,8 +42,14 @@ export default function QuizPage() {
     window.scrollTo(0, 0);
     dispatch(advanceQuiz())
     
-    if (quizState.currentGeneratedQuizIndex >= quizState.generatedQuizes.length-1)
+    if (quizState.currentGeneratedQuizIndex >= quizState.generatedQuizes.length-1) {
+      dispatch(unlockNextMaterial(
+        userState.history[0].type === 'empty' ?
+        userState.history[1].data.material.id :
+        userState.history[0].data.material.id
+      ));
       dispatch(completeQuiz({}));
+    }
   }, [quizState.currentGeneratedQuizIndex]);
   
   const confirmEnd = useCallback(_ => {

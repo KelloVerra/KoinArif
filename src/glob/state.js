@@ -117,8 +117,9 @@ const materialSlice = createSlice({
         familiarTerms: [],
     }},
     reducers: {
-        incrementMaterialLevel: (state, action) => { // payload is addition of levels
-            state.value.materialLevel += action.payload;
+        unlockNextMaterial: (state, action) => { // payload is input material level id
+            if (state.value.materialLevel != action.payload) return;
+            state.value.materialLevel += 1;
         },
 
         resetMaterialLevel: (state, action) => { // no payload
@@ -144,7 +145,7 @@ const materialSlice = createSlice({
         },
     }
 });
-export const {incrementMaterialLevel, resetMaterialLevel, addFamiliarTerms, addSubmoduleRewardClaimed, resetMaterialState, } = materialSlice.actions;
+export const {unlockNextMaterial, resetMaterialLevel, addFamiliarTerms, addSubmoduleRewardClaimed, resetMaterialState, } = materialSlice.actions;
 
 const userSlice = createSlice({
     name: 'user',
