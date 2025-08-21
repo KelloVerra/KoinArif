@@ -1,4 +1,4 @@
-import { reduceMaterialSubmoduleData } from "./materials/main";
+import { getMaterials, reduceMaterialSubmoduleData } from "./materials/main";
 import { randomLength } from "./util";
 
 // QUIZ TEMPLATE REGISTRY
@@ -27,31 +27,44 @@ const QUIZ_FORMAT_PROCESSOR_REGISTRY = [
     {
         id: 0,
         type: "definitive_multiple_choice",
-        options_generator: ({optionsRule, template, termData, submoduleData, materialData}) => {
+        options_generator: ({template, quizData, submoduleData, materialData}) => {
             const optionsData = [];
-            const correctOptionIndex = randomLength(3); // PROCESSING USING OPTIONSRULES TBD
-            
+            const optionsLabel = new Set();
+            const optionsCount = 3; // RANDOM OPTIONS COUNT USING QUIZDATA TBD
+            const correctInd = randomLength(optionsCount);
+
             // Find unrelated distractor data
             const unrelatedSubmodules = [...materialData.submoduleData];
-            unrelatedSubmodules.splice(submoduleData.submoduleId,1);
+            unrelatedSubmodules.splice(submoduleData.id,1);
 
-            const unrelatedSubmodule = unrelatedSubmodules[randomLength(unrelatedSubmodules.length)];
 
             const genCorrectAnswer = () => {
-                const selectTerms = template.type === 'definition' ? termData.definition : termData.name;
-                return selectTerms[randomLength(selectTerms.length)];
+                const data = template.type === 'definition' ? quizData.selTermData.definition : quizData.selTermData.name;
+                return data[randomLength(data.length)];
             };
             const genIncorrectAnswer = () => {
-                const distractTermData = unrelatedSubmodule.terms[randomLength(unrelatedSubmodule.terms.length)];            
-                const selectTerms = template.type === 'definition' ? distractTermData.definition : distractTermData.name;
-                return selectTerms[randomLength(selectTerms.length)];
+                const unrelatedSubmoduleTerm = unrelatedSubmodules[randomLength(unrelatedSubmodules.length)].terms;
+                let answer;
+                for (let i = 0; i < unrelatedSubmoduleTerm.length; i++) {
+                    const element = unrelatedSubmoduleTerm[i];
+                    let data = template.type === 'definition' ? element.definition : element.name;
+                    data = data[randomLength(data.length)];
+
+                    if (optionsLabel.has(data)) continue;
+                    
+                    optionsLabel.add(data);
+                    answer = data;
+                    break;
+                }
+
+                return answer;
             };
 
-            for (let i = 0; i < 3; i++) { // PROCESSING USING OPTIONSRULES TBD
+            for (let i = 0; i < optionsCount; i++) {
                 optionsData.push({
                     parent_format: 0,
-                    desc: correctOptionIndex === i ? genCorrectAnswer() : genIncorrectAnswer(),
-                    correct: correctOptionIndex === i,
+                    desc: correctInd === i ? genCorrectAnswer() : genIncorrectAnswer(),
+                    correct: correctInd === i,
                 });                
             }
             return optionsData;
@@ -61,15 +74,15 @@ const QUIZ_FORMAT_PROCESSOR_REGISTRY = [
             return optionsData.correct;
         },
 
-        question_template_processor: ({templateType, templates, termData}) => {
-            const selectedTemplate = templates[randomLength(templates.length)];
+        question_template_processor: ({templateData, quizData}) => {
+            const selectedTemplate = templateData.templates[randomLength(templateData.templates.length)];
             
             // Select random term based on question types
-            let term = termData.name;
-            if (templateType === 'reverse-definition')
-                term = termData.definition;
+            let data = quizData.selTermData.name;
+            if (templateData.type === 'reverse-definition')
+                data = quizData.selTermData.definition;
 
-            const selectedTerm = term[randomLength(term.length)];
+            const selectedTerm = data[randomLength(data.length)];
             return replaceQuizTemplate(selectedTemplate, [selectedTerm])
         },
     },
@@ -114,38 +127,56 @@ export function replaceQuizTemplate(template, replacement) {
 }
 
 
-export function generateQuiz(data) { // data => {material,}
+export function generateMaterialQuiz(material) {
 
     // TRUE & FALSE, MATCHING QUESTION FORMAT TBD
 
     // RANDOMIZATION TBD
-    const reducedMaterialSubmodules = reduceMaterialSubmoduleData(data.material)
+    const reducedSubmodules = reduceMaterialSubmoduleData(material);
     
     const selectedTemplate = getQuizTemplateByIndex(randomLength(getAllQuizTemplates().length));
-    const selectedSubmoduleData = reducedMaterialSubmodules.terms[randomLength(reducedMaterialSubmodules.terms.length)];
-    const selectedTermData = selectedSubmoduleData.data[randomLength(selectedSubmoduleData.data.length)];
-    
 
-    // Process selected question
-    const processor = getQuizFormatProcessorByFormatIndex(selectedTemplate.format);
+    const rng = randomLength(Number.MAX_SAFE_INTEGER-20);
+    const selectedTerms = reducedSubmodules.terms[rng % reducedSubmodules.terms.length];
+    const selectedFacts = reducedSubmodules.facts[rng % reducedSubmodules.facts.length];
+    
+    return generateQuiz({material:material, submodule: material.submoduleData[selectedFacts.submoduleId]}, selectedTemplate, {selTerms: selectedTerms, selFacts: selectedFacts});
+}
+
+export function generateSubmoduleQuiz(submodule) {
+
+    // TRUE & FALSE, MATCHING QUESTION FORMAT TBD
+    const selectedTemplate = getQuizTemplateByIndex(randomLength(getAllQuizTemplates().length));
+    const selectedTerms = {data: submodule.terms};
+    const selectedFacts = {data: submodule.facts};
+    
+    return generateQuiz({material:getMaterials()[submodule.materialId](), submodule: submodule}, selectedTemplate, {selTerms: selectedTerms, selFacts: selectedFacts});
+}
+
+export function generateQuiz(metadata, template, quizData) { // quizData => {selTerms, selFacts}
+
+    const selTermData = quizData.selTerms.data[randomLength(quizData.selTerms.data.length)];
+    const selFactData = quizData.selFacts.data[randomLength(2) === 0 ? 'true' : 'false'];
+    const finalQuizData = {selTermData: selTermData, selFactData: selFactData};
+
+    const processor = getQuizFormatProcessorByFormatIndex(template.format);
 
     const optionsData = processor.options_generator({
-        template: selectedTemplate, 
-        termData: selectedTermData,
-        submoduleData: selectedSubmoduleData,
-        materialData: data.material,
+        template: template, 
+        quizData: finalQuizData,
+        submoduleData: metadata.submodule,
+        materialData: metadata.material,
     });
     const questionString = processor.question_template_processor({
-        templateType: selectedTemplate.type, 
-        templates: selectedTemplate.templates, 
-        termData: selectedTermData,
+        templateData: template,
+        quizData: finalQuizData,
     });
 
     return {
-        questionData: selectedTemplate,
+        questionData: template,
         questionString: questionString,
         options: optionsData,
         processor: processor,
-        material: selectedSubmoduleData,
+        submodule: metadata.submodule,
     }
 }

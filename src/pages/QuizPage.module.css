@@ -68,7 +68,7 @@
 	display: flex;
 	gap: .5rem;
 	align-items: center;
-	padding: .5rem 1rem;
+	padding: .5rem 4.75rem;
 	margin: 0 auto;
 	font-family: var(--header-font);
 	font-size: 1.75rem;
@@ -103,6 +103,7 @@
 	cursor: pointer;
 	display: block;
     padding: .25rem .5rem .5rem;
+	box-sizing: content-box;
     color: var(--col-secondary);
     border-radius: 8px;
     background: color-mix(in srgb, var(--col-accent1) 10%, transparent);
@@ -112,7 +113,11 @@
 	font-size: 1rem;
 	text-align: center;
 }
+.matching-quiz-option:hover:enabled {
+    background: color-mix(in srgb, var(--col-accent1) 20%, transparent);
+}
 .matching-quiz-option:disabled {
+	cursor: default;
 	color: var(--col-accent1);
 	background: none;
 }
@@ -159,7 +164,7 @@
 	border: solid 3px color-mix(in srgb, var(--col-accent1) 50%, transparent);
 	border-radius: 8px;
 	opacity: 0;
-	animation: anim-quiz-fin-stat 400ms cubic-bezier(.42,1.9,.92,1.38) 0ms forwards;
+	animation: anim-quiz-fin-stat 500ms cubic-bezier(.42,1.9,.92,1.38) 150ms forwards;
 }
 .quiz-fin-stat-coin img {
 	pointer-events: none;
@@ -178,7 +183,7 @@
 	border: solid 3px color-mix(in srgb, var(--col-accent0) 50%, transparent);
 	border-radius: 8px;
 	opacity: 0;
-	animation: anim-quiz-fin-stat 400ms cubic-bezier(.42,1.9,.92,1.38) 300ms forwards;
+	animation: anim-quiz-fin-stat 500ms cubic-bezier(.42,1.9,.92,1.38) 600ms forwards;
 }
 .quiz-fin-stat-accuracy img {
 	pointer-events: none;

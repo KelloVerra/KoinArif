@@ -13,10 +13,11 @@ export default function material0() {
         submoduleData: [
             {
                 id: 0,
+                materialId: 0,
                 desc: 'uang',
                 terms: [
                     {
-                        name: ['uang', 'duit', 'mata uang', 'rupiah', 'uang rupiah', '' ],
+                        name: ['uang', 'duit', 'mata uang', 'rupiah', 'uang rupiah', ],
                         definition: [
                             'nilai tukar',
                             'alat penukar',
@@ -40,6 +41,7 @@ export default function material0() {
             },
             {
                 id: 1,
+                materialId: 0,
                 desc: 'budget',
                 terms: [
                     {
@@ -77,6 +79,7 @@ export default function material0() {
             },
             {
                 id: 2,
+                materialId: 0,
                 desc: 'kebutuhan & keinginan',
                 terms: [
                     {

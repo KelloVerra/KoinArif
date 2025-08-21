@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import storage from "redux-persist/lib/storage"
-import { generateQuiz, getAllQuizTemplates } from "./quizes";
+import { generateMaterialQuiz, getAllQuizTemplates } from "./quizes";
 import { randomLength } from "./util";
 
 
@@ -63,7 +63,7 @@ const quizSlice = createSlice({
             
 
             for (let i = 0; i < quizLen; i++) {
-                const question = generateQuiz({material: data.material});
+                const question = generateMaterialQuiz(data.material);
                 const qReward = randomLength(5) + 10;
                 
                 // generative questions TBD (TODO: QUESTION LOAD CALCULATION & REFERENCE OLDER MATERIALS)

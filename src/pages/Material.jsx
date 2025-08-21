@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import NotFound from './NotFound'
 
 import { getMaterialByIndex } from '../glob/materials/main'
-import { addHistory, createQuizList, incrementMaterialLevel, resetQuiz} from '../glob/state'
+import { addHistory, createQuizList, resetQuiz} from '../glob/state'
 
 import styles from './Material.module.css'
 

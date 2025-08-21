@@ -34,6 +34,8 @@ export default function QuizPage() {
     hadReloaded.current = true;
   }, []);
 
+
+
   const addAnswerState = useCallback(v => dispatch(addAnsweredQuizData({...v})))
 
   const nextQuestion = useCallback(_ => {
@@ -51,6 +53,8 @@ export default function QuizPage() {
   const onQuestionBookmarked = useCallback(_ => {
     console.log('bookmarked');
   }, []);
+
+
 
   return (
     <>
