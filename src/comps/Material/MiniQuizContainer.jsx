@@ -41,7 +41,7 @@ export default function MiniQuizContainer({id}) {
         const submoduleData = getMaterials()[id.material_id]().submoduleData[id.submodule_id];
         setQuestionData(generateSubmoduleQuiz(submoduleData));
     }, [hasStarted]);
- 
+
     const validStart = hasStarted && questionData;
     return (<>
         <div className={styles['miniquiz-container']}>
@@ -113,7 +113,7 @@ function MultipleChoiceOptionLayout({questionData, onAnswer}) {
     }, [answeredInd]);
 
     return (
-        <div className={styles['quiz-options']} deps={[answeredInd]}>
+        <div className={styles['quiz-options']} deps={[answeredInd]} style={{gridTemplateColumns:`repeat(${questionData.options.length}, 1fr)`}}>
             {questionData.options.map((v, i) => 
             <button key={i} disabled={answeredInd != -1} onClick={_ => setAnsweredInd(i)} className={`${styles[`quiz-option`]} ${styles[answeredInd === i ? answerState : '']}`}>
                 {v.desc}

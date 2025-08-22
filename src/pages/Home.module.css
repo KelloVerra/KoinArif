@@ -91,8 +91,12 @@
     color: var(--col-accent0);
 }
 .material-card-container {
-    overflow-x: auto;
+    width: 100%;
     padding-bottom: 1rem;
+    overflow-x: scroll;
+    scrollbar-width:thin;
+    scrollbar-color: var(--col-accent0) color-mix(in srgb, var(--col-accent0) 15%, transparent);
+    scroll-behavior: smooth;
     display: flex;
     gap: 1rem;
 }
@@ -100,7 +104,8 @@
 .material-card {
     padding: 1rem;
     cursor: pointer;
-    max-width: 15rem;
+    min-width: 15rem;
+    width: 15rem;
     height: 18rem;
     background-color: rgba(180, 68, 255, 0.15);
     border: solid 1px var(--col-accent0);

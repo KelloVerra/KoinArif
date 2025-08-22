@@ -15,6 +15,7 @@ export default function Home() {
   const quizState = useSelector(stat => stat.quiz.value);
 
   const materials = useRef(getMaterials());
+  const materialCardContainer = useRef(null);
 
   const greetings = _ => {
     // Time based greetings
@@ -35,6 +36,15 @@ export default function Home() {
     return quotes[Math.floor(Math.random()*quotes.length)];
   }
 
+  useEffect(_ => { // skrol horizontal
+    if(materialCardContainer.current) {
+      materialCardContainer.current.addEventListener('wheel', e => {
+        e.preventDefault();
+        materialCardContainer.current.scrollLeft += e.deltaY;
+      }, { passive: false })
+    }
+  }, [materialCardContainer.current]);
+
   return (
     <main>
       <div className={styles['content']}>
@@ -49,7 +59,7 @@ export default function Home() {
         {/* Mascot here */}
         <div className={styles['material-container']}>
           <h1>Materi</h1>
-          <div className={styles['material-card-container']}>
+          <div className={styles['material-card-container']} ref={materialCardContainer}>
             {materials.current.map(v => {
               const material = v();
               if(material.id > materialState.materialLevel)

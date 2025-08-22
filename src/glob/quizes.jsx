@@ -52,6 +52,7 @@ const QUIZ_TEMPLATE_REGISTRY = [
             'false': [
                 'Salah',
                 'Tidak tepat',
+                'Kurang tepat',
             ]
         },
     },
@@ -65,8 +66,8 @@ const QUIZ_TEMPLATE_REGISTRY = [
             '$',
             'apakah $?',
             '$, apakah pernyataan tersebut tepat?',
-            'tepatkah $?',
-            'betulkah $?',
+            'tepat-kah $?',
+            'betul-kah $?',
             'benarkah $?',
         ],
         option_template: {
@@ -78,6 +79,7 @@ const QUIZ_TEMPLATE_REGISTRY = [
             'false': [
                 'Salah',
                 'Tidak tepat',
+                'Kurang tepat'
             ]
         },
     },
