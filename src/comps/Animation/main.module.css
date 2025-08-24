@@ -1,0 +1,10 @@
+.container {
+    position: relative;
+    aspect-ratio: 1;
+}
+
+.container * {
+    position: absolute;
+    width: auto;
+    height: auto;
+}

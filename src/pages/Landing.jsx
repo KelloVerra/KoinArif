@@ -2,6 +2,10 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { setUserHasStarted } from '../glob/state'
 import styles from  './Landing.module.css'
+import { lazy, Suspense } from 'react';
+import Loading from '../comps/Loading';
+
+const MascotWave = lazy(_ => import('../comps/Animation/MascotWave'));
 
 export default function Landing() {
   const userState = useSelector(stat => stat.user.value);
@@ -22,16 +26,25 @@ export default function Landing() {
 
 
         <div className={styles['textart0']}>
+          <Suspense fallback={<Loading />}>
+            <MascotWave scale={1.125} />
+          </Suspense>
           <h1>Siapkah kamu dengan Masa Depanmu?</h1>
           <p>Banyak hal yang sulit diprediksi seiring jaman. Sudah yakin keadaan finansialmu pasti aman kedepannya?</p>
         </div>
 
         <div className={styles['textart1']}>
+          <Suspense fallback={<Loading />}>
+            <MascotWave scale={1.125} />
+          </Suspense>
           <h1>Berharap agar Belajar serasa Scrolling Sosmed?</h1>
           <p>Andai mengasah literasi finansial gak ngebosenin dan bikin pusing seperti belajar matematika di sekolah.</p>
         </div>
 
         <div className={styles['textart2']}>
+          <Suspense fallback={<Loading />}>
+            <MascotWave scale={1.125} />
+          </Suspense>
           <h1>Salam Kenal.. Namaku Arif</h1>
           <p>Aku siap nemenin kamu mengasah kemampuan literasimu!</p>
           <p>Ayo, langsung aja mulai petualangan finansial kita!</p>
