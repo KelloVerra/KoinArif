@@ -29,7 +29,7 @@ export default function Footer() {
     <footer>
       <div className={styles['content']}>
         <div className={styles['upper']}>
-          <img className={styles["logo"]} src={logo}/>
+          <img className={styles["logo"]} src={logo} alt='logo koin arif' width='30'/>
           <p>Koin Arif adalah platform financial education yang dapat mengasah pengetahuan literasimu dalam cara yang menyenangkan dan engaging.</p>
         </div>
         { userState.hasStarted ?

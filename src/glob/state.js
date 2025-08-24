@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import storage from "redux-persist/lib/storage"
-import { generateMaterialQuiz, getAllQuizTemplates } from "./quizes";
+import { generateMaterialQuiz, getAllQuizTemplates } from "./quizes.js";
 import { randomLength } from "./util";
 
 

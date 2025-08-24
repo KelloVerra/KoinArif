@@ -18,7 +18,7 @@ export default function Navbar() {
   return (
     <header>
       <div className={styles["content"]}>
-        <img className={styles["logo"]} alt='logo' src={logo} width="20" onClick={_=>navigate("/")}/>
+        <img className={styles["logo"]} alt='logo koin arif' src={logo} width="20" onClick={_=>navigate("/")}/>
         {userState.hasStarted ? <LoggedIn /> : <LoggedOut />}
       </div>
     </header>

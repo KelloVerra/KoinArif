@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setUserHasStarted } from '../glob/state'
@@ -8,7 +6,6 @@ import styles from  './Landing.module.css'
 export default function Landing() {
   const userState = useSelector(stat => stat.user.value);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const startLearning = () => dispatch(setUserHasStarted(true));
 

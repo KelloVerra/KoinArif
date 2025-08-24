@@ -125,12 +125,14 @@
     background: color-mix(in srgb, var(--col-semantic-success) 20%, transparent) !important;
     border: solid 2.125px color-mix(in srgb, var(--col-semantic-success) 30%, transparent) !important;
 	animation: anim-quiz-correct-option-0 250ms cubic-bezier(.14,.84,.72,1.33) 0ms forwards;
+    will-change: transform;
 }
 .matching-quiz-option-incorrect {
 	color: var(--col-semantic-failure) !important;
     background: color-mix(in srgb, var(--col-semantic-failure) 20%, transparent) !important;
     border: solid 2.125px color-mix(in srgb, var(--col-semantic-failure) 30%, transparent) !important;
 	animation: anim-quiz-incorrect-option-0 200ms ease-out 0ms forwards;
+    will-change: transform;
 }
 
 
@@ -164,6 +166,7 @@
 	border-radius: 8px;
 	opacity: 0;
 	animation: anim-quiz-fin-stat 500ms cubic-bezier(.42,1.9,.92,1.38) 150ms forwards;
+    will-change: transform, opacity;
 }
 .quiz-fin-stat-coin img {
 	pointer-events: none;
