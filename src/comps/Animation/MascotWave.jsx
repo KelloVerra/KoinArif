@@ -8,7 +8,7 @@ import mascotfeet from '/mascot/wave/feet.svg';
 import mascotcoin from '/mascot/wave/coin.svg';
 
 
-export default function MascotWave({containerStyle, scale}) {
+export default function MascotWave({scale, className}) {
 
     const partsData = {
         body: {
@@ -34,7 +34,7 @@ export default function MascotWave({containerStyle, scale}) {
     const coin = useRef(null);
     const feet = useRef(null);
 
-    const explicitContainerStyle = { width: `${12 * scale}rem`, };
+    const explicitContainerStyle = { width: `${9.5 * scale}rem`, height: `${12 * scale}rem` };
 
     const scope = useRef(null);
     const root = useRef(null);
@@ -61,9 +61,9 @@ export default function MascotWave({containerStyle, scale}) {
 
 
 
-    return (<div style={{...explicitContainerStyle, ...containerStyle}} className={mainStyles['container']} ref={root}>
-        <img src={mascotcoin} ref={coin} width="20" style={ partsData.coin.style } alt=''/>
-        <img src={mascotbody} width="20" style={ partsData.body.style } alt=''/>
-        <img src={mascotfeet} ref={feet} width="20" style={ partsData.feet.style } alt=''/>
+    return (<div style={explicitContainerStyle} className={`${mainStyles['container']} ${className}`} ref={root}>
+        <img src={mascotcoin} ref={coin} width="80" style={ partsData.coin.style } alt=''/>
+        <img src={mascotbody} width="80" style={ partsData.body.style } alt=''/>
+        <img src={mascotfeet} ref={feet} width="80" style={ partsData.feet.style } alt=''/>
     </div>);
 }

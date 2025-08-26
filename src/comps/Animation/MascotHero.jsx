@@ -1,0 +1,164 @@
+import { animate, createScope, createSpring, createTimeline } from 'animejs';
+import { useEffect, useRef } from 'react';
+
+import mainStyles from './main.module.css';
+
+import mascotbodybg from '/mascot/hero/bodybg.svg';
+import mascotcoin from '/mascot/hero/coin.svg';
+import mascotbodyfg from '/mascot/hero/bodyfg.svg';
+
+import mascotexpressdef from '/mascot/hero/exprdef.svg';
+import mascotexpresshappy from '/mascot/hero/exprhappi.svg';
+import mascotexpressexcite from '/mascot/hero/exprexci.svg';
+
+
+export default function MascotHero({scale, className}) {
+
+    const partsData = {
+        bodybg: {
+            style:{ left: 0 *scale, top: 0 *scale, width: 165 *scale },
+        },
+        bodyfg: {
+            style:{ left: 0 *scale, top: 0 *scale, width: 165 *scale },
+        },
+        coin0: {
+            style:{ left: 0 *scale, top: -100 *scale, width: 165 *scale },
+        },
+        exprhappy: {
+            style:{ left: 0 *scale, top: 0 *scale, width: 165 *scale, opacity:0 },
+        },
+        exprexcited: {
+            style:{ left: 0 *scale, top: 0 *scale, width: 165 *scale, opacity:0 },
+        },
+        exprdef: {
+            style:{ left: 0 *scale, top: 0 *scale, width: 165 *scale, opacity:1 },
+        },
+    }
+    const eyedef = useRef(null);
+    const eyeexcit = useRef(null);
+    const eyehappi = useRef(null);
+
+    const coin0 = useRef(null);
+    const bodyfg = useRef(null);
+    const bodybg = useRef(null);
+
+    const explicitContainerStyle = { 
+        width: `${12 * scale}rem`, 
+        height: `${18 * scale}rem`, 
+
+        position:'absolute', 
+        zIndex: -1,
+        top: '-200px',
+    };
+
+    useEffect(_ => {
+        const timeline = createTimeline({
+            defaults: {
+                ease: 'steps(1)',
+                duration: 5,
+            },
+            loop: true,
+        });
+
+
+        const timelineCoinAnim = _ => {
+            timeline.add(coin0.current, {
+                y:        0
+            });
+            timeline.add(coin0.current, {
+                y:        115 *scale,
+                ease:     'outCirc',
+                duration: 800,
+            });
+            timeline.add(coin0.current, {
+                y:        115 *scale,
+                duration: 200,
+            });
+            timeline.add(coin0.current, {
+                y:        250 *scale,
+                ease:     'inBack(3)',
+                duration: 800,
+            });
+        };
+        const timelineEyeAnim = i => {
+            const sequence = [
+                eyehappi.current,
+                eyedef.current,
+                eyeexcit.current,
+                eyedef.current,
+            ]
+
+            timeline.add(sequence.at(i-1), {
+                opacity:  0
+            }, "-=340");
+            timeline.add(sequence.at(i), {
+                y:        15,
+                opacity:  1
+            }, "-=340");
+            timeline.add(sequence.at(i), {
+                opacity:  1,
+                y:        0,
+                ease:     'outBack(3)',
+                duration: 200,
+            }, "-=320");
+            timeline.add(sequence.at(i), {
+                y:        0,
+                duration: 200,
+            });
+        };
+        const wiggleBody = _ => { 
+            timeline.add(bodyfg.current, {
+                rotate     : 3
+            }, "-=15");
+            timeline.add(bodybg.current, {
+                rotate     : 3
+            }, "-=15");
+            timeline.add(bodyfg.current, {
+                rotate     : 0,
+                ease: "outBack(2)",
+                duration: 400,
+            },);
+            timeline.add(bodybg.current, {
+                rotate     : 0,
+                ease: "outBack(2)",
+                duration: 400,
+            }, "-=400");
+        }
+
+        timelineCoinAnim();
+        wiggleBody();
+        timelineEyeAnim(0);
+
+        timelineCoinAnim();
+        wiggleBody();
+        timelineEyeAnim(1);
+
+
+        timelineCoinAnim();
+        wiggleBody();
+        timelineEyeAnim(2);
+
+
+        timelineCoinAnim();
+        wiggleBody();
+        timelineEyeAnim(3);
+
+
+
+
+        return _ => timeline.revert();
+    }, [scale]);
+
+
+
+    return (
+        <div style={explicitContainerStyle} className={`${mainStyles['container']} ${className}`}>
+            <img src={mascotbodybg} ref={bodybg} width="80" style={ partsData.bodybg.style } alt=''/>
+            <img src={mascotcoin} ref={coin0} width="80" style={ partsData.coin0.style } alt=''/>
+            <img src={mascotbodyfg} ref={bodyfg} width="80" style={ partsData.bodyfg.style } alt=''/>
+            <img src={mascotexpressdef} ref={eyedef} width="80" style={ partsData.exprdef.style } alt=''/>
+            <img src={mascotexpresshappy} ref={eyehappi} width="80" style={ partsData.exprhappy.style } alt=''/>
+            <img src={mascotexpressexcite} ref={eyeexcit} width="80" style={ partsData.exprexcited.style } alt=''/>
+        </div>
+    );
+}

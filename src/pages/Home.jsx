@@ -1,18 +1,19 @@
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addHistory, } from '../glob/state';
 import { useNavigate } from 'react-router';
-
-import styles from './Home.module.css'
-import budgetLogo from '/Budget3D.svg'
-import materialLevelLogo from '/Level.svg'
-
 import { getMaterials } from '../glob/materials/main';
+import { randomLength } from '../glob/util';
+
+import Loading from '../comps/Loading';
+import MascotWave from '../comps/Animation/MascotWave';
+import styles from './Home.module.css'
+
+
 
 export default function Home() {
   const userState = useSelector(stat => stat.user.value);
   const materialState = useSelector(stat => stat.material.value);
-  const quizState = useSelector(stat => stat.quiz.value);
 
   const materials = useRef(getMaterials());
   const materialCardContainer = useRef(null);
@@ -33,30 +34,48 @@ export default function Home() {
       'Menginvestasikan dirimu dengan belajar, hargai masa depanmu..',
       'Belajar Literasi Finansial 5 menit setiap hari hasilnya sangatlah dahsyat dibandingkan dengan tidak belajar sama sekali',
     ];
-    return quotes[Math.floor(Math.random()*quotes.length)];
+    return quotes[randomLength(quotes.length)];
+  }
+  const mascotPose = _ => {
+    const comps = [
+      <MascotWave scale={1.45} className={styles['mascot']} />,
+    ];
+    return comps[randomLength(comps.length)];
   }
 
   useEffect(_ => { // skrol horizontal
     if(materialCardContainer.current) {
-      materialCardContainer.current.addEventListener('wheel', e => {
+      const act = e => {
         e.preventDefault();
         materialCardContainer.current.scrollLeft += e.deltaY;
-      }, { passive: false })
+      };
+
+      materialCardContainer.current.addEventListener('wheel', act, { passive: false })
+      return _ => {
+        if(materialCardContainer.current)
+          materialCardContainer.current.removeEventListener('wheel', act, { passive: false })
+      };
     }
   }, [materialCardContainer.current]);
 
   return (
     <main>
       <div className={styles['content']}>
-        <div className={styles['greetings-container']}>
-          <div className={styles['greetings-content']}>
-            <h1>Selamat <span style={{color:'var(--col-accent1)'}}>{greetings()}</span>!</h1>
-            <p>" {motivQuote()} "</p>
-            <p>- Arif</p>
+        <div className={styles['heading-container']}>
+          <div className={styles['greetings-container']}>
+            <div className={styles['greetings-content']}>
+              <h1>Selamat <span style={{color:'var(--col-accent1)'}}>{greetings()}</span>!</h1>
+              <p>" {motivQuote()} "</p>
+              <p>- Arif</p>
+            </div>
+            <ContinueLastActivityButton />
           </div>
-          <ContinueLastActivityButton />
+
+          <Suspense fallback={<Loading />}>
+            {mascotPose()}
+          </Suspense>
         </div>
-        {/* Mascot here */}
+
         <div className={styles['material-container']}>
           <h1>Materi</h1>
           <div className={styles['material-card-container']} ref={materialCardContainer}>

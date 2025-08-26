@@ -3,6 +3,16 @@
     width: 45rem;
 }
 
+.heading-container {
+    position: relative;
+    display: flex;
+}
+.mascot {
+    position: absolute;
+    right: 0px;
+    bottom: -15px;
+}
+
 .user-stat-container {
     padding: 0 .5rem;
     height: 2.75rem;
