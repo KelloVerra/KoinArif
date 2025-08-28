@@ -13,13 +13,13 @@ export default function MascotPhone({scale, className}) {
 
     const partsData = {
         body: {
-            style:{ left: 0, top: 0, width: 165 *scale },
+            style:{ left: 0, top: 0, width: '100%' },
         },
         content0: {
-            style:{ left: 0, top: 0, width: 165 *scale },
+            style:{ left: 0, top: 0, width: '100%' },
         },
         content1: {
-            style:{ left: 0, top: 0, width: 165 *scale, opacity: 0 },
+            style:{ left: 0, top: 0, width: '100%', opacity: 0 },
         },
     }
     const content0 = useRef(null);
@@ -47,15 +47,15 @@ export default function MascotPhone({scale, className}) {
             duration: 1000,
         });
         timeline.add(content0.current, {
-            x: -2,
-            y: -15,
+            x: '-1%',
+            y: '-7.5%',
             opacity: 0,
             ease: 'outCubic',
             duration: 500,
         });
         timeline.add(content1.current, {
-            x: 2,
-            y: 15,
+            x: '1%',
+            y: '7.5%',
         }, "-=500");
         timeline.add(content1.current, {
             x: 0,
@@ -66,18 +66,18 @@ export default function MascotPhone({scale, className}) {
         }, "-=495");
         timeline.add(content1.current, {
             opacity: 1,
-            duration: 1500,
+            duration: 800,
         });
         timeline.add(content1.current, {
-            x: -2,
-            y: -15,
+            x: '-1%',
+            y: '-7.5%',
             opacity: 0,
             ease: 'outCubic',
             duration: 500,
         });
         timeline.add(content0.current, {
-            x: 2,
-            y: 15,
+            x: '1%',
+            y: '7.5%',
         }, "-=500");
         timeline.add(content0.current, {
             x: 0,

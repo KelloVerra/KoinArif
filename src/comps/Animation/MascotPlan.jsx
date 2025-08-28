@@ -8,23 +8,22 @@ import mascotbody from '/mascot/plan/body.svg';
 import mascoteyes from '/mascot/plan/eye.svg';
 import mascotfeet from '/mascot/plan/feet.svg';
 
-
-export default function MascotHero({scale, className}) {
+export default function MascotHero({scale}) {
 
     const partsData = {
         clock: {
-            style:{ left: 0 *scale, top: 20 *scale, width: 100 *scale },
+            style:{ left: 0, top: '5%', width: '57%' },
         },
         body: {
-            style:{ left: 8 *scale, top: 20 *scale, width: 165 *scale },
+            style:{ left: '5%', top: '5%', width: '95%' },
         },
         eyes: {
-            style:{ left: 8 *scale, top: 20 *scale, width: 165 *scale },
+            style:{ left: '5%', top: '5%', width: '95%' },
         },
         feet: {
-            style:{ left: 8 *scale, top: 20 *scale, width: 165 *scale },
+            style:{ left: '5%', top: '5%', width: '95%' },
             keyframes: [
-                {y: -10,    x: 5 ,  ease: 'out'  , duration: 500},
+                {y: '-10%',    x: '5%' ,  ease: 'out'  , duration: 500},
                 {y: 0,      x: 0 ,  ease: 'out'  , duration: 500},
             ]
         },
@@ -35,9 +34,8 @@ export default function MascotHero({scale, className}) {
     const feet = useRef(null);
 
     const explicitContainerStyle = { 
-        width: `${11 * scale}rem`, 
-        height: `${9.5 * scale}rem`, 
-
+        width: `${12.5 * scale}rem`, 
+        height: `${10 * scale}rem`,
     };
 
     const root = useRef(null);
@@ -62,7 +60,7 @@ export default function MascotHero({scale, className}) {
         });
         const wiggleClock = _ => {
             timeline.add(clock.current, {
-                y: -20,
+                y: '-20%',
                 rotate     : 15,
                 ease: 'outSine',
                 duration: 200,
@@ -85,8 +83,8 @@ export default function MascotHero({scale, className}) {
         };
 
         timeline.add(eyes.current, {
-            x: 8,
-            y: 1,
+            x: '8%',
+            y: '1%',
             scaleY: 0.5,
             ease: 'outCirc',
             duration: 1000,
@@ -117,7 +115,7 @@ export default function MascotHero({scale, className}) {
 
 
     return (
-        <div style={explicitContainerStyle} className={`${mainStyles['container']} ${className}`} ref={root}>
+        <div style={explicitContainerStyle} className={`${mainStyles['container']}`} ref={root}>
             <img src={mascotclock} ref={clock} width="80" style={ partsData.clock.style } alt=''/>
             <img src={mascotbody} ref={body} width="80" style={ partsData.body.style } alt=''/>
             <img src={mascoteyes} ref={eyes} width="80" style={ partsData.eyes.style } alt=''/>

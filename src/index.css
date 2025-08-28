@@ -7,12 +7,33 @@
   max-width: 1280px;
   height: fit-content;
   min-height: 100vh;
-  
+
+  --column-width: 60rem;
+  --mobile-column-width: 30rem;
+
   text-align: center;
 }
 
+p {
+  font-size: 1rem;
+}
+h1 {
+  font-family: var(--header-font);
+  line-height: 4.235rem;
+  font-size: 4.235rem;
+}
+h2 {
+  font-family: var(--header-font);
+  line-height: 2.168rem;
+  font-size: 2.168rem;
+}
+h3 {
+  font-family: var(--header-font);
+  line-height: 1rem;
+  font-size: 1rem;
+}
+
 body {
-  /* TODO: Test later */
   margin: 0;
   display: flex;
   place-items: center;

@@ -15,11 +15,12 @@
         font-family: "Kodchasan", Helvetica, Arial, sans-serif;
         line-height: 1.5;
         font-weight: 400;
+        font-size: 18px;
 
         --col-primary: #19101B;
         --col-secondary: #ffffff;
         --col-accent0: #B444FF;
-        --col-accent1: #FFC370;
+        --col-accent1: #FFC561;
 
         --col-semantic-success: rgb(121, 255, 137);
         --col-semantic-failure: rgb(255, 124, 146);
@@ -34,6 +35,25 @@
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+
+        overflow-x: hidden;
+      }
+
+      ::selection {
+        color: var(--col-primary);
+        background-color: var(--col-secondary);
+        -webkit-text-fill-color: var(--col-primary);
+      }
+      
+      @media (max-width: 950px) {
+        :root {
+          font-size: 12px;
+        }
+      }
+      @media (max-width: 725px) {
+        :root {
+          font-size: 11px;
+        }
       }
     </style>
 

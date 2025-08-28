@@ -4,6 +4,7 @@
 }
 
 .container * {
+    user-select: none;
     position: absolute;
     width: auto;
     height: auto;

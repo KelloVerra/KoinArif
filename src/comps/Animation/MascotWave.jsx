@@ -12,29 +12,29 @@ export default function MascotWave({scale, className}) {
 
     const partsData = {
         body: {
-            style:{ left: 0 *scale, top: 35 *scale, width: 150 *scale },
+            style:{ left: 0, top: "8%", width: '95%' },
         },
         feet: {
-            style:{ left: 85 *scale, top: 120 *scale, width: 35 *scale },
+            style:{ left: '55%', top: '55%', width: '21%' },
             keyframes: [
-                {y: 0,          x: 0 ,  ease: 'linear'  , duration: 0},
-                {y: -35/3,      x: 12 , ease: 'in'      , duration: 300},
-                {y: -35/3*2,    x: 12 , ease: 'in'      , duration: 75},
-                {y: -35,        x: 0 ,  ease: 'outSine' , duration: 300},
+                {y:    0,               x: 0    ,  ease: 'linear'  , duration: 0},
+                {y: `${-65/3}%`,        x: '25%',  ease: 'in'      , duration: 300},
+                {y: `${-65/3*2}%`,      x: '25%',  ease: 'in'      , duration: 75},
+                {y: `${-65}%`,          x: 0    ,  ease: 'outSine' , duration: 300},
             ]
         },
         coin: {
-            style:{ left: 45 *scale, top: 0 *scale, width: 55 *scale },
+            style:{ left: '37%', top: '-15%', width: '35%' },
             keyframes: [
-                { y: 15 *scale  , ease: 'inOutSine' , duration:1000 },
-                { y: 0 *scale   , ease: 'inOutSine' , duration:1000 },
+                { y: '35%'      , ease: 'inOutSine' , duration:1000 },
+                { y: 0          , ease: 'inOutSine' , duration:1000 },
             ]
         },
     }
     const coin = useRef(null);
     const feet = useRef(null);
 
-    const explicitContainerStyle = { width: `${9.5 * scale}rem`, height: `${12 * scale}rem` };
+    const explicitContainerStyle = { width: `${9.5 * scale}rem`, height: `${10 * scale}rem` };
 
     const scope = useRef(null);
     const root = useRef(null);

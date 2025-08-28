@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { setUserHasStarted } from '../glob/state'
 import styles from  './Landing.module.css'
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import Loading from '../comps/Loading';
 import MascotPhone from '../comps/Animation/MascotPhone';
 
@@ -16,54 +16,92 @@ export default function Landing() {
 
   const startLearning = () => dispatch(setUserHasStarted(true));
 
+  const checkMobile = _ => window.innerWidth < 725;
+  const [isMobile, setIsMobile] = useState(checkMobile());
+  useEffect(_ => {
+    const handle = _ => setIsMobile(checkMobile());
+    window.addEventListener('resize', handle);
+    return _ => window.removeEventListener('resize', handle);
+  }, []);
+  
+
   return (
     <main>
       <div className={styles['content']}>
         <div className={styles['hero']}>
-          <Suspense fallback={<Loading />}>
-            <MascotHero scale={2} />
-          </Suspense>
           <div className={styles['herotextart']}>
-            <h1>Pengalaman<br/>&nbsp;&nbsp;Literasi Finansial<br/>&nbsp;&nbsp;&nbsp;<span style={{color:'var(--col-accent1)'}}>Dibikin seru.</span></h1>
-            <p>Bersama Koin Arif, mari mengasah pengetahuan literasimu dengan cara yang menyenangkan.</p>
+            <Suspense fallback={<Loading />}>
+              <MascotHero scale={isMobile ? 2 : 2.75} className={styles['hero-mascot']} />
+            </Suspense>
+            <h1>Literasi Finansial<br/>
+                <span className={styles['gradient-heading']}>Dibikin seru</span>
+            </h1>
+            <p> Bersama Koin Arif, mari mengasah pengetahuan literasimu sambil yang bersenang-senang! </p>
+            <button className={styles['start-button']} onClick={startLearning}>Mulai Belajar</button>
           </div>
-          <StartLearningButton startLearning={startLearning} isHero={true} />
         </div>
 
 
-        <div className={styles['textart0']}>
+        <section className={styles['section0']}>
+          <div>
+            <h2>
+              Siapkah <br />
+              kamu dengan <br />
+              <span className={styles['gradient-heading']}>Masa Depanmu?</span>
+            </h2>
+            <p>
+              Banyak hal yang sulit diprediksi seiring jaman.
+              Sudah yakin keadaan finansialmu pasti aman
+              kedepannya?
+            </p>
+          </div>
           <Suspense fallback={<Loading />}>
-            <MascotPlan scale={1.5} />
+            <MascotPlan scale={1.85} />
           </Suspense>
-          <h1>Siapkah kamu dengan Masa Depanmu?</h1>
-          <p>Banyak hal yang sulit diprediksi seiring jaman. Sudah yakin keadaan finansialmu pasti aman kedepannya?</p>
-        </div>
+        </section>
 
-        <div className={styles['textart1']}>
+        <section className={styles['section1']}>
+          <div>
+            <h2>
+              Berharap <br />
+              Belajar serasa <br/> 
+              <span className={styles['gradient-heading']}>Scrolling Sosmed?</span>
+            </h2>
+            <p>
+              Andai mengasah literasi finansial gak ngebosenin
+              dan bikin pusing seperti belajar matematika di
+              sekolah..
+            </p>
+          </div>
           <Suspense fallback={<Loading />}>
-            <MascotPhone scale={1.325} />
+            <MascotPhone scale={1.65} />
           </Suspense>
-          <h1>Berharap agar Belajar serasa Scrolling Sosmed?</h1>
-          <p>Andai mengasah literasi finansial gak ngebosenin dan bikin pusing seperti belajar matematika di sekolah.</p>
-        </div>
+        </section>
 
-        <div className={styles['textart2']}>
+        <section className={styles['section2']}>
+          <div>
+            <p className={styles['text-intro']}>Salam Kenal..</p>
+            <h1>
+              Namaku <br />
+              <span className={styles['gradient-heading']}>Arif</span>
+            </h1>
+            <p>
+              Aku siap nemenin kamu mengasah 
+              <span style={{color:'var(--col-accent1)'}}> kemampuan literasimu!</span>
+            </p>
+            <p style={{
+              marginTop: '1.618rem',
+            }}>
+              Ayo, langsung aja mulai petualangan 
+              <span style={{color:'var(--col-accent1)'}}> finansial kita!</span>
+            </p>
+          </div>
           <Suspense fallback={<Loading />}>
-            <MascotWave scale={1.325} />
+            <MascotWave scale={2} />
           </Suspense>
-          <h1>Salam Kenal.. Namaku Arif</h1>
-          <p>Aku siap nemenin kamu mengasah kemampuan literasimu!</p>
-          <p>Ayo, langsung aja mulai petualangan finansial kita!</p>
-        </div>
-
-        <StartLearningButton startLearning={startLearning} isHero={false} />
+        </section>
+        <button className={styles['start-button']} onClick={startLearning}>Mulai Belajar</button>
       </div>
     </main>
   )
-}
-
-function StartLearningButton({startLearning, isHero}) {
-  return (
-    <button className={styles[isHero ? 'hero-start-button' : 'start-button']} onClick={startLearning}>Mulai Belajar</button>
-  );
 }

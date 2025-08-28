@@ -16,22 +16,22 @@ export default function MascotHero({scale, className}) {
 
     const partsData = {
         bodybg: {
-            style:{ left: 0 *scale, top: 0 *scale, width: 165 *scale },
+            style:{ left: 0, bottom: 0, width: '86%' },
         },
         bodyfg: {
-            style:{ left: 0 *scale, top: 0 *scale, width: 165 *scale },
+            style:{ left: 0, bottom: 0, width: '86%' },
         },
         coin0: {
-            style:{ left: 0 *scale, top: -100 *scale, width: 165 *scale },
+            style:{ left: 0, bottom: 0, width: '86%' },
         },
         exprhappy: {
-            style:{ left: 0 *scale, top: 0 *scale, width: 165 *scale, opacity:0 },
+            style:{ left: 0, bottom: 0, width: '86%', opacity:0 },
         },
         exprexcited: {
-            style:{ left: 0 *scale, top: 0 *scale, width: 165 *scale, opacity:0 },
+            style:{ left: 0, bottom: 0, width: '86%', opacity:0 },
         },
         exprdef: {
-            style:{ left: 0 *scale, top: 0 *scale, width: 165 *scale, opacity:1 },
+            style:{ left: 0, bottom: 0, width: '86%', opacity:1 },
         },
     }
     const eyedef = useRef(null);
@@ -48,14 +48,15 @@ export default function MascotHero({scale, className}) {
 
         position:'absolute', 
         zIndex: -1,
-        top: '-200px',
+        top: '-60%',
+        right: '-65%',
     };
 
     useEffect(_ => {
         const timeline = createTimeline({
             defaults: {
                 ease: 'steps(1)',
-                duration: 5,
+                duration: 3,
             },
             loop: true,
         });
@@ -63,19 +64,19 @@ export default function MascotHero({scale, className}) {
 
         const timelineCoinAnim = _ => {
             timeline.add(coin0.current, {
-                y:        0
+                y: '-50%'
             });
             timeline.add(coin0.current, {
-                y:        115 *scale,
+                y:        '10%',
                 ease:     'outCirc',
                 duration: 800,
             });
             timeline.add(coin0.current, {
-                y:        115 *scale,
+                y:        '10%',
                 duration: 200,
             });
             timeline.add(coin0.current, {
-                y:        250 *scale,
+                y:        '50%',
                 ease:     'inBack(3)',
                 duration: 800,
             });
@@ -92,7 +93,7 @@ export default function MascotHero({scale, className}) {
                 opacity:  0
             }, "-=340");
             timeline.add(sequence.at(i), {
-                y:        15,
+                y:        '3%',
                 opacity:  1
             }, "-=340");
             timeline.add(sequence.at(i), {
@@ -142,9 +143,6 @@ export default function MascotHero({scale, className}) {
         timelineCoinAnim();
         wiggleBody();
         timelineEyeAnim(3);
-
-
-
 
         return _ => timeline.revert();
     }, [scale]);

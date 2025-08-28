@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetStore, setUserHasStarted } from '../glob/state';
 
@@ -15,15 +13,10 @@ import materialLevelLogo from '/Level.svg'
 
 export default function Footer() {
   const userState = useSelector(state => state.user.value);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const startLearning = () => dispatch(setUserHasStarted(true));
   const quitLearning = () => resetStore();
-
-  const goToCredits = () => {
-    navigate("/credit");
-  };
 
   return (
     <footer>
@@ -38,7 +31,6 @@ export default function Footer() {
         }
         <hr />
         <div className={styles['lower']}>
-          <a className={styles['credits']} onClick={goToCredits}>Kredit & Atribusi</a>
           <p>IntechFest 2025 Web Design Competition Submission</p>
         </div>
       </div>

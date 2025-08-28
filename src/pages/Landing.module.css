@@ -1,121 +1,142 @@
 .content {
   margin: 0 auto;
-  width: 45rem;
+  width: var(--column-width);
 }
 
 .hero {
-  position: relative;
-  margin: 9rem 0 2rem;
+  display: flex;
+  align-items: center;
+  height: 100svh;
+  margin: 0;
 }
 .herotextart {
-  margin: 0 0 0 auto;
-  padding: 1rem 1.5rem;
-  width: 23rem;
-  background-color: color-mix(in srgb, var(--col-accent0) 35%, transparent);
+  position: relative;
+  margin: 0;
+  padding-bottom: 12rem;
   border-radius: 8px;
 }
 .herotextart > h1 {
-  margin: 0 0 1.5rem;
-  line-height: 2rem;
-  font-family: var(--header-font);
+  margin: 0;
   color: var(--col-secondary);
   text-align: left;
+}
+.gradient-heading {
+  background: linear-gradient( to right, var(--col-accent1), var(--col-accent0));
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .herotextart > p {
-  margin: 0 0 0 4rem;
+  max-width: 29.03rem;
+  margin: 1.618rem 0 0;
   color: var(--col-secondary);
-  font-size: 1rem;
-  font-weight: 300;
-  text-align: left;
-}
-.hero-start-button {
-  cursor: pointer;
-  display: block;
-  padding: .5rem 1rem;
-  margin: 2rem auto 0;
-  font-family: var(--header-font);
-  font-size: 1.75rem;
-  color: var(--col-primary);
-  background-color: var(--col-accent0);
-  border: none;
-  border-radius: 10px;
-}
-
-.textart0 {
-  margin: 0 auto 0 0;
-  padding: 1rem 1.5rem;
-  width: 25rem;
-  background-color: color-mix(in srgb, var(--col-accent0) 25%, transparent);
-  border-radius: 8px;
-}
-.textart0 > h1 {
-  margin: 0 0 1.5rem;
-  line-height: 2rem;
-  font-family: var(--header-font);
-  color: var(--col-secondary);
-  text-align: left;
-}
-.textart0 > p {
-  margin: 0 0 0 4rem;
-  color: var(--col-secondary);
-  font-size: 1rem;
-  font-weight: 300;
-  text-align: left;
-}
-
-.textart1 {
-  margin: 0 0 0 auto;
-  padding: 1rem 1.5rem;
-  width: 25rem;
-  background-color: color-mix(in srgb, var(--col-accent1) 25%, transparent);
-  border-radius: 8px;
-}
-.textart1 > h1 {
-  margin: 0 0 1.5rem;
-  line-height: 2rem;
-  font-family: var(--header-font);
-  color: var(--col-secondary);
-  text-align: left;
-}
-.textart1 > p {
-  margin: 0 0 0 4rem;
-  color: var(--col-secondary);
-  font-size: 1rem;
-  font-weight: 300;
-  text-align: left;
-}
-
-
-.textart2 {
-  margin: 0 auto 0;
-  padding: 1rem 1.5rem;
-  width: 75%;
-  background-color: color-mix(in srgb, var(--col-accent0) 25%, transparent);
-  border-radius: 8px;
-}
-.textart2 > h1 {
-  margin: 0 0 1.5rem;
-  line-height: 2rem;
-  font-family: var(--header-font);
-  color: var(--col-secondary);
-  text-align: left;
-}
-.textart2 > p {
-  margin: 0 0 0 4rem;
-  color: var(--col-secondary);
-  font-size: 1rem;
   font-weight: 300;
   text-align: left;
 }
 .start-button {
   cursor: pointer;
   display: block;
-  padding: .5rem 1rem;
-  margin: 2rem auto 0;
+  padding: 0.618rem 2rem;
+  margin: 2.618rem auto 0;
   font-family: var(--header-font);
-  font-size: 1.75rem;
-  color: var(--col-primary);
-  background-color: var(--col-accent0);
-  border: none;
+  font-size: 1.618rem;
+  color: var(--col-accent1);
+  background-color: transparent;
+  border: solid var(--col-accent1) 2px;
   border-radius: 10px;
+  transition: all 100ms ease-out;
+}
+.hero .start-button {
+  margin: 2.618rem 0 0 13rem;
+}
+.start-button:hover {
+  color: var(--col-primary);
+  background-color: var(--col-accent1);
+}
+
+section {
+  display: flex;
+  place-items: center;
+  gap: 1rem;
+  margin: 17.942rem auto 0;
+  width: fit-content;
+  border-radius: 8px;
+}
+section h2, h1 {
+  text-align: left;
+}
+section p {
+  margin: 0;
+  max-width: 17.942rem;
+  color: var(--col-secondary);
+  font-weight: 300;
+  text-align: left;
+}
+
+.section1 {
+  gap: 0.618rem;
+  flex-direction: row-reverse;
+}
+.section2 h1 {
+  margin: 0 0 1.618rem;
+  font-size: 4.235rem;
+  line-height: 4.235rem;
+}
+
+
+@media (max-width: 725px) {
+  .content {
+    width: var(--mobile-column-width);
+  }
+
+  .herotextart p, section p {
+    margin: 0 auto;
+    max-width: inherit;
+    font-size: 1.618rem;
+    padding: 0 0.618rem;
+    text-align: center;
+  }
+  .introtext {
+    font-size: 2.618rem;
+  }
+
+  section, .section1 {
+    flex-direction: column;
+    gap: 4.235rem;
+  }
+  section h1, h2 {
+    padding: 0 1.618rem;
+    text-align: center !important;
+  }
+  section h2 {
+    font-size: 2.618rem;
+    line-height: 2.618rem;
+  }
+  
+  .hero {
+    align-items: center;
+    padding-bottom: 0;
+  }
+  .hero-mascot {
+    top: -50% !important;
+    left: 15% !important;
+  }
+  .herotextart {
+    padding-top: 15rem;
+    padding-bottom: 0rem;
+  }
+  .herotextart > h1 {
+    margin: 0 auto;
+    text-align: center;
+    width: 29.03rem;
+  }
+  .herotextart > p {
+    margin: 1.618rem auto 0;
+    text-align: center;
+  }
+  .start-button {
+    padding: 0.618rem 6.854rem;
+  }
+  .hero .start-button {
+    margin: 2.618rem auto 0;
+  }
 }
