@@ -10,6 +10,7 @@ export default function material1() {
         error: false,
         title: 'Resiko dan Urgensi',
         desc: 'Membahas mengenai pengelolaan resiko dan situasi urgen maupun darurat.',
+        estimateDuration: '6 menit',
         submoduleData: [
             {
                 id: 0,
@@ -73,7 +74,7 @@ export default function material1() {
         component: _ => (
             <>
                 <SubModuleContainer id={{material_id:2,submodule_id:0}} minimizedMaxContentCount={4} minimizedHeight={'11rem'}>
-                    <h1>Resiko</h1>
+                    <h2>Resiko</h2>
                     <p>Resiko ialah kemungkinan dari kejadian tidak terduga yang dapat merugikanmu</p>
                     <p>[EXAMPLE] seperti, sakit, kerusakan, kecelakaan, kematian, atau kehilangan aset</p>
                     <img src={imgdebgu} alt="Ilustrasi nilai ukur antara Uang & Barang" width="200px" />
@@ -87,12 +88,12 @@ export default function material1() {
                 </SubModuleContainer>
                 <MiniQuizContainer id={{material_id:2,submodule_id:0}} />
                 <SubModuleContainer id={{material_id:2,submodule_id:1}} minimizedMaxContentCount={4} minimizedHeight={'11rem'}>
-                    <h1>Dana Darurat</h1>
+                    <h2>Dana Darurat</h2>
                     
                 </SubModuleContainer>
                 <MiniQuizContainer id={{material_id:2,submodule_id:1}} />
                 <SubModuleContainer id={{material_id:2,submodule_id:2}} minimizedMaxContentCount={4} minimizedHeight={'11rem'}>
-                    <h1>Asuransi</h1>
+                    <h2>Asuransi</h2>
                     
                 </SubModuleContainer>
                 <MiniQuizContainer id={{material_id:2,submodule_id:2}} />

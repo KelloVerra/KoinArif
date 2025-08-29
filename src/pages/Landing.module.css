@@ -35,22 +35,26 @@
 .start-button {
   cursor: pointer;
   display: block;
-  padding: 0.618rem 2rem;
+  padding: 0.618rem 2.618rem;
   margin: 2.618rem auto 0;
   font-family: var(--header-font);
   font-size: 1.618rem;
-  color: var(--col-accent1);
+  color: var(--col-primary);
+  background: linear-gradient( to right, var(--col-accent1), var(--col-accent0));
   background-color: transparent;
-  border: solid var(--col-accent1) 2px;
+  border: none;
   border-radius: 10px;
   transition: all 100ms ease-out;
 }
 .hero .start-button {
+  background: var(--col-accent1);
   margin: 2.618rem 0 0 13rem;
 }
 .start-button:hover {
-  color: var(--col-primary);
-  background-color: var(--col-accent1);
+  transform: scale(1.05);
+}
+.start-button:active {
+  transform: scale(0.95);
 }
 
 section {
@@ -100,8 +104,8 @@ section p {
   }
 
   section, .section1 {
-    flex-direction: column;
-    gap: 4.235rem;
+    flex-direction: column-reverse;
+    gap: 1.618rem;
   }
   section h1, h2 {
     padding: 0 1.618rem;

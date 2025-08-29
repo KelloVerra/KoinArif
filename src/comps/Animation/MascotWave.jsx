@@ -39,6 +39,7 @@ export default function MascotWave({scale, className}) {
     const scope = useRef(null);
     const root = useRef(null);
     useEffect(_ => {
+        if (scale === 0) return;
         scope.current = createScope({ root }).add(_ => {
             
             animate(coin.current, {

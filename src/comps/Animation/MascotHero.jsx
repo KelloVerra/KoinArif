@@ -16,22 +16,22 @@ export default function MascotHero({scale, className}) {
 
     const partsData = {
         bodybg: {
-            style:{ left: 0, bottom: 0, width: '86%' },
+            style:{ left: 0, bottom: 0, width: '100%' },
         },
         bodyfg: {
-            style:{ left: 0, bottom: 0, width: '86%' },
+            style:{ left: 0, bottom: 0, width: '100%' },
         },
         coin0: {
-            style:{ left: 0, bottom: 0, width: '86%' },
+            style:{ left: 0, bottom: 0, width: '100%' },
         },
         exprhappy: {
-            style:{ left: 0, bottom: 0, width: '86%', opacity:0 },
+            style:{ left: 0, bottom: 0, width: '100%', opacity:0 },
         },
         exprexcited: {
-            style:{ left: 0, bottom: 0, width: '86%', opacity:0 },
+            style:{ left: 0, bottom: 0, width: '100%', opacity:0 },
         },
         exprdef: {
-            style:{ left: 0, bottom: 0, width: '86%', opacity:1 },
+            style:{ left: 0, bottom: 0, width: '100%', opacity:1 },
         },
     }
     const eyedef = useRef(null);
@@ -43,13 +43,13 @@ export default function MascotHero({scale, className}) {
     const bodybg = useRef(null);
 
     const explicitContainerStyle = { 
-        width: `${12 * scale}rem`, 
+        width: `${10.5 * scale}rem`, 
         height: `${18 * scale}rem`, 
 
         position:'absolute', 
         zIndex: -1,
-        top: '-60%',
-        right: '-65%',
+        top: '-65%',
+        right: '-55%',
     };
 
     useEffect(_ => {

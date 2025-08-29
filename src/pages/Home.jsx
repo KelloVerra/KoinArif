@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addHistory, } from '../glob/state';
 import { useNavigate } from 'react-router';
 import { getMaterials } from '../glob/materials/main';
-import { randomLength } from '../glob/util';
+import { randomLength, useIsMobile } from '../glob/util';
 
-import Loading from '../comps/Loading';
-import MascotWave from '../comps/Animation/MascotWave';
+import MascotGreetings from '../comps/MascotGreetings';
+import ArrowGoPurple from '/PurpleArrowGo.svg';
+import ArrowGoPrimary from '/PrimaryArrowGo.svg';
+import LockPurple from '/PurpleLock.svg';
+import LockWhite from '/WhiteLock.svg';
 import styles from './Home.module.css'
 
 
@@ -15,11 +18,13 @@ export default function Home() {
   const userState = useSelector(stat => stat.user.value);
   const materialState = useSelector(stat => stat.material.value);
 
+  const isMobile = useIsMobile();
   const materials = useRef(getMaterials());
   const materialCardContainer = useRef(null);
 
+
+  
   const greetings = _ => {
-    // Time based greetings
     const hour = new Date().getHours();
     if (hour <= 9) return "Pagi";
     else if (hour <= 15) return "Siang";
@@ -32,16 +37,13 @@ export default function Home() {
       'Jangan menunggu motivasi, langsung saja mulai!',
       'Kata pepatah, waktu adalah uang..',
       'Menginvestasikan dirimu dengan belajar, hargai masa depanmu..',
-      'Belajar Literasi Finansial 5 menit setiap hari hasilnya sangatlah dahsyat dibandingkan dengan tidak belajar sama sekali',
+      'Belajar 5 menit setiap hari hasilnya dahsyat daripada tidak belajar!',
     ];
     return quotes[randomLength(quotes.length)];
   }
-  const mascotPose = _ => {
-    const comps = [
-      <MascotWave scale={1.45} className={styles['mascot']} />,
-    ];
-    return comps[randomLength(comps.length)];
-  }
+
+
+
 
   useEffect(_ => { // skrol horizontal
     if(materialCardContainer.current) {
@@ -58,22 +60,23 @@ export default function Home() {
     }
   }, [materialCardContainer.current]);
 
+
+
+
   return (
     <main>
       <div className={styles['content']}>
         <div className={styles['heading-container']}>
           <div className={styles['greetings-container']}>
             <div className={styles['greetings-content']}>
-              <h1>Selamat <span style={{color:'var(--col-accent1)'}}>{greetings()}</span>!</h1>
+              <h1>Selamat <span className={styles['gradient-heading']}>{greetings()}!</span></h1>
               <p>" {motivQuote()} "</p>
               <p>- Arif</p>
             </div>
             <ContinueLastActivityButton />
           </div>
 
-          <Suspense fallback={<Loading />}>
-            {mascotPose()}
-          </Suspense>
+          <MascotGreetings scale={isMobile ? 1.25 : 1.5} className={styles['mascot']} />
         </div>
 
         <div className={styles['material-container']}>
@@ -139,7 +142,10 @@ function ContinueLastActivityButton({}) {
   }
 
   return (
-    <button className={styles['continue-activity-button']} onClick={continueLastActivity}>{formatHistory()}</button>
+    <button className={styles['continue-activity-button']} onClick={continueLastActivity}>
+      {formatHistory()}
+      <img src={ArrowGoPrimary} alt='' width='5' />
+    </button>
   )
 }
 
@@ -161,15 +167,16 @@ function MaterialCard({material}) {
   return (
     <div className={styles['material-card']} onClick={startMaterial}>
       <p className={styles['lvl']}>Materi Level {material.id+1}</p>
-      <h1 className={styles['title']}>{material.title}</h1>
+      <h2 className={styles['title']}>{material.title}</h2>
       <p className={styles['desc']}>{material.desc}</p>
+      <div className={styles['material-card-misc']}>
+        <p>{material.estimateDuration}</p>
+        <img src={ArrowGoPurple} alt='' width='5' />
+      </div>
     </div>
   )
 }
 function LockedMaterialCard({material}) {
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const startMaterial = _ => {
     console.log('terkunci')
@@ -177,9 +184,12 @@ function LockedMaterialCard({material}) {
 
   return (
     <div className={`${styles['material-card']} ${styles['material-card-locked']}`} onClick={startMaterial}>
-      <p className={styles['lvl']}>Materi Level {material.id+1} (Terkunci)</p>
-      <h1 className={styles['title']}>{material.title}</h1>
+      <p className={styles['lvl']}>Materi Level {material.id+1} <img src={LockWhite} alt='' width='5' /> </p>
+      <h2 className={styles['title']}>{material.title}</h2>
       <p className={styles['desc']}>{material.desc}</p>
+      <div className={styles['material-card-misc']}>
+        <img src={LockPurple} alt='' width='5' />
+      </div>
     </div>
   )
 }

@@ -7,7 +7,9 @@ import NotFound from './NotFound'
 import { getMaterialByIndex } from '../glob/materials/main'
 import { addHistory, createQuizList, resetQuiz} from '../glob/state'
 
+import MascotGreetings from '../comps/MascotGreetings';
 import styles from './Material.module.css'
+import { useIsMobile } from '../glob/util';
 
 export default function Material() {
 
@@ -69,6 +71,9 @@ export default function Material() {
 }
 
 function DefaultDisplay({receivedMaterialData, goHome, startQuiz}) {
+
+  const isMobile = useIsMobile();
+
   return (
   <div className={styles['content']}>
     <div className={styles['header-container']}>
@@ -80,11 +85,12 @@ function DefaultDisplay({receivedMaterialData, goHome, startQuiz}) {
           {receivedMaterialData.title}
         </h1>
       </div>
+      <MascotGreetings scale={isMobile ? 0 : 1.45} className={styles['mascot']} />
     </div>
     <div className={styles['material-container']}>
       {receivedMaterialData.component()}
     </div>
-    <button onClick={startQuiz} className={styles['start-quiz-btn']}>Latihan Kuis</button>
+    <button onClick={startQuiz} className={styles['start-quiz-btn']}>Mulai Kuis Latihan Materi {receivedMaterialData.title}</button>
     <button className={styles['back-btn']} onClick={goHome}>Kembali ke halaman utama</button>
   </div>);
 }

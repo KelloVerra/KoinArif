@@ -7,7 +7,6 @@ import { advanceQuiz, completeQuiz, addAnsweredQuizData, addUserBudget, addEmpty
 import { randomLength } from '../glob/util';
 
 import styles from './QuizPage.module.css'
-import bookmarkIcon from '/Bookmark.svg';
 import coinIcon from '/Budget3D.svg';
 import checkBadgeIcon from '/CheckBadge.svg';
 import NotFound from './NotFound';
@@ -56,10 +55,6 @@ export default function QuizPage() {
     navigate("/");
   }, []);
 
-  const onQuestionBookmarked = useCallback(_ => {
-    console.log('bookmarked');
-  }, []);
-
 
 
   return (
@@ -74,7 +69,6 @@ export default function QuizPage() {
           <QuizInterface  state={quizState}
                           quiz={currentQuiz}
                           onNextQuestion={nextQuestion}
-                          onQuestionBookmarked={onQuestionBookmarked}
                           addAnswerState={addAnswerState}
           />
         }
@@ -84,7 +78,7 @@ export default function QuizPage() {
   )
 }
 
-function QuizInterface({state, quiz, onNextQuestion, onQuestionBookmarked, addAnswerState}) {
+function QuizInterface({state, quiz, onNextQuestion, addAnswerState}) {
   const [confirmable, setConfirmable] = useState(false);
   const reward = state.generatedQuizes[state.currentGeneratedQuizIndex].reward;
   
@@ -126,7 +120,6 @@ function QuizInterface({state, quiz, onNextQuestion, onQuestionBookmarked, addAn
           </div>
           <div className={styles['quiz-question-container']}>
             <p>{quiz.question}</p>
-            <img src={bookmarkIcon} alt='bookmarkQuestion' width='20' onClick={onQuestionBookmarked} />
           </div>
         </div>
       </div>

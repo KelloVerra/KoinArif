@@ -10,6 +10,7 @@ export default function material0() {
         error: false,
         title: 'Dasar-Dasar Keuangan',
         desc: 'Membahas uang dari dasar, pembagian uang dengan bijak serta psikologi manusia terhadap uang.',
+        estimateDuration: '4 menit',
         submoduleData: [
             {
                 id: 0,
@@ -117,7 +118,7 @@ export default function material0() {
             return (
                 <>
                     <SubModuleContainer id={{material_id:0,submodule_id:0}} minimizedMaxContentCount={3} minimizedHeight={'8rem'}>
-                        <h1>Uang</h1>
+                        <h2>Uang</h2>
                         <p>Uang adalah alat tukar pembayaran.</p>
                         <p>Uang juga digunakan sebagai Standar pengukur nilai (satuan hitung).</p>
                         <p>Misal, 1 Nasi Kotak = 8 AK, Sehingga 16 AK = 2 Nasi Kotak</p>
@@ -128,7 +129,7 @@ export default function material0() {
                     </SubModuleContainer>
                     <MiniQuizContainer id={{material_id:0,submodule_id:0}} />
                     <SubModuleContainer id={{material_id:0,submodule_id:1}} minimizedMaxContentCount={3} minimizedHeight={'10rem'}>
-                        <h1>Anggaran & Penganggaran</h1>
+                        <h2>Anggaran & Penganggaran</h2>
                         <p>Anggaran (budget) adalah perkiraan pemasukan & pengeluaran uang di periode tertentu.</p>
                         <p>Penganggaran (budgeting) adalah rencana anggaran (budget) di masa mendatang.</p>
                         <img src={imgdebgu} alt="Ilustrasi perencanaan finansial" width="200px" />
@@ -142,7 +143,7 @@ export default function material0() {
                     </SubModuleContainer>
                     <MiniQuizContainer id={{material_id:0,submodule_id:1}} />
                     <SubModuleContainer id={{material_id:0,submodule_id:2}} minimizedMaxContentCount={4} minimizedHeight={'23rem'}>
-                        <h1>Kebutuhan vs Keinginan</h1>
+                        <h2>Kebutuhan vs Keinginan</h2>
                         <p>Kebutuhan adalah hal mutlak yang diperlukan untuk hidup.</p>
                         <p>Seperti Air Bersih, Nasi Kotak, Tempat tinggal layak dan lainnya..</p>
                         <img src={imgdebgu} alt="Ilustrasi kebutuhan dasar" width="200px" />

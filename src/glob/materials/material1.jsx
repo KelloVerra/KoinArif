@@ -10,6 +10,7 @@ export default function material1() {
         error: false,
         title: 'Pengenalan dengan Aset',
         desc: 'Membahas pengertian dari aset serta hal yang berinteraksi terhadap aset.',
+        estimateDuration: '6 menit',
         submoduleData: [
             {
                 id: 0,
@@ -73,7 +74,7 @@ export default function material1() {
         component: _ => (
             <>
                 <SubModuleContainer id={{material_id:1,submodule_id:0}} minimizedMaxContentCount={4} minimizedHeight={'11rem'}>
-                    <h1>Aset</h1>
+                    <h2>Aset</h2>
                     <p>Aset adalah suatu harta, sumber daya maupun kekayaan.</p>
                     <p>Aset dimiliki oleh suatu pihak.</p>
                     <p>Aset diharapkan dapat diubah menjadi keuntungan di masa mendatang.</p>
@@ -85,7 +86,7 @@ export default function material1() {
                 </SubModuleContainer>
                 <MiniQuizContainer id={{material_id:1,submodule_id:0}} />
                 <SubModuleContainer id={{material_id:1,submodule_id:1}} minimizedMaxContentCount={4} minimizedHeight={'11rem'}>
-                    <h1>Liabilitas</h1>
+                    <h2>Liabilitas</h2>
                     <p>Liabilitas adalah utang, kewajiban finansial maupun tagihan yang harus kamu bayar.</p>
                     <p>Dibayar dalam bentuk uang, barang maupun jasa.</p>
                     <p>Dalam kata lain, Liabilitas adalah hal yang menguras aset yang kamu miliki.</p>
@@ -99,7 +100,7 @@ export default function material1() {
                 </SubModuleContainer>
                 <MiniQuizContainer id={{material_id:1,submodule_id:1}} />
                 <SubModuleContainer id={{material_id:1,submodule_id:2}} minimizedMaxContentCount={4} minimizedHeight={'11rem'}>
-                    <h1>Tabungan</h1>
+                    <h2>Tabungan</h2>
                     <p>Tabungan adalah sekumpulan aset / jumlah nilai</p>
                     <p>Menabung, simpelnya ialah menyimpan aset dengan harapan untuk mencapai jumlah nilai / aset tertentu</p>
                     <p>Kamu dapat menabung dimana saja</p>

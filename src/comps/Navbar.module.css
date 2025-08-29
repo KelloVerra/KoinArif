@@ -97,6 +97,7 @@ header > .content > .right-content {
 
 @media (max-width: 725px) {
   .content {
-    width: var(--mobile-column-width);
+    width: 80svw;
+    max-width: var(--mobile-column-width) !important;
   }
 }

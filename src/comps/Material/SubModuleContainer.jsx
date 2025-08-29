@@ -36,10 +36,10 @@ export default function SubModuleContainer({children, id, minimizedMaxContentCou
             return cloneElement(elem, {style:{opacity:0.0,transition:`opacity 200ms`}})
 
         //  auto header
-        if(!hasHeader && elem.type === 'h1') {
+        if(!hasHeader && elem.type === 'h2') {
             hasHeader = true;
             return (<div className={styles['submodule-header']}>
-                <h1>{elem.props.children}</h1>
+                <h2>{elem.props.children}</h2>
                 <p>M.{id.material_id}.{id.submodule_id}</p>
             </div>);    
         }

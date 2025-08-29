@@ -45,8 +45,8 @@ export default function MiniQuizContainer({id}) {
     const validStart = hasStarted && questionData;
     return (<>
         <div className={styles['miniquiz-container']}>
-            <h1>Mini Quiz Submodul {id.submodule_id+1}</h1>
-            <div ref={containerRef} onClick={onStart} className={validStart ? styles['quiz-container'] : styles['quiz-starter-container']} style={{maxHeight: hasStarted ? `${containerHeight.current}px` : '30px'}}>
+            <h2>Mini Quiz</h2>
+            <div ref={containerRef} onClick={onStart} className={validStart ? styles['quiz-container'] : styles['quiz-starter-container']} style={{maxHeight: hasStarted ? `${containerHeight.current}px` : '4.236rem'}}>
             {
                 validStart ?
                 <QuizDisplay onAnswer={onAnswer} hasAnswered={hasAnswered} rewardOverview={rewardOverview.current} questionData={questionData} /> :

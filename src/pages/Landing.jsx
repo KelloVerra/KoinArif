@@ -5,6 +5,7 @@ import styles from  './Landing.module.css'
 import { lazy, Suspense, useEffect, useState } from 'react';
 import Loading from '../comps/Loading';
 import MascotPhone from '../comps/Animation/MascotPhone';
+import { useIsMobile } from '../glob/util';
 
 const MascotWave = lazy(_ => import('../comps/Animation/MascotWave'));
 const MascotPlan = lazy(_ => import('../comps/Animation/MascotPlan'));
@@ -15,14 +16,7 @@ export default function Landing() {
   const dispatch = useDispatch();
 
   const startLearning = () => dispatch(setUserHasStarted(true));
-
-  const checkMobile = _ => window.innerWidth < 725;
-  const [isMobile, setIsMobile] = useState(checkMobile());
-  useEffect(_ => {
-    const handle = _ => setIsMobile(checkMobile());
-    window.addEventListener('resize', handle);
-    return _ => window.removeEventListener('resize', handle);
-  }, []);
+  const isMobile = useIsMobile();
   
 
   return (

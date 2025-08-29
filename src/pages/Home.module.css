@@ -4,40 +4,15 @@
 }
 
 .heading-container {
+    margin-top: 1.618rem;
     position: relative;
     display: flex;
+    width: 100%;
 }
 .mascot {
-    position: absolute;
+    position: absolute !important;
     right: 0px;
-    bottom: -15px;
-}
-
-.user-stat-container {
-    padding: 0 .5rem;
-    height: 2.75rem;
-    width: fit-content;
-
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-
-    border: solid 1px var(--col-accent0);
-    border-radius: 8px;
-}
-.stat-container {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: .325rem;
-
-    height: 50%;
-}
-.stat-container img {
-    height: 100%;
-}
-.stat-container p {
-    margin: 0;
-    color: var(--col-accent1);
+    bottom: 0px;
 }
 
 
@@ -68,18 +43,23 @@
     text-align: left;
     width: 100%;
 }
+.gradient-heading {
+  background: linear-gradient( to right, var(--col-accent1), var(--col-accent0));
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .continue-activity-button {
     margin: 1rem 0 0;
-    padding: .25rem .5rem;
+    padding: .618rem 1rem;
     width: 100%;
-    height: 2.5rem;
-    letter-spacing: .5px;
+    height: auto;
+    letter-spacing: .25px;
     font-family: var(--paragraph-font);
     font-weight: 600;
     font-size: 1rem;
     background-color: rgba(0,0,0,0.25);
-    color: var(--col-accent1);
+    color: var(--col-secondary);
     border: solid 1px var(--col-accent1);
     border-radius: 5px;
     cursor: pointer;
@@ -89,16 +69,22 @@
     color: var(--col-primary);
     background-color: var(--col-accent1);
 }
+.continue-activity-button img {
+    margin-left: 0.382rem;
+    width: 0.85rem;
+    translate: 0 1px
+}
 
 .material-container {
-    margin: 3rem 0 0;
+    margin: 4rem 0 0;
 }
 .material-container > h1 {
-    margin: 0 0 1rem;
-    font-family: var(--header-font);
-    font-size: 3rem;
-    letter-spacing: 3px;
-    color: var(--col-accent0);
+    margin: 0 auto 1rem;
+    width: fit-content;
+    background: linear-gradient( to right, var(--col-accent1), var(--col-accent0));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 .material-card-container {
     width: 100%;
@@ -108,10 +94,11 @@
     scrollbar-color: var(--col-accent0) color-mix(in srgb, var(--col-accent0) 15%, transparent);
     scroll-behavior: smooth;
     display: flex;
-    gap: 1rem;
+    gap: 1.618rem;
 }
 
 .material-card {
+    position: relative;
     padding: 1rem;
     cursor: pointer;
     min-width: 15rem;
@@ -129,7 +116,7 @@
     margin: 0;
     font-weight: 200;
     font-size: .85rem;
-    letter-spacing: 1px;
+    letter-spacing: 0.25px;
     color: var(--col-secondary);
 }
 .material-card > .title {
@@ -137,9 +124,6 @@
     white-space: normal;
     word-wrap: normal;
     overflow-wrap: anywhere;
-    line-height: 2.25rem;
-    font-family: var(--header-font);
-    font-size: 1.75rem;
     color: var(--col-secondary);
 }
 .material-card > .desc {
@@ -148,14 +132,55 @@
     word-wrap: normal;
     overflow-wrap: anywhere;
     text-align: left;
-    line-height: 1.325rem;
     font-weight: 400;
-    font-size: 1rem;
-    font-family: var(--paragraph-font);
     color: var(--col-secondary);
 }
 .material-card-locked {
+    position: relative;
     cursor: not-allowed;
     background: linear-gradient( to bottom, rgba(180, 68, 255, 0.10), transparent);
     border-color: rgba(180, 68, 255, 0.25);
+}
+.material-card-locked img {
+    margin-left: 0.382rem;
+    width: 0.5rem;
+}
+
+
+.material-card-misc {
+    position: absolute;
+    right:0; bottom: 0; left: 0;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+.material-card-misc > p {
+    margin: 0;
+    color: color-mix(in srgb, var(--col-secondary) 50%, transparent);
+}
+.material-card-misc > img {
+    margin-left: auto;
+    width: 1rem;
+}
+
+@media (max-width: 725px) {
+    .content {
+        width: var(--mobile-column-width);
+    }
+
+    .mascot {
+        bottom: 20%;
+        right: -5%;
+    }
+    .greetings-container {
+        width: 100%;
+    }
+    .greetings-content {
+        width: 50%;
+        padding-right: 1rem;
+    }
+
+    .material-container {
+        margin-top: 10rem;
+    }
 }

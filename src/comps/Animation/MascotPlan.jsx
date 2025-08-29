@@ -8,7 +8,7 @@ import mascotbody from '/mascot/plan/body.svg';
 import mascoteyes from '/mascot/plan/eye.svg';
 import mascotfeet from '/mascot/plan/feet.svg';
 
-export default function MascotHero({scale}) {
+export default function MascotHero({scale, className}) {
 
     const partsData = {
         clock: {
@@ -41,6 +41,7 @@ export default function MascotHero({scale}) {
     const root = useRef(null);
     const scope = useRef(null);
     useEffect(_ => {
+        if (scale === 0) return;
         scope.current = createScope({ root }).add(_ => {
 
             animate(feet.current, {
@@ -115,7 +116,7 @@ export default function MascotHero({scale}) {
 
 
     return (
-        <div style={explicitContainerStyle} className={`${mainStyles['container']}`} ref={root}>
+        <div style={explicitContainerStyle} className={`${mainStyles['container']} ${className}`} ref={root}>
             <img src={mascotclock} ref={clock} width="80" style={ partsData.clock.style } alt=''/>
             <img src={mascotbody} ref={body} width="80" style={ partsData.body.style } alt=''/>
             <img src={mascoteyes} ref={eyes} width="80" style={ partsData.eyes.style } alt=''/>
