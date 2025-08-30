@@ -14,7 +14,6 @@
 * Menggunakan Persistent Storage
 * Materi Finansial yang Interaktif
 * Kuis Finansial yang Interaktif
-* Review Materi
 * Pengalaman Belajar yang Menyenangkan
 
 <div align="right">INTECHFEST 2025 Web Design Competition Project Submission</div>

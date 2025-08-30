@@ -1,15 +1,18 @@
 footer {
-    position:absolute;
-    left: 0;
-    right: 0;
     margin-top: 10rem;
     padding: 1.5rem;
-    height: 15rem;
+    height: 20rem;
+}
+footer > .absolute-container {
+    position: absolute;
+    left: 0; right: 0;
+    height: fit-content;
     border-top: solid var(--col-accent0) 2px;
 }
-footer > .content {
+footer .content {
     margin: 0 auto;
-    max-width: 45rem;
+    padding-top: 2.618rem;
+    max-width: var(--column-width);
     height: 100%;
 
     display: flex;
@@ -17,14 +20,15 @@ footer > .content {
 }
 hr {
     margin: 1rem 0;
-    width: 100%;
     border:none;
     border-top: solid var(--col-accent0) 1px;
 }
 
 
 .logo {
-    max-height: 80%;
+    user-select: none;
+    width: auto;
+    height: 100%;
 }
 
 
@@ -54,7 +58,7 @@ hr {
 
 .content > .lower {
     padding-top: 1rem;
-    height: 100%;
+    height: fit-content;
 
     display: flex;
     flex-flow: column;
@@ -68,6 +72,7 @@ hr {
 }
 
 .start {
+    font-size: 1rem;
     margin-left: auto;
     padding: .25rem 1rem;
     width: fit-content;
@@ -82,14 +87,36 @@ hr {
     background-color: var(--col-accent0);
     color: var(--col-primary);
 }
-.credits {
-    cursor: pointer;
-    text-decoration: underline;
-    color: var(--col-accent1);
-}
 .quit {
+    font-size: 1rem;
     text-align: right;
     cursor: pointer;
     text-decoration: underline;
     color: var(--col-accent0);
+}
+
+
+@media (max-width: 725px) {
+    .content {
+        width: 80svw;
+        max-width: var(--mobile-column-width) !important;
+    }
+    .logo {
+        height: 50%;
+    }
+    
+    .upper {
+        margin-bottom: 4.236rem;
+    }
+    .upper > p {
+        padding-right: 0;
+    }
+    .lower {
+        padding: 0 0 1.618rem !important;
+    }
+    .lower > p {
+        margin: 0 auto;
+        padding: 0;
+        font-size: 1rem;
+    }
 }
