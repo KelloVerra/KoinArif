@@ -1,0 +1,12 @@
+.container {
+    position: relative;
+    aspect-ratio: 1;
+}
+
+.container * {
+    user-select: none;
+    position: absolute;
+    width: auto;
+    height: auto;
+    will-change: transform;
+}

@@ -8,14 +8,13 @@ import App from './App.jsx'
 import { appStore, persistAppStore } from './glob/state'
 
 import './index.css'
+import Loading from './comps/Loading.jsx'
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <Provider store={appStore}>
-      <PersistGate loading={null} persistor={persistAppStore}>
-        <App />
-      </PersistGate>
-    </Provider>
-  </StrictMode>
+  <Provider store={appStore}>
+    <PersistGate loading={<Loading />} persistor={persistAppStore}>
+      <App />
+    </PersistGate>
+  </Provider>
 )

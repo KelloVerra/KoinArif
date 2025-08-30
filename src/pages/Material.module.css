@@ -4,7 +4,12 @@
 }
 
 .header-container {
+    margin: 2rem auto 8rem;
+    position: relative;
     display: flex;
+}
+.header-container > .textart {
+    width: 60%;
 }
 .header-container > .textart p {
     margin: 0;
@@ -13,18 +18,23 @@
 }
 .header-container > .textart h1 {
     margin: 0;
-    width: 100%;
+    padding: 0;
+    text-wrap-mode: wrap;
     text-align: left;
-    font-family: var(--header-font);
+}
+.mascot {
+    position: absolute !important;
+    right: 0;
+    bottom: 0px;
 }
 
 .material-container {
     width: fit-content;
-    margin: 2rem auto 4rem;
+    margin: 0 auto 4rem;
     display:flex;
     flex-direction: column;
     align-items: center;
-    gap: 2.5rem;
+    gap: 6.854rem;
 }
 
 .back-btn {
@@ -37,24 +47,34 @@
     text-decoration: underline;
     font-family: var(--paragraph-font);
     font-weight: 200;
-    font-size: 1rem;
+    font-size: 1.618rem;
     letter-spacing: 1px;
 }
 .start-quiz-btn {
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 1rem 3.508rem;
     cursor: pointer;
     border: none;
     display: block;
     border-radius: 8px;
     background-color: transparent;
+    color: var(--col-secondary);
     border: solid 1.5px var(--col-accent0);
-    transition: background-color 75ms ease-in-out;
+    transition: all 75ms ease-in-out;
     font-family: var(--header-font);
-    font-size: 1.5rem;
+    font-size: 1.618rem;
+    width: 37rem;
 }
-.start-quiz-btn:hover {
+.start-quiz-btn:hover, .start-quiz-btn:active {
     background-color: var(--col-accent0);
+    color: var(--col-primary);
+}
+.start-quiz-btn img {
+    user-select: none;
+    pointer-events: none;
+    margin-left: 0.382rem;
+    width: 1.125rem;
+    translate: 0 1px
 }
 
 
@@ -76,16 +96,13 @@
     display: flex;
     align-items: baseline;
 }
-.submodule-container > .submodule-header h1 {
+.submodule-container > .submodule-header h2 {
     margin: 0;
     width: 100%;
     text-align: left;
-    font-family: var(--header-font);
     white-space: normal;
     word-wrap: normal;
     overflow-wrap: anywhere;
-    line-height: 2rem;
-    font-size: 2rem;
 }
 .submodule-container > .submodule-header p {
     margin: 0;
@@ -99,6 +116,7 @@
 }
 .submodule-container > .submodule-attachment img {
     pointer-events: none;
+    user-select: none;
     margin: 0;
 }
 .submodule-container > .submodule-attachment p {
@@ -106,37 +124,42 @@
     width: 100%;
     text-align: left;
     font-weight: 300;
-    font-size: .75rem;
 }
 .submodule-container > p {
-    margin: 1rem 0;
+    margin: 1.618rem 0;
     width: 100%;
     text-align: left;
     white-space: normal;
     word-wrap: normal;
     overflow-wrap: anywhere;
-    letter-spacing: .5px;
-    line-height: 1.5rem;
-    font-weight: 400;
-    font-size: .95rem;
+    letter-spacing: .618px;
 }
 .submodule-expand-btn {
+    padding: 0.236rem .618rem;
     position: absolute;
     cursor: pointer;
     right: .75rem;
     bottom: .75rem;
     display: block;
     border: none;
-    background-color: transparent;
+    border-radius: 5px;
+    background-color: color-mix(in srgb, var(--col-accent1) 10%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     color: var(--col-accent1);
     text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--col-accent1) 25%, transparent);
     font-family: var(--paragraph-font);
     font-weight: 200;
-    font-size: .85rem;
-    letter-spacing: 1px;
+    font-size: 1rem;
+    letter-spacing: .618px;
+}
+.submodule-expand-btn img {
+    margin-left: .618rem;
+    width: .618rem;
 }
 .submodule-coin-claim-btn {
-    padding: .25rem .5rem;
+    padding: .272rem .618rem;
     display: flex;
     align-items: center;
     gap: .5rem;
@@ -150,7 +173,7 @@
     color: var(--col-accent1);
     font-family: var(--paragraph-font);
     font-weight: 500;
-    font-size: .85rem;
+    font-size: 1rem;
 }
 .submodule-coin-claim-btn img {
     pointer-events: none;
@@ -162,10 +185,9 @@
 
 /* ======================================= MINIQUIZ CSS ======================================= */
 
-.miniquiz-container h1 {
-    margin: 0;
+.miniquiz-container h2 {
+    margin: 0 0 1.618rem;
     font-family: var(--header-font);
-    font-size: 2rem;
     letter-spacing: 1px;
 }
 
@@ -178,7 +200,7 @@
     border: solid 1.75px color-mix(in srgb, var(--col-accent0) 75%, transparent);
     border-radius: 8px;
     transition: max-height 500ms ease-out;
-    overflow: none;
+    overflow: hidden;
 }
 .quiz-starter-container .quiz-starter-content {
     width: fit-content;
@@ -190,19 +212,18 @@
 .quiz-starter-content > p {
     margin: 0;
     font-weight: 500;
-    font-size: 1.25rem;
     text-decoration: underline;
 }
 
 .quiz-container {
     position: relative;
-    padding: 1rem 2rem;
-    width: 33rem;
+    padding: 1.618rem 1.618rem 2.618rem;
+    width: 34rem;
     background: linear-gradient(145deg, color-mix(in srgb, var(--col-accent0) 20%, transparent) 0%, transparent 50%, color-mix(in srgb, var(--col-accent0) 9%, transparent));
     border: solid 1.75px color-mix(in srgb, var(--col-accent0) 75%, transparent);
     border-radius: 8px;
     transition: max-height 500ms ease-out;
-    overflow: none;
+    overflow: hidden;
 }
 .quiz-content {
     opacity: 0;
@@ -218,12 +239,10 @@
     margin: 0;
     width: 100%;
     text-align: left;
-    line-height: 1.325rem;
-    font-size: .95rem;
     font-weight: 400;
 }
 .quiz-reward-display {
-    padding: .125rem .25rem;
+    padding: 0.236rem .618rem;
     display: flex;
     align-items: center;
     height: fit-content;
@@ -236,7 +255,7 @@
 .quiz-reward-display p,img {
     pointer-events: none;
     margin: 0;
-    height: 100%;
+    height: 50%;
     font-weight: 600;
     text-align: left;
 }
@@ -245,9 +264,7 @@
 .quiz-options {
     width: 100%;
     display:grid;
-    gap: 10px;
-    /* TODO: MAKE DYNAMIC */
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 1rem;
 }
 .quiz-option {
@@ -257,8 +274,8 @@
 	box-sizing: border-box;
     font-family: var(--paragraph-font);
     font-weight: 600;
-    text-align: left;
-    gap: .5rem;
+    font-size: 1.272rem;
+    text-align: center;
     cursor: pointer;
     border: solid 1px var(--col-accent1);
     border-radius: 8px;
@@ -274,15 +291,19 @@
 .quiz-option-correct {
     color: var(--col-semantic-success) !important;
     background: color-mix(in srgb, var(--col-semantic-success) 20%, transparent) !important;
-    border: solid 2.125px color-mix(in srgb, var(--col-semantic-success) 30%, transparent) !important;
+    border: solid 1px var(--col-semantic-success) !important;
     animation: anim-quiz-correct-option-0 250ms cubic-bezier(.14,.84,.72,1.33) 0ms forwards;
 }
 .quiz-option-incorrect {
 	color: var(--col-semantic-failure) !important;
     background: color-mix(in srgb, var(--col-semantic-failure) 20%, transparent) !important;
-    border: solid 2.125px color-mix(in srgb, var(--col-semantic-failure) 30%, transparent) !important;
+    border: solid 1px var(--col-semantic-failure) !important;
     animation: anim-quiz-incorrect-option-0 200ms ease-out 0ms forwards;
 }
+
+
+
+
 
 @keyframes fade-in {
     from { opacity: 0; }
@@ -291,14 +312,51 @@
 
 @keyframes anim-quiz-correct-option-0 {
 	0% { transform: translateY(0); }
-	35% { transform: translateY(-5px); }
+	35% { transform: translateY(-15px); }
 	100% { transform: translateY(0); }
 }
 @keyframes anim-quiz-incorrect-option-0 {
   0% { transform: translateX(0); }
-  20% { transform: translateX(-5px); }
-  40% { transform: translateX(5px); }
-  60% { transform: translateX(-5px); }
-  80% { transform: translateX(5px); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-10px); }
+  80% { transform: translateX(10px); }
   100% { transform: translateX(0); }
+}
+
+
+
+
+@media (max-width: 725px) {
+    .content {
+        width: var(--mobile-column-width);
+    }
+
+    .mascot {
+        right: -100px !important;
+    }
+
+    .material-container {
+        gap: 8rem;
+        width: 100%;
+    }
+    .submodule-container {
+        width: calc(100% - 2rem - 4px) !important;
+    }
+    .miniquiz-container {
+        width: 100% !important;
+    }
+    .quiz-starter-container {
+        width: calc(100% - 5px) !important;
+    }
+    .quiz-container {
+        width: calc(100% - 4rem - 4px) !important;
+    }
+    .quiz-option {
+        font-size: 1rem;
+    }
+    
+    .start-quiz-btn {
+        width: 100%;
+    }
 }

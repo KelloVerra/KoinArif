@@ -5,7 +5,7 @@ import styles from '../../pages/Material.module.css'
 import coinLogo from '/Budget3D.svg'
 import { useDispatch, useSelector } from 'react-redux';
 import { getMaterials } from '../../glob/materials/main';
-import { generateMaterialQuiz, generateSubmoduleQuiz, getQuizFormatProcessorByFormatIndex } from '../../glob/quizes';
+import { generateMaterialQuiz, generateSubmoduleQuiz, getQuizFormatProcessorByFormatIndex } from '../../glob/quizes.js';
 import { addUserBudget } from '../../glob/state';
 
 
@@ -20,6 +20,7 @@ export default function MiniQuizContainer({id}) {
     const rewardOverview = useRef(5); // random tbd
     const containerRef = useRef(null);
     const containerHeight = useRef(30);
+    const [questionData, setQuestionData] = useState(null);
 
     const onAnswer = useCallback((opt) => {
         dispatch(addUserBudget(rewardOverview.current * opt.accuracy));
@@ -34,14 +35,21 @@ export default function MiniQuizContainer({id}) {
         if (containerRef.current)
             containerHeight.current = containerRef.current.clientHeight + 300;
     }, []);
- 
+
+    useEffect(_ => {
+        if (!hasStarted) return;
+        const submoduleData = getMaterials()[id.material_id]().submoduleData[id.submodule_id];
+        setQuestionData(generateSubmoduleQuiz(submoduleData));
+    }, [hasStarted]);
+
+    const validStart = hasStarted && questionData;
     return (<>
         <div className={styles['miniquiz-container']}>
-            <h1>Mini Quiz Submodul {id.submodule_id+1}</h1>
-            <div ref={containerRef} onClick={onStart} className={hasStarted ? styles['quiz-container'] : styles['quiz-starter-container']} style={{maxHeight: hasStarted ? `${containerHeight.current}px` : '30px'}}>
+            <h2>Mini Quiz</h2>
+            <div ref={containerRef} onClick={onStart} className={validStart ? styles['quiz-container'] : styles['quiz-starter-container']} style={{maxHeight: hasStarted ? `${containerHeight.current}px` : '4.236rem'}}>
             {
-                hasStarted ?
-                <QuizDisplay onAnswer={onAnswer} hasAnswered={hasAnswered} rewardOverview={rewardOverview.current} id={id} /> :
+                validStart ?
+                <QuizDisplay onAnswer={onAnswer} hasAnswered={hasAnswered} rewardOverview={rewardOverview.current} questionData={questionData} /> :
                 <QuizStarter rewardOverview={rewardOverview.current} />
             }
             </div>
@@ -63,15 +71,10 @@ function QuizStarter({rewardOverview}) {
     );
 }
 
-function QuizDisplay({onAnswer, hasAnswered, rewardOverview, id}) {
-
-    const {material_id, submodule_id} = id;
-    const submoduleData = getMaterials()[material_id]().submoduleData[submodule_id];
-
-    const questionData = useRef(generateSubmoduleQuiz(submoduleData));
+function QuizDisplay({onAnswer, hasAnswered, rewardOverview, questionData}) {
 
     const displayOptionLayout = _ => {
-        switch(questionData.current.questionData.display_format) {
+        switch(questionData.questionData.display_format) {
             case 0:
                 return <MultipleChoiceOptionLayout questionData={questionData} onAnswer={onAnswer} />
         }
@@ -80,7 +83,7 @@ function QuizDisplay({onAnswer, hasAnswered, rewardOverview, id}) {
     return (
         <div className={styles['quiz-content']}>
             <div className={styles['quiz-header']}>
-                <p>{questionData.current.questionString}</p>
+                <p>{questionData.questionString}</p>
                 <div className={styles['quiz-reward-display']} style={{opacity: hasAnswered ? 0 : 1}}>
                     <img src={coinLogo} alt='coinLogo' width='20'/>
                     <p>+{rewardOverview}</p>
@@ -98,20 +101,20 @@ function MultipleChoiceOptionLayout({questionData, onAnswer}) {
 
     useEffect(_ => {
         if (answeredInd === -1) return;
-        const selOption = questionData.current.options[answeredInd];
+        const selOption = questionData.options[answeredInd];
         const processor = getQuizFormatProcessorByFormatIndex(selOption.parent_format);
         const correct = processor.is_options_correct(selOption);
         
         setAnswerState(correct ? 'quiz-option-correct' : 'quiz-option-incorrect');
         onAnswer({
-            quizData: questionData.current,
+            quizData: questionData,
             accuracy: correct ? 1 : 0,
         });
     }, [answeredInd]);
 
     return (
-        <div className={styles['quiz-options']} deps={[answeredInd]}>
-            {questionData.current.options.map((v, i) => 
+        <div className={styles['quiz-options']} deps={[answeredInd]} style={{gridTemplateColumns:`repeat(${questionData.options.length}, 1fr)`}}>
+            {questionData.options.map((v, i) => 
             <button key={i} disabled={answeredInd != -1} onClick={_ => setAnsweredInd(i)} className={`${styles[`quiz-option`]} ${styles[answeredInd === i ? answerState : '']}`}>
                 {v.desc}
             </button>)}

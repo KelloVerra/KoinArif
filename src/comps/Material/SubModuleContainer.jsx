@@ -1,11 +1,13 @@
 import { Children, cloneElement, isValidElement, useEffect, useMemo, useRef, useState } from 'react';
 
 
-import styles from '../../pages/Material.module.css'
-import budgetLogo from '/Budget3D.svg'
+import { useIsMobile } from '../../glob/util';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSubmoduleRewardClaimed, addUserBudget } from '../../glob/state';
 
+import styles from '../../pages/Material.module.css'
+import budgetLogo from '/Budget3D.svg'
+import arrowDownYellow from '/YellowArrowDown.svg';
 
 
 export default function SubModuleContainer({children, id, minimizedMaxContentCount, minimizedHeight}) {
@@ -21,6 +23,8 @@ export default function SubModuleContainer({children, id, minimizedMaxContentCou
     const containerHeight = useRef(100);
     const containerRef = useRef(null);
     const reward = useRef(5);
+
+    const isMobile = useIsMobile(1140);
     
     const format = {material_id:id.material_id,submodule_id:id.submodule_id};
     let hasHeader = false;
@@ -36,10 +40,10 @@ export default function SubModuleContainer({children, id, minimizedMaxContentCou
             return cloneElement(elem, {style:{opacity:0.0,transition:`opacity 200ms`}})
 
         //  auto header
-        if(!hasHeader && elem.type === 'h1') {
+        if(!hasHeader && elem.type === 'h2') {
             hasHeader = true;
             return (<div className={styles['submodule-header']}>
-                <h1>{elem.props.children}</h1>
+                <h2>{elem.props.children}</h2>
                 <p>M.{id.material_id}.{id.submodule_id}</p>
             </div>);    
         }
@@ -57,7 +61,7 @@ export default function SubModuleContainer({children, id, minimizedMaxContentCou
     useEffect(_ => {
         // note: might source of bug
         if (containerRef.current)
-            containerHeight.current = containerRef.current.scrollHeight + 300;
+            containerHeight.current = containerRef.current.scrollHeight + 350;
     }, []);
     
 
@@ -72,9 +76,9 @@ export default function SubModuleContainer({children, id, minimizedMaxContentCou
     };
 
 
-
+    minimizedHeight = isMobile ? minimizedHeight * 1.618 : minimizedHeight;
     return (<>
-        <div className={styles['submodule-container']} ref={containerRef} style={{maxHeight: expanded ? `${containerHeight.current}px` : minimizedHeight}}>
+        <div className={styles['submodule-container']} ref={containerRef} style={{maxHeight: expanded ? `${containerHeight.current}px` : `${minimizedHeight}rem`}}>
             {processedChildren}
             {   !hasClaimed ?
                 <button onClick={claimCoin} className={styles['submodule-coin-claim-btn']} >
@@ -85,8 +89,8 @@ export default function SubModuleContainer({children, id, minimizedMaxContentCou
             {
                 expanded ? null :
                 <button onClick={expand} className={styles['submodule-expand-btn']} >
-                    {/* TODO: ICON */}
-                    Pelajari lebih dalam V
+                    Pelajari lebih dalam
+                    <img src={arrowDownYellow} alt='' width='2'/>
                 </button>
             }
         </div>

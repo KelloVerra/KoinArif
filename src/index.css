@@ -1,4 +1,5 @@
 #root {
+  z-index: 0;
   margin: 0 auto;
   padding-top: 5rem;
   
@@ -6,12 +7,33 @@
   max-width: 1280px;
   height: fit-content;
   min-height: 100vh;
-  
+
+  --column-width: 60rem;
+  --mobile-column-width: 30rem;
+
   text-align: center;
 }
 
+p {
+  font-size: 1rem;
+}
+h1 {
+  font-family: var(--header-font);
+  line-height: 4.235rem;
+  font-size: 4.235rem;
+}
+h2 {
+  font-family: var(--header-font);
+  line-height: 2.168rem;
+  font-size: 2.168rem;
+}
+h3 {
+  font-family: var(--header-font);
+  line-height: 1rem;
+  font-size: 1rem;
+}
+
 body {
-  /* TODO: Test later */
   margin: 0;
   display: flex;
   place-items: center;
@@ -19,34 +41,19 @@ body {
   min-height: 100vh;
 }
 
-/* TODO: REMOVE button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
 
-/* TODO: REMOVE @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+
+@media (max-width: 1140px) {
+  p {
+    font-size: 1.618rem;
   }
-  a:hover {
-    color: #747bff;
+  h2 {
+    line-height: 2.758rem;
+    font-size: 2.758rem;
   }
-  button {
-    background-color: #f9f9f9;
+}
+@media (max-width: 725px) {
+  p {
+    font-size: 1.272rem;
   }
-} */
+}

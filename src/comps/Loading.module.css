@@ -1,0 +1,24 @@
+.container {
+    margin: 0 auto;
+    padding: 0;
+    max-width: 4rem;
+    height: auto;
+}
+
+.container img {
+    margin: 0;
+    width: 100%;
+    height: auto;
+    font-family: monospace;
+    animation: rotate 2s linear 0s forwards infinite;
+    will-change: transform;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotateZ(0deg)
+    }
+    to {
+        transform: rotateZ(360deg)
+    }
+}
