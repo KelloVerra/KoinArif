@@ -36,7 +36,7 @@ export default function Landing() {
             <h1>Literasi Finansial<br/>
                 <span className={styles['gradient-heading']}>Dibikin seru</span>
             </h1>
-            <p> Bersama Koin Arif, mari mengasah pengetahuan literasimu sambil bersenang-senang! </p>
+            <p> Bersama Koin Arif, mari mengasah pengetahuan literasi finansial sambil bersenang-senang! </p>
             <button className={styles['start-button']} onClick={startLearning}>
               <img className={styles['star0']} src={star0} alt='' width='2' />
               <img className={styles['star1']} src={star1} alt='' width='2' />
@@ -88,16 +88,16 @@ export default function Landing() {
             <p className={styles['text-intro']}>Salam Kenal..</p>
             <h1>
               Namaku <br />
-              <span className={styles['gradient-heading']}>Arif</span>
+              <span className={styles['gradient-heading']}>Arif!</span>
             </h1>
             <p>
-              Aku siap nemenin kamu mengasah 
-              <span style={{color:'var(--col-accent1)'}}> kemampuan literasimu!</span>
+              Aku siap nemenin kamu
+              <span style={{color:'var(--col-accent1)'}}> upgrade kemampuan literasimu!</span>
             </p>
             <p style={{
               marginTop: '1.618rem',
             }}>
-              Ayo, langsung aja mulai petualangan 
+              Ayo, langsung aja mulai petualangan
               <span style={{color:'var(--col-accent1)'}}> finansial kita!</span>
             </p>
           </div>

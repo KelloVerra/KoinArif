@@ -18,7 +18,7 @@ export default function material0() {
                 desc: 'uang',
                 terms: [
                     {
-                        name: ['uang', 'duit', 'mata uang', 'rupiah', 'uang rupiah', ],
+                        name: ['uang', 'duit', 'mata uang', 'uang rupiah', ],
                         definition: [
                             'nilai tukar',
                             'alat penukar',
@@ -32,10 +32,12 @@ export default function material0() {
                     'true': [
                         'uang yang disimpan di bank termasuk uang giral',
                         'uang kartal dikeluarkan oleh negara',
+                        'uang tunai dikeluarkan oleh negara',
                         'nilai uang diterima oleh banyak orang',
                     ],
                     'false': [
                         'e-money termasuk uang kartal',
+                        'e-money termasuk uang tunai',
                         'uang giral adalah uang yang dikeluarkan oleh negara',
                         'uang hanyalah kertas berisi angka yang tak bermakna',
                     ],
@@ -103,7 +105,7 @@ export default function material0() {
                     'true': [
                         'makanan, air bersih dan tempat tinggal termasuk suatu kebutuhan',
                         'villa, tiket bioskop, dan vr headset termasuk contoh dari suatu keinginan',
-                        'jika kebutuhanmu tidak dipenuhi, kualitas hidupmu akan hancur',
+                        'jika kebutuhanmu tidak dipenuhi, kualitas hidupmu akan menurun',
                     ],
                     'false': [
                         'keinginan harus selalu diprioritaskan',
@@ -117,32 +119,41 @@ export default function material0() {
         component: _ => {
             return (
                 <>
-                    <SubModuleContainer id={{material_id:0,submodule_id:0}} minimizedMaxContentCount={3} minimizedHeight={'8rem'}>
+                    <SubModuleContainer id={{material_id:0,submodule_id:0}} minimizedMaxContentCount={3} minimizedHeight={10}>
+
                         <h2>Uang</h2>
                         <p>Uang adalah alat tukar pembayaran.</p>
                         <p>Uang juga digunakan sebagai Standar pengukur nilai (satuan hitung).</p>
-                        <p>Misal, 1 Nasi Kotak = 8 AK, Sehingga 16 AK = 2 Nasi Kotak</p>
+                        <p>Misal, 1 Nasi Kotak = 8k Rupiah, Sehingga 16k Rupiah = 2 Nasi Kotak</p>
                         <img src={imgdebgu} alt="Ilustrasi nilai ukur antara Uang & Barang" width="200px" />
                         <p>Wujudnya beragam, mulai dari Uang koin, Uang kertas, Simpanan Bank, E-Money dan sebagiannya.</p>
                         <p>Uang koin, Uang kertas termasuk uang kartal yang dikeluarkan oleh negara.</p>
+                        <p>Sebutan lain dari uang kartal ialah uang tunai.</p>
                         <p>Uang Simpanan di Bank, E-Money termasuk uang giral yang disimpan oleh jasa perbank-an.</p>
+
                     </SubModuleContainer>
+
                     <MiniQuizContainer id={{material_id:0,submodule_id:0}} />
-                    <SubModuleContainer id={{material_id:0,submodule_id:1}} minimizedMaxContentCount={3} minimizedHeight={'10rem'}>
+
+                    <SubModuleContainer id={{material_id:0,submodule_id:1}} minimizedMaxContentCount={3} minimizedHeight={15}>
+
                         <h2>Anggaran & Penganggaran</h2>
-                        <p>Anggaran (budget) adalah perkiraan pemasukan & pengeluaran uang di periode tertentu.</p>
-                        <p>Penganggaran (budgeting) adalah rencana anggaran (budget) di masa mendatang.</p>
+                        <p>Anggaran (budget, atau dana) adalah perkiraan pemasukan & pengeluaran uang di periode tertentu.</p>
+                        <p>Penganggaran (budgeting, atau pendanaan) adalah rencana anggaran (budget) di masa mendatang.</p>
                         <img src={imgdebgu} alt="Ilustrasi perencanaan finansial" width="200px" />
                         <p>Penganggaran bertujuan untuk merencanakan dan mengevaluasi ekspektasi yang realistis dan sistematis.</p>
                         <p>Dengan penganggaran, kamu dapat membentuk ekspektasi realistis menyesuaikan dengan kondisi finansialmu.</p>
                         <p>Tanpa penganggaran, kamu akan mem-boros uang, bahkan lupa kemana kamu menghabiskan uangmu .</p>
                         <img src={imgdebgu} alt="Ilustrasi pemborosan" width="200px" />
                         <p>Penganggaran yang efektif adalah penganggaran yang realistis, sesuai kebutuhan & keinginanmu dengan kondisi finansialmu.</p>
-                        {/* <p>Oleh karena itu, bijaklah membagi uangmu, pilihlah salah satu hal yang akan kamu gunakan dengan uangmu.</p>
-                        <p></p> */}
+                        <p>Oleh karena itu, bijaklah membagi uangmu.</p>
+
                     </SubModuleContainer>
+
                     <MiniQuizContainer id={{material_id:0,submodule_id:1}} />
-                    <SubModuleContainer id={{material_id:0,submodule_id:2}} minimizedMaxContentCount={4} minimizedHeight={'23rem'}>
+
+                    <SubModuleContainer id={{material_id:0,submodule_id:2}} minimizedMaxContentCount={4} minimizedHeight={25}>
+
                         <h2>Kebutuhan vs Keinginan</h2>
                         <p>Kebutuhan adalah hal mutlak yang diperlukan untuk hidup.</p>
                         <p>Seperti Air Bersih, Nasi Kotak, Tempat tinggal layak dan lainnya..</p>
@@ -154,7 +165,9 @@ export default function material0() {
                         <p>Jika kebutuhan tidak dipenuhi, kualitas hidup kita akan menurun.</p>
                         <p>Jika keinginan tidak dipenuhi, kamu hanya akan merasakan sedikit kekecewaan.</p>
                         <img src={imgdebgu} alt="Ilustrasi kualitas hidup" width="200px" />
+
                     </SubModuleContainer>
+
                     <MiniQuizContainer id={{material_id:0,submodule_id:2}} />
                 </>
             )

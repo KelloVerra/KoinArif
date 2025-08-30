@@ -28,8 +28,8 @@
     color: var(--col-secondary);
     margin: 0 0 1.25rem;
     padding: 0;
-    line-height: 2.5rem;
-    font-size: 2.5rem;
+    line-height: 2.618rem;
+    font-size: 2.618rem;
     font-family: var(--header-font);
     text-align: left;
     width: 100%;
@@ -38,8 +38,6 @@
     color: var(--col-accent1);
     margin: 0;
     padding: 0;
-    line-height: 1.75rem;
-    font-size: 1rem;
     text-align: left;
     width: 100%;
 }
@@ -65,11 +63,13 @@
     cursor: pointer;
     transition: background-color 50ms ease-out, color 50ms ease-out;
 }
-.continue-activity-button:hover {
+.continue-activity-button:hover, .continue-activity-button:active {
     color: var(--col-primary);
     background-color: var(--col-accent1);
 }
 .continue-activity-button img {
+    user-select: none;
+    pointer-events: none;
     margin-left: 0.382rem;
     width: 0.85rem;
     translate: 0 1px
@@ -115,7 +115,6 @@
 .material-card > .lvl {
     margin: 0;
     font-weight: 200;
-    font-size: .85rem;
     letter-spacing: 0.25px;
     color: var(--col-secondary);
 }
@@ -159,9 +158,29 @@
     color: color-mix(in srgb, var(--col-secondary) 50%, transparent);
 }
 .material-card-misc > img {
+    user-select: none;
+    pointer-events: none;
     margin-left: auto;
     width: 1rem;
 }
+
+
+
+
+@media (max-width: 1140px) {
+
+    .continue-activity-button {
+        font-size: 1.272rem;
+    }
+    .material-card > .lvl {
+        font-size: 1rem;
+    }
+
+    .material-card > .desc, .material-card-misc > p {
+        font-size: 1.128rem;
+    }
+}
+
 
 @media (max-width: 725px) {
     .content {
@@ -169,7 +188,7 @@
     }
 
     .mascot {
-        bottom: 20%;
+        bottom: 25%;
         right: -5%;
     }
     .greetings-container {
@@ -182,5 +201,9 @@
 
     .material-container {
         margin-top: 4.236rem;
+    }
+    .material-card > .title {
+        font-size: 2.058rem;
+        line-height: 2.058rem;
     }
 }

@@ -40,3 +40,20 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+
+
+
+@media (max-width: 1140px) {
+  p {
+    font-size: 1.618rem;
+  }
+  h2 {
+    line-height: 2.758rem;
+    font-size: 2.758rem;
+  }
+}
+@media (max-width: 725px) {
+  p {
+    font-size: 1.272rem;
+  }
+}

@@ -48,7 +48,7 @@ export default function MascotHero({scale, className}) {
 
         position:'absolute', 
         zIndex: -1,
-        top: '-65%',
+        top: '-57.5%',
         right: '-55%',
     };
 

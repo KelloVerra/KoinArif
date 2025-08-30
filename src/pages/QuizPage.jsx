@@ -125,8 +125,8 @@ function QuizInterface({state, quiz, onNextQuestion, addAnswerState}) {
         </div>
         <div className={styles['quiz-detail-container']}>
           <div className={styles['quiz-stat-container']}>
-            <h2>Quiz {state.currentGeneratedQuizIndex+1}</h2>
-            <h2 className={styles['leftovr']}>/{state.generatedQuizes.length}</h2>
+            <h1>Quiz {state.currentGeneratedQuizIndex+1}</h1>
+            <h1 className={styles['leftovr']}>/{state.generatedQuizes.length}</h1>
             
             <div className={styles['quiz-reward-display']}>
               <img src={coinIcon} alt='coinIcon' width='20' />
@@ -151,6 +151,7 @@ function MultipleChoiceQuestion({data, confirmable, addAnswerState, reward}) {
 
   const [answeredInd, setAnsweredInd] = useState(-1);
   const [answerState, setAnswerState] = useState('multchoice-quiz-option-incorrect');
+  const isMobile = useIsMobile();
 
 
   useEffect(_ => {
@@ -175,7 +176,13 @@ function MultipleChoiceQuestion({data, confirmable, addAnswerState, reward}) {
   }, [confirmable.state]);
   
   return (
-    <div className={styles['multchoice-quiz-option-container']} deps={[confirmable.state, data, answeredInd, answerState]} style={{gridTemplateColumns:`repeat(${data.options.length}, 1fr)`}}>
+    <div 
+      className= {styles['multchoice-quiz-option-container']} 
+      deps= {[confirmable.state, data, answeredInd, answerState]} 
+      style= {{
+        gridTemplateColumns:`repeat(${isMobile ? 1 : data.options.length}, 1fr)`
+      }}
+    >
       {Array.from({length: data.options.length}).map((_, i) =>
         <button key={i} className={`${styles[`multchoice-quiz-option`]} ${styles[answeredInd === i ? answerState : '']}`} onClick={_ => setAnsweredInd(i)} disabled={confirmable.state}> {data.options[i].desc} </button>
       )}

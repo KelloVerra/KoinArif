@@ -32,6 +32,7 @@
   margin: 1.618rem 0 0;
   color: var(--col-secondary);
   font-weight: 300;
+  font-size: 1.272rem;
   text-align: left;
 }
 .start-button {
@@ -51,7 +52,7 @@
 }
 .hero .start-button {
   background: var(--col-accent1);
-  margin: 2.618rem 0 0 13rem;
+  margin: 2.618rem 0 0 10rem;
 }
 .start-button:hover {
   transform: scale(1.05);
@@ -131,6 +132,31 @@ section p {
   line-height: 4.235rem;
 }
 
+@media (max-width: 1140px) {
+  .herotextart > p {
+    font-size: 2.0581rem;
+  }
+  .hero-mascot {
+    top: -45% !important;
+  }
+  .start-button {
+    padding: 0.618rem 2.618rem;
+    margin: 4.236rem auto 0;
+    font-size: 2.618rem;
+  }
+  .hero .start-button {
+    padding: 0.618rem 2.618rem;
+    margin: 4.236rem 0 0 4.5rem;
+    font-size: 2.058rem;
+  }
+  section p {
+    margin: 0;
+    max-width: 29.02704rem;
+    color: var(--col-secondary);
+    font-weight: 300;
+    text-align: left;
+  }
+}
 
 @media (max-width: 725px) {
   .content {
@@ -183,10 +209,10 @@ section p {
     text-align: center;
   }
   .start-button {
-    padding: 0.618rem 6.854rem;
+    padding: 0.618rem 4.236rem;
   }
   .hero .start-button {
-    margin: 2.618rem auto 0;
+    margin: 1.618rem auto 0;
   }
   
   .guide-arrow {

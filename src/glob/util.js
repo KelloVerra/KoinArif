@@ -16,9 +16,9 @@ export const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: 
 
 
 
-export const useIsMobile = _ => {
+export const useIsMobile = (lim = 725) => {
 
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 725);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < lim);
 
     useEffect(_ => {
         const handle = _ => {
