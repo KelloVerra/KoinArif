@@ -85,12 +85,6 @@ hr {
     background-color: var(--col-accent0);
     color: var(--col-primary);
 }
-.credits {
-    font-size: 1rem;
-    cursor: pointer;
-    text-decoration: underline;
-    color: var(--col-accent1);
-}
 .quit {
     font-size: 1rem;
     text-align: right;
@@ -105,8 +99,14 @@ hr {
         width: 80svw;
         max-width: var(--mobile-column-width) !important;
     }
+    .logo {
+        width: 15%;
+    }
     
     .upper > p {
         padding-right: 0;
+    }
+    .lower > p {
+        margin: 0 auto;
     }
 }

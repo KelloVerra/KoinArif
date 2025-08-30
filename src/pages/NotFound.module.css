@@ -1,31 +1,38 @@
 .content {
-    margin: 0 auto;
-    width: 45rem;
+  margin: 0 auto;
+  width: var(--column-width);
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .splash-container {
   position: relative;
+  margin: 0;
   pointer-events: none;
   width: 100%;
-  height: 30rem;
-  margin: -4rem 0 0 -1.5rem; /* gambar nakal */
+  height: 10rem;
+  translate: -2.25% -2rem;
 }
 .splash-bg {
+  margin: 0;
   position: absolute;
-  top: 0;
+  top: -12rem;
   left: 0;
   pointer-events: none;
   width: 100%;
+  height: 25rem;
 }
 .splash-fg {
   position: absolute;
-  top: -10%;
+  top: -7rem;
   left: 50%;
   transform: translate(-50%, 0);
   pointer-events: none;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  width: 65%;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  width: 40%;
   mask-repeat: no-repeat;
   mask-size: contain;
   mask-position: center;
@@ -43,4 +50,14 @@
   background-color: var(--col-accent0);
   border: none;
   border-radius: 10px;
+}
+
+@media (max-width: 725px) {
+  .content {
+    width: var(--mobile-column-width);
+  }  
+  .splash-fg {
+    top: -6.5rem;
+    width: 65%;
+  }
 }

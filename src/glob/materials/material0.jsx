@@ -10,7 +10,7 @@ export default function material0() {
         error: false,
         title: 'Dasar-Dasar Keuangan',
         desc: 'Membahas uang dari dasar, pembagian uang dengan bijak serta psikologi manusia terhadap uang.',
-        estimateDuration: '4 menit',
+        estimateDuration: '3 menit',
         submoduleData: [
             {
                 id: 0,

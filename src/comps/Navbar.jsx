@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetStore, setUserHasStarted } from '../glob/state';
@@ -15,8 +15,20 @@ export default function Navbar() {
   const userState = useSelector(state => state.user.value);
   const navigate = useNavigate();
 
+  const navRef = useRef(null);
+  useEffect(_ => {
+    const handle = _ => {
+      if(navRef) {
+        navRef.current.classList.toggle(styles['has-scrolled'], window.scrollY > 5)
+      }
+    };
+    window.addEventListener('scroll', handle);
+
+    return _ => window.removeEventListener('scroll', handle);
+  }, []);
+
   return (
-    <header>
+    <header ref={navRef}>
       <div className={styles["content"]}>
         <img className={styles["logo"]} alt='logo koin arif' src={logo} width="20" onClick={_=>navigate("/")} draggable="false" />
         {userState.hasStarted ? <LoggedIn /> : <LoggedOut />}

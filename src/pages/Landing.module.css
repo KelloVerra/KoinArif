@@ -1,9 +1,11 @@
 .content {
   margin: 0 auto;
   width: var(--column-width);
+  padding-bottom: 2rem;
 }
 
 .hero {
+  position: relative;
   display: flex;
   align-items: center;
   height: 100svh;
@@ -90,6 +92,13 @@
   left: -1.5rem;
   width: 3rem;
   animation: starblink 1.4337s ease-in-out 0s alternate infinite;
+}
+.guide-arrow {
+  position: absolute;
+  height: auto;
+  bottom: 6rem;
+  right: 0;
+  width: 1rem;
 }
 
 
@@ -178,6 +187,11 @@ section p {
   }
   .hero .start-button {
     margin: 2.618rem auto 0;
+  }
+  
+  .guide-arrow {
+    right: 50%;
+    transform: translateX(50%);
   }
 }
 

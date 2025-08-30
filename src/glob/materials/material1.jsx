@@ -10,7 +10,7 @@ export default function material1() {
         error: false,
         title: 'Pengenalan dengan Aset',
         desc: 'Membahas pengertian dari aset serta hal yang berinteraksi terhadap aset.',
-        estimateDuration: '6 menit',
+        estimateDuration: '5 menit',
         submoduleData: [
             {
                 id: 0,

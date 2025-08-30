@@ -9,6 +9,7 @@ import styles from  './Landing.module.css'
 
 import star0 from '/Star0.svg';
 import star1 from '/Star1.svg';
+import purpleArrowDown from '/PurpleArrowDown.svg';
 
 const MascotHero = lazy(_ => import('../comps/Animation/MascotHero'));
 const MascotPlan = lazy(_ => import('../comps/Animation/MascotPlan'));
@@ -42,6 +43,7 @@ export default function Landing() {
               Mulai Belajar
             </button>
           </div>
+          <img className={styles['guide-arrow']} src={purpleArrowDown} alt='' width='2' />
         </div>
 
 

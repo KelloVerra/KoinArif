@@ -101,9 +101,9 @@
     position: relative;
     padding: 1rem;
     cursor: pointer;
-    min-width: 15rem;
-    width: 15rem;
-    height: 18rem;
+    min-width: 17rem;
+    width: 17rem;
+    height: 20.646rem;
     background-color: rgba(180, 68, 255, 0.15);
     border: solid 1px var(--col-accent0);
     border-radius: 10px;
@@ -123,7 +123,7 @@
     margin: 0;
     white-space: normal;
     word-wrap: normal;
-    overflow-wrap: anywhere;
+    overflow-wrap: normal;
     color: var(--col-secondary);
 }
 .material-card > .desc {
@@ -181,6 +181,6 @@
     }
 
     .material-container {
-        margin-top: 10rem;
+        margin-top: 4.236rem;
     }
 }
