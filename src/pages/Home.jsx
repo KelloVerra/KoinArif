@@ -129,10 +129,10 @@ function ContinueLastActivityButton({}) {
 
     switch(history.type) {
       case 'empty':
-        txt = `Mari mulai Belajar materi ${getMaterials()[materialState.materialLevel]().title}`
+        txt = `Mari mulai Belajar ${getMaterials()[materialState.materialLevel]().title}!`
         break;
       case 'material':
-        txt = `Lanjut Bahas ${getMaterials()[history.data.material_id]().title}, gas!`
+        txt = `Lanjut Bahas ${getMaterials()[history.data.material_id]().title}, gaskan!`
         break;
       case 'quiz':
         txt = `Lanjutin Quiz ${getMaterials()[history.data.material.id]().title}, yuk!`

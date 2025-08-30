@@ -60,13 +60,19 @@
     background-color: transparent;
     color: var(--col-secondary);
     border: solid 1.5px var(--col-accent0);
-    transition: background-color 75ms ease-in-out;
+    transition: all 75ms ease-in-out;
     font-family: var(--header-font);
-    font-size: 1rem;
+    font-size: 1.618rem;
     width: 37rem;
 }
 .start-quiz-btn:hover {
     background-color: var(--col-accent0);
+    color: var(--col-primary);
+}
+.start-quiz-btn img {
+    margin-left: 0.382rem;
+    width: 0.85rem;
+    translate: 0 1px
 }
 
 

@@ -1,15 +1,20 @@
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setUserHasStarted } from '../glob/state'
-import styles from  './Landing.module.css'
-import { lazy, Suspense, useEffect, useState } from 'react';
-import Loading from '../comps/Loading';
-import MascotPhone from '../comps/Animation/MascotPhone';
 import { useIsMobile } from '../glob/util';
+import { lazy, Suspense } from 'react';
+import Loading from '../comps/Loading';
 
-const MascotWave = lazy(_ => import('../comps/Animation/MascotWave'));
-const MascotPlan = lazy(_ => import('../comps/Animation/MascotPlan'));
+import styles from  './Landing.module.css'
+
+import star0 from '/Star0.svg';
+import star1 from '/Star1.svg';
+
 const MascotHero = lazy(_ => import('../comps/Animation/MascotHero'));
+const MascotPlan = lazy(_ => import('../comps/Animation/MascotPlan'));
+const MascotPhone = lazy(_ => import('../comps/Animation/MascotPhone'));
+const MascotWave = lazy(_ => import('../comps/Animation/MascotWave'));
+
 
 export default function Landing() {
   const userState = useSelector(stat => stat.user.value);
@@ -30,8 +35,12 @@ export default function Landing() {
             <h1>Literasi Finansial<br/>
                 <span className={styles['gradient-heading']}>Dibikin seru</span>
             </h1>
-            <p> Bersama Koin Arif, mari mengasah pengetahuan literasimu sambil yang bersenang-senang! </p>
-            <button className={styles['start-button']} onClick={startLearning}>Mulai Belajar</button>
+            <p> Bersama Koin Arif, mari mengasah pengetahuan literasimu sambil bersenang-senang! </p>
+            <button className={styles['start-button']} onClick={startLearning}>
+              <img className={styles['star0']} src={star0} alt='' width='2' />
+              <img className={styles['star1']} src={star1} alt='' width='2' />
+              Mulai Belajar
+            </button>
           </div>
         </div>
 
@@ -94,7 +103,11 @@ export default function Landing() {
             <MascotWave scale={2} />
           </Suspense>
         </section>
-        <button className={styles['start-button']} onClick={startLearning}>Mulai Belajar</button>
+        <button className={styles['start-button']} onClick={startLearning}>
+          <img className={styles['star0']} src={star0} alt='' width='2' />
+          <img className={styles['star1']} src={star1} alt='' width='2' />
+          Mulai Belajar
+        </button>
       </div>
     </main>
   )

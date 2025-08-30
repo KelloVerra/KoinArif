@@ -1,4 +1,4 @@
-import { animate, createScope, createSpring, createTimeline } from 'animejs';
+import { createTimeline } from 'animejs';
 import { useEffect, useRef } from 'react';
 
 import mainStyles from './main.module.css';

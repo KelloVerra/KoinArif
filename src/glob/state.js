@@ -19,6 +19,7 @@ const persistConfig = {
 const quizSlice = createSlice({
     name: 'quiz',
     initialState: { value: {
+        prevMaterialLvl: 0,
         answeredQuizes: [],
         currentGeneratedQuizIndex: 0,
         generatedQuizes: [],
@@ -49,6 +50,10 @@ const quizSlice = createSlice({
             state.value.generatedQuizes.length = 0;
             state.value.answeredQuizes.length = 0;
             state.value.quizCompletionRecapData = {finished: false};
+        },
+        
+        setPrevMaterialLvl: (state, action) => { // payload is lvl num
+            state.value.prevMaterialLvl = action.payload;
         },
 
         createQuizList: (state, action) => { // payload is quiz generation rules, TBD
@@ -107,7 +112,7 @@ const quizSlice = createSlice({
         },
     }
 });
-export const {advanceQuiz, resetQuiz, completeQuiz, createQuizList, addFamiliarQuizID, addSavedQuizData, clearSavedQuizData, addAnsweredQuizData} = quizSlice.actions;
+export const {advanceQuiz, resetQuiz, completeQuiz, setPrevMaterialLvl, createQuizList, addFamiliarQuizID, addSavedQuizData, clearSavedQuizData, addAnsweredQuizData} = quizSlice.actions;
 
 const materialSlice = createSlice({
     name: 'material',

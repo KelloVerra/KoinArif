@@ -24,9 +24,9 @@ export default function MascotWave({scale, className}) {
             ]
         },
         coin: {
-            style:{ left: '37%', top: '-15%', width: '35%' },
+            style:{ left: '37%', top: '-5%', width: '30%' },
             keyframes: [
-                { y: '35%'      , ease: 'inOutSine' , duration:1000 },
+                { y: '25%'      , ease: 'inOutSine' , duration:1000 },
                 { y: 0          , ease: 'inOutSine' , duration:1000 },
             ]
         },

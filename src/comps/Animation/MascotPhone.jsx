@@ -44,18 +44,18 @@ export default function MascotPhone({scale, className}) {
             x: 0,
             y: 0,
             opacity: 1,
-            duration: 1000,
+            duration: 750,
         });
         timeline.add(content0.current, {
             x: '-1%',
-            y: '-7.5%',
+            y: '-5%',
             opacity: 0,
             ease: 'outCubic',
             duration: 500,
         });
         timeline.add(content1.current, {
             x: '1%',
-            y: '7.5%',
+            y: '5%',
         }, "-=500");
         timeline.add(content1.current, {
             x: 0,
@@ -70,14 +70,14 @@ export default function MascotPhone({scale, className}) {
         });
         timeline.add(content1.current, {
             x: '-1%',
-            y: '-7.5%',
+            y: '-5%',
             opacity: 0,
             ease: 'outCubic',
             duration: 500,
         });
         timeline.add(content0.current, {
             x: '1%',
-            y: '7.5%',
+            y: '5%',
         }, "-=500");
         timeline.add(content0.current, {
             x: 0,
