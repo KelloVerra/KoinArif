@@ -14,7 +14,7 @@
   text-align: center;
 }
 
-p {
+p, a {
   font-size: 1rem;
 }
 h1 {
@@ -41,19 +41,35 @@ body {
   min-height: 100vh;
 }
 
+.toast-container {
+  top: calc(3.33rem + .5rem) !important;
+  left: 50% !important;
+  transform: translateX(-50%);
+  width: var(--column-width);
+}
+
 
 
 @media (max-width: 1140px) {
-  p {
+  p, a {
     font-size: 1.618rem;
   }
   h2 {
     line-height: 2.758rem;
     font-size: 2.758rem;
   }
+  
+  .toast-container {
+    top: 5.388rem !important;
+  }
 }
 @media (max-width: 725px) {
   p {
     font-size: 1.272rem;
+  }
+
+  .toast-container {
+    top: calc(4.236rem + 1rem) !important;
+    width: var(--mobile-column-width);
   }
 }

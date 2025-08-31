@@ -8,6 +8,7 @@ import { addSubmoduleRewardClaimed, addUserBudget } from '../../glob/state';
 import styles from '../../pages/Material.module.css'
 import budgetLogo from '/Budget3D.svg'
 import arrowDownYellow from '/YellowArrowDown.svg';
+import toast from 'react-hot-toast';
 
 
 export default function SubModuleContainer({children, id, minimizedMaxContentCount, minimizedHeight}) {
@@ -68,11 +69,17 @@ export default function SubModuleContainer({children, id, minimizedMaxContentCou
     const expand = _ => {
         setExpanded(true);
     };
-    const claimCoin = _ => { // todo; timer?
+    const claimCoin = _ => {
         if (hasClaimed) return;
         setHasClaimed(true);
         dispatch(addSubmoduleRewardClaimed(format))
         dispatch(addUserBudget(reward.current))
+        toast.success(
+            `+${reward.current} Koin`,
+            {
+                icon: `src(${budgetLogo})`
+            }
+        );
     };
 
 

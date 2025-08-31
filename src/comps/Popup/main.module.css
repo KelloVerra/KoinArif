@@ -1,0 +1,77 @@
+.container {
+    position: fixed;
+    z-index: 99999;
+    inset: 0;
+    display:flex;
+    place-items: center;
+    background-color: color-mix(in srgb, var(--col-primary) 75%, transparent);
+    opacity: 0;
+    pointer-events: none;
+}
+.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.content {
+    position: relative;
+    width: 29.03rem;
+    margin: 0 auto;
+    padding: 1.272rem;
+    background-color: var(--col-primary);
+    border-radius: 5px;
+    border: solid 1px #000;
+}
+.mascot {
+    margin: 0;
+    width: 11.089rem;
+    height: auto;
+}
+
+.content > h2, p {
+    margin: 0 0 1.618rem;
+}
+
+.btn {
+    margin: 1rem 0;
+    padding: .618rem;
+    cursor: pointer;
+    display: block;
+    border-radius: 5px;
+    color: var(--col-primary);
+    font-weight: 600;
+    font-size: 1.272rem;
+}
+.quit {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: .618rem; right: 1.272rem;
+    width: 1rem;
+}
+.quit img {
+    width: 100%;
+    height: auto;
+}
+
+.btn-primary {
+    background-color: var(--col-accent1);
+}
+.btn-secondary {
+    background-color: var(--col-accent0);
+}
+
+@media (max-width: 1140px) {
+    .btn {
+        font-size: 1.618rem;
+    }
+}
+@media (max-width: 725px) {
+    .btn {
+        font-size: 1.272rem;
+    }
+    .content {
+        width: 22.82rem;
+        padding: 1.618rem;
+    }
+}

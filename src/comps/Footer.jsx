@@ -5,12 +5,12 @@ import styles from './Footer.module.css'
 import logo from '/CompactLogo.svg'
 
 
-export default function Footer() {
+export default function Footer({setLogOutWarnVisible}) {
   const userState = useSelector(state => state.user.value);
   const dispatch = useDispatch();
 
   const startLearning = () => dispatch(setUserHasStarted(true));
-  const quitLearning = () => resetStore();
+  const logOut = () => setLogOutWarnVisible(true);
 
   return (
     <footer>
@@ -21,7 +21,7 @@ export default function Footer() {
             <p>Koin Arif adalah platform financial education yang dapat mengasah pengetahuan literasimu dalam cara yang menyenangkan dan engaging.</p>
           </div>
           { userState.hasStarted ?
-            <a className={styles['quit']} onClick={quitLearning}>Log Out</a> :
+            <a className={styles['quit']} onClick={logOut}>Log Out</a> :
             <a className={styles['start']} onClick={startLearning}>Mulai Belajar</a>
           }
           <hr />

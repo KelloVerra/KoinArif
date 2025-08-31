@@ -88,13 +88,11 @@ hr {
     color: var(--col-primary);
 }
 .quit {
-    font-size: 1rem;
     text-align: right;
     cursor: pointer;
     text-decoration: underline;
     color: var(--col-accent0);
 }
-
 
 @media (max-width: 725px) {
     .content {

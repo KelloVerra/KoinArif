@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMaterials } from '../../glob/materials/main';
 import { generateMaterialQuiz, generateSubmoduleQuiz, getQuizFormatProcessorByFormatIndex } from '../../glob/quizes.js';
 import { addUserBudget } from '../../glob/state';
+import toast from 'react-hot-toast';
 
 
 
@@ -25,6 +26,14 @@ export default function MiniQuizContainer({id}) {
     const onAnswer = useCallback((opt) => {
         dispatch(addUserBudget(rewardOverview.current * opt.accuracy));
         SetHasAnswered(true);
+
+        if(rewardOverview.current * opt.accuracy === 0) return;
+        toast.success(
+            `+${rewardOverview.current * opt.accuracy} Koin`,
+            {
+                icon: <img src={coinLogo} alt='[coinIcon]' width='5' style={{height:'1.618rem',width:'auto'}} />
+            }
+        );
     }, []);
     const onStart = _ => {
         SetHasStarted(true);

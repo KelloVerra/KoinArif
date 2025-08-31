@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,17 +14,15 @@ import styles from './Material.module.css'
 
 export default function Material() {
 
-  // TODO: navigate to landing if user hasnt started
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
   const userState = useSelector(stat => stat.user.value);
   const materialState = useSelector(stat => stat.material.value);
-  const quizState = useSelector(stat => stat.quiz.value);
 
   const invalidState = !userState.hasStarted || userState.history.length === 0;
 
-  const getMaterialData = _ => {
+  const receivedMaterialData = useRef((_ => {
     if (invalidState)
       return {id: -1, error: 1, component: null};
 
@@ -32,21 +30,18 @@ export default function Material() {
     const materialData = getMaterialByIndex(materialIndex);
 
     if(materialData.error)
-      console.error(`error while obtaining material index of ${materialIndex}`);
+      console.warn(`unable to obtain material index of ${materialIndex}`);
 
     return materialData;
-  };
-
-  const [receivedMaterialData, setReceivedMaterialData] = useState(getMaterialData());
-
+  })());
   
   const startQuiz = useCallback(_ => {
     dispatch(addHistory({
       type: 'quiz',
       data: {
         material: {
-          id: receivedMaterialData.id,
-          terms: receivedMaterialData.terms,
+          id: receivedMaterialData.current.id,
+          terms: receivedMaterialData.current.terms,
         },
       },
     }));
@@ -55,10 +50,10 @@ export default function Material() {
     dispatch(resetQuiz());
     dispatch(createQuizList({
         level: materialState.materialLevel,
-        material: receivedMaterialData,
+        material: receivedMaterialData.current,
     }));
     navigate("/quiz");
-  }, [receivedMaterialData]);
+  }, [receivedMaterialData.current]);
 
   const goHome = useCallback(_ => {
     navigate("/");
@@ -67,7 +62,7 @@ export default function Material() {
 
   return (
     <>
-        {receivedMaterialData.error ? <NotFound /> : <DefaultDisplay receivedMaterialData={receivedMaterialData} goHome={goHome} startQuiz={startQuiz} />}
+        {receivedMaterialData.current.error ? <NotFound /> : <DefaultDisplay receivedMaterialData={receivedMaterialData.current} goHome={goHome} startQuiz={startQuiz} />}
     </>
   )
 }

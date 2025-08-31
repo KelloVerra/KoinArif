@@ -1,15 +1,19 @@
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addHistory, } from '../glob/state';
 import { useNavigate } from 'react-router';
 import { getMaterials } from '../glob/materials/main';
 import { randomLength, useIsMobile } from '../glob/util';
+import toast from 'react-hot-toast';
 
 import MascotGreetings from '../comps/MascotGreetings';
+import MaterialWarning from '../comps/Popup/MaterialWarning';
 import ArrowGoPurple from '/PurpleArrowGo.svg';
 import ArrowGoPrimary from '/PrimaryArrowGo.svg';
 import LockPurple from '/PurpleLock.svg';
+import LockPrimary from '/PrimaryLock.svg';
 import LockWhite from '/WhiteLock.svg';
+
 import styles from './Home.module.css'
 
 
@@ -21,6 +25,11 @@ export default function Home() {
   const isMobile = useIsMobile();
   const materials = useRef(getMaterials());
   const materialCardContainer = useRef(null);
+  const [isMaterialWarningVisible, setIsMaterialWarningVisible] = useState({
+    materialData: {},
+    goTo : _ => {},
+    visible: false
+  });
 
 
   
@@ -31,7 +40,7 @@ export default function Home() {
     else if (hour <= 18) return "Sore";
     else return "Malam";
   };
-  const motivQuote = _ => {
+  const motivQuote = useRef((_ => {
     const quotes = [
       'Tunggu apa lagi? Yuk, luangkan waktu untuk belajar!',
       'Jangan menunggu motivasi, langsung saja mulai!',
@@ -40,7 +49,7 @@ export default function Home() {
       'Belajar 5 menit setiap hari hasilnya dahsyat daripada tidak belajar!',
     ];
     return quotes[randomLength(quotes.length)];
-  }
+  })())
 
 
 
@@ -66,11 +75,12 @@ export default function Home() {
   return (
     <main>
       <div className={styles['content']}>
+        <MaterialWarning visible={{val:isMaterialWarningVisible, set:setIsMaterialWarningVisible}} goToMaterial={isMaterialWarningVisible.goTo}/>
         <div className={styles['heading-container']}>
           <div className={styles['greetings-container']}>
             <div className={styles['greetings-content']}>
               <h1>Selamat <span className={styles['gradient-heading']}>{greetings()}!</span></h1>
-              <p>" {motivQuote()} "</p>
+              <p>" {motivQuote.current} "</p>
               <p>- Arif</p>
             </div>
             <ContinueLastActivityButton />
@@ -86,7 +96,7 @@ export default function Home() {
               const material = v();
               if(material.id > materialState.materialLevel)
                 return <LockedMaterialCard key={material.id} material={material} />
-              return <MaterialCard key={material.id} material={material} />
+              return <MaterialCard key={material.id} material={material} setWarn={setIsMaterialWarningVisible} />
             })}
           </div>
         </div>
@@ -101,6 +111,24 @@ function ContinueLastActivityButton({}) {
   const materialState = useSelector(stat => stat.material.value);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const msgFormat = useRef((_ => {
+      const history = userState.history[0];
+      let txt = "";
+
+      switch(history.type) {
+        case 'empty':
+          txt = `Mari mulai Belajar ${getMaterials()[materialState.materialLevel]().title}!`
+          break;
+        case 'material':
+          txt = `Lanjut Bahas ${getMaterials()[history.data.material_id]().title}, gaskan!`
+          break;
+        case 'quiz':
+          txt = `Lanjutin Quiz ${getMaterials()[history.data.material.id]().title}, yuk!`
+          break;
+      }
+      return txt;
+    })());
 
   const continueLastActivity = _ => {
     const history = userState.history[0];
@@ -123,38 +151,21 @@ function ContinueLastActivityButton({}) {
     } 
   };
 
-  const formatHistory = _ => {
-    const history = userState.history[0];
-    let txt = "";
-
-    switch(history.type) {
-      case 'empty':
-        txt = `Mari mulai Belajar ${getMaterials()[materialState.materialLevel]().title}!`
-        break;
-      case 'material':
-        txt = `Lanjut Bahas ${getMaterials()[history.data.material_id]().title}, gaskan!`
-        break;
-      case 'quiz':
-        txt = `Lanjutin Quiz ${getMaterials()[history.data.material.id]().title}, yuk!`
-        break;
-    }
-    return txt;
-  }
-
   return (
     <button className={styles['continue-activity-button']} onClick={continueLastActivity}>
-      {formatHistory()}
+      {msgFormat.current}
       <img src={ArrowGoPrimary} alt='' width='5' />
     </button>
   )
 }
 
-function MaterialCard({material}) {
+function MaterialCard({material, setWarn}) {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userState = useSelector(stat => stat.user.value);
 
-  const startMaterial = _ => {
+  const goToMaterial = _ => {
     dispatch(addHistory({
         type: 'material',
         data: {
@@ -162,6 +173,16 @@ function MaterialCard({material}) {
         },
       }));
     navigate("/material");
+  }
+
+  const startMaterial = _ => {
+    const history = userState.history[0];
+    if (history.type === 'quiz') {
+      setWarn({materialData:{material}, goTo:{goToMaterial}, visible:true});
+      return;
+    }
+    
+    goToMaterial();
   };
 
   return (
@@ -179,7 +200,14 @@ function MaterialCard({material}) {
 function LockedMaterialCard({material}) {
 
   const startMaterial = _ => {
-    console.log('terkunci')
+    toast.error(
+      `Tidak cukup level,
+       Selesaikan kuis materi level sebelumnya.
+      `,
+      {
+        icon: <img src={LockPrimary} alt='[LockIcon]' width='5' style={{height:'auto',width:'1.272rem', marginRight:'.618rem'}} />
+      }
+    );
   };
 
   return (

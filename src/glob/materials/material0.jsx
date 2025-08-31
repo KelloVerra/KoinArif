@@ -76,7 +76,7 @@ export default function material0() {
                     ],
                     'false': [
                         'budgeting bermanfaat agar boros pengeluaran',
-                        'budgeting cocok untuk digunakan dalam membagi sedekah', // todo: think more
+                        'budgeting cocok untuk digunakan dalam membagi sedekah',
                         'sisa dari budget dapat dihabiskan untuk aktivitas rekreasi',
                     ],
                 },

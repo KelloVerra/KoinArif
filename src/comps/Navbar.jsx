@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetStore, setUserHasStarted } from '../glob/state';
+import { setUserHasStarted } from '../glob/state';
 
 import styles from './Navbar.module.css'
 
@@ -11,7 +11,7 @@ import materialLevelIcon from '/Level.svg'
 
 
 
-export default function Navbar() {
+export default function Navbar({setLogOutWarnVisible}) {
   const userState = useSelector(state => state.user.value);
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ export default function Navbar() {
     <header ref={navRef}>
       <div className={styles["content"]}>
         <img className={styles["logo"]} alt='logo koin arif' src={logo} width="20" onClick={_=>navigate("/")} draggable="false" />
-        {userState.hasStarted ? <LoggedIn /> : <LoggedOut />}
+        {userState.hasStarted ? <LoggedIn warn={setLogOutWarnVisible} /> : <LoggedOut />}
       </div>
     </header>
   )
@@ -56,18 +56,11 @@ function LoggedOut({}) {
 }
 
 
-function LoggedIn({}) {
-  const navigate = useNavigate();
-
-  const quitLearning = useCallback(() => {
-    resetStore();
-    navigate("/");
-  }, []);
-
+function LoggedIn({warn}) {
   return (
     <div className={styles["right-content"]}>
       <UserStat />
-      <a className={styles["quit"]} onClick={quitLearning}>Log Out</a>
+      <a className={styles["quit"]} onClick={_ => warn(true)}>Log Out</a>
     </div>
   )
 }

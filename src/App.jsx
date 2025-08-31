@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { HashRouter, Routes, Route } from 'react-router'
 
 
@@ -12,39 +12,62 @@ const NotFound = lazy(_ => import('./pages/NotFound'));
 
 
 // Utils
-import { useSelector } from 'react-redux'
-import Navbar from './comps/Navbar'
-import Footer from './comps/Footer'
-import ScrollToTop from './comps/ScrollToTop'
-import Loading from './comps/Loading'
+import { useSelector } from 'react-redux';
+import Navbar from './comps/Navbar';
+import Footer from './comps/Footer';
+import ScrollToTop from './comps/ScrollToTop';
+import Loading from './comps/Loading';
+import LogOutWarning from './comps/Popup/LogOutWarning';
+import { Toaster } from 'react-hot-toast';
 
 
 
 
 
-function App() {
+export default function App() {
   const userState = useSelector(state => state.user.value);
+  const [logOutWarnVisible, setLogOutWarnVisible] = useState(false);
 
   return (
-    <>
-      <HashRouter>
-        <ScrollToTop />
-        <Navbar />
-        <Suspense fallback={<Loading style={{marginBottom: '65vh'}} />}>
-          <Routes>
-            <Route path='/' element={userState.hasStarted ? <Home /> : <Landing />} />
-            <Route path='/material' element={<Material />} />
-            <Route path='/quiz' element={<QuizPage />} />
-            <Route path='/credit' element={<CreditsAttributions />} />
-            <Route path='*' element={<NotFound />} />
-          </Routes>
-        </Suspense>
-        <Footer />
-      </HashRouter>
-    </>
+    <HashRouter>
+      <Toaster 
+        position='top-right'
+        containerClassName='toast-container'
+        toastOptions={{
+          duration: 4000,
+          gutter: '1rem',
+          style: {
+            textAlign: 'left',
+            backgroundColor: 'color-mix(in srgb, var(--col-accent1) 25%, var(--col-primary))',
+            color: 'var(--col-accent1)',
+            fontSize: '1rem',
+            fontWeight: '500',
+          },
+          error: { style:{
+            width: 'fit-content',
+            backgroundColor: 'var(--col-accent0)',
+            color: 'var(--col-primary)',
+            border: 'none',
+          }},
+        }}
+      />
+      
+      <ScrollToTop />
+      <LogOutWarning visible={{val: logOutWarnVisible, set: setLogOutWarnVisible}} />
+      <Navbar setLogOutWarnVisible={setLogOutWarnVisible}/>
+
+      <Suspense fallback={<Loading style={{marginBottom: '65vh'}} />}>
+        <Routes>
+          <Route path='/' element={userState.hasStarted ? <Home /> : <Landing />} />
+          <Route path='/material' element={<Material />} />
+          <Route path='/quiz' element={<QuizPage />} />
+          <Route path='/credit' element={<CreditsAttributions />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </Suspense>
+
+      <Footer setLogOutWarnVisible={setLogOutWarnVisible}/>
+    </HashRouter>
   )
 }
 
-
-
-export default App

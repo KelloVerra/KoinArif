@@ -1,8 +1,8 @@
-import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getQuizFormatProcessorByFormatIndex, getQuizTemplateByIndex } from '../glob/quizes.js'
+import { getQuizFormatProcessorByFormatIndex } from '../glob/quizes.js'
 import { advanceQuiz, completeQuiz, addAnsweredQuizData, addUserBudget, addEmptyHistory, unlockNextMaterial } from '../glob/state';
 import { randomLength, useIsMobile } from '../glob/util';
 
@@ -13,6 +13,7 @@ import materialLevelIcon from '/Level.svg'
 import NotFound from './NotFound';
 import MascotQuizComplete from '../comps/MascotQuizComplete.jsx';
 import MascotQuiz from '../comps/MascotQuiz.jsx';
+import toast from 'react-hot-toast';
 
 
 export default function QuizPage() {
@@ -244,22 +245,37 @@ function Finish({onConfirmEnd}) {
   const coins = quizState.quizCompletionRecapData.totalReward;
   const accuracy = quizState.quizCompletionRecapData.accuracy;
 
+  
+  const hasRaisedLevel = (
+    userState.history[1].type === 'quiz' ?
+      userState.history[1].data.material.id === quizState.prevMaterialLvl :
+      false
+  );
 
   const hadReloaded = useRef(false);
   useEffect(_ => {
     if (hadReloaded.current) return;
     if (userState.history[0].type != 'quiz') return;
 
+    toast.success(
+      `+${coins} Koin`,
+      {
+        icon: <img src={coinIcon} alt='[coinIcon]' width='5' style={{height:'1.618rem',width:'auto'}} />
+      }
+    );
+    
+    if (userState.history[0].data.material.id === quizState.prevMaterialLvl)
+      toast.success(
+        `Level Up`,
+        {
+          icon: <img src={materialLevelIcon} alt='[levelIcon]' width='5' style={{height:'1.618rem',width:'auto'}} />
+        }
+      );
     dispatch(addEmptyHistory());
     dispatch(addUserBudget(coins));
     hadReloaded.current = true;
   }, []);
 
-  const hasRaisedLevel = (
-    userState.history[1].type === 'quiz' ?
-      userState.history[1].data.material.id === quizState.prevMaterialLvl :
-      false
-  );
 
 
   return (<>
