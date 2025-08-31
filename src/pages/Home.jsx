@@ -96,7 +96,7 @@ export default function Home() {
               const material = v();
               if(material.id > materialState.materialLevel)
                 return <LockedMaterialCard key={material.id} material={material} />
-              return <MaterialCard key={material.id} material={material} setWarn={setIsMaterialWarningVisible} />
+              return <MaterialCard key={material.id} material={material} setWarn={setIsMaterialWarningVisible} isFin={material.id <= materialState.accomplishedMaterialLevel} />
             })}
           </div>
         </div>
@@ -159,7 +159,7 @@ function ContinueLastActivityButton({}) {
   )
 }
 
-function MaterialCard({material, setWarn}) {
+function MaterialCard({material, setWarn, isFin}) {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -186,7 +186,7 @@ function MaterialCard({material, setWarn}) {
   };
 
   return (
-    <div className={styles['material-card']} onClick={startMaterial}>
+    <div className={`${styles['material-card']} ${isFin ? styles['material-card-fin'] : ''}`} onClick={startMaterial}>
       <p className={styles['lvl']}>Materi Level {material.id+1}</p>
       <h2 className={styles['title']}>{material.title}</h2>
       <p className={styles['desc']}>{material.desc}</p>

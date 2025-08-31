@@ -28,7 +28,7 @@ export default function MaterialWarning({visible, goToMaterial}) {
                 
                 <img className={styles['mascot']} src={MascotThink} alt='mascot thinking' width='25' />
                 <h2>Tunggu Dulu!</h2>
-                <p> Kamu sebelumnya sedang mengerjakan kuis nih, <br />
+                <p> Kamu sebelumnya lagi mengerjakan kuis nih, <br />
                     Apakah kamu ingin melanjutkannya?
                 </p>
 

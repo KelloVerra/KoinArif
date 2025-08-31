@@ -1,6 +1,8 @@
 import MiniQuizContainer from "../../comps/Material/MiniQuizContainer";
 import SubModuleContainer from "../../comps/Material/SubModuleContainer"
 
+import materialStyles from '../../pages/Material.module.css';
+
 import imgdebgu from '/Level.svg';
 
 export default function material0() {
@@ -9,8 +11,13 @@ export default function material0() {
         load: 0,
         error: false,
         title: 'Dasar-Dasar Keuangan',
+        displayTitle: <h1 className={materialStyles["header"]}>
+            Dasar-Dasar
+            <h1 className={materialStyles["gradient-heading"]}> Keuangan</h1>
+        </h1>,
         desc: 'Membahas uang dari dasar, pembagian uang dengan bijak serta psikologi manusia terhadap uang.',
         estimateDuration: '3 menit',
+        requiredQuizCoins: 35,
         submoduleData: [
             {
                 id: 0,

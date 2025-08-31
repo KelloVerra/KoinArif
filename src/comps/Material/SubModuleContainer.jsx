@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addSubmoduleRewardClaimed, addUserBudget } from '../../glob/state';
 
 import styles from '../../pages/Material.module.css'
-import budgetLogo from '/Budget3D.svg'
+import coinIcon from '/Budget3D.svg'
 import arrowDownYellow from '/YellowArrowDown.svg';
 import toast from 'react-hot-toast';
 
@@ -77,7 +77,7 @@ export default function SubModuleContainer({children, id, minimizedMaxContentCou
         toast.success(
             `+${reward.current} Koin`,
             {
-                icon: `src(${budgetLogo})`
+                icon: <img src={coinIcon} alt='[coinIcon]' width='5' style={{height:'1.618rem',width:'auto'}} />
             }
         );
     };
@@ -89,7 +89,7 @@ export default function SubModuleContainer({children, id, minimizedMaxContentCou
             {processedChildren}
             {   !hasClaimed ?
                 <button onClick={claimCoin} className={styles['submodule-coin-claim-btn']} >
-                    <img src={budgetLogo} width='30px' alt='coinLogo' />
+                    <img src={coinIcon} width='30px' alt='coinLogo' />
                     <p>Klaim {reward.current} Koin</p>
                 </button> : null
             }

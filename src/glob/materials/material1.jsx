@@ -1,6 +1,8 @@
 import MiniQuizContainer from "../../comps/Material/MiniQuizContainer";
 import SubModuleContainer from "../../comps/Material/SubModuleContainer"
 
+import materialStyles from '../../pages/Material.module.css';
+
 import imgdebgu from '/Level.svg';
 
 export default function material1() {
@@ -11,6 +13,11 @@ export default function material1() {
         title: 'Pengenalan dengan Aset',
         desc: 'Membahas pengertian dari aset serta hal yang berinteraksi terhadap aset.',
         estimateDuration: '5 menit',
+        displayTitle: <h1 className={materialStyles["header"]}>
+            Pengenalan dengan
+            <h1 className={materialStyles["gradient-heading"]}> Aset</h1>
+        </h1>,
+        requiredQuizCoins: 135,
         submoduleData: [
             {
                 id: 0,

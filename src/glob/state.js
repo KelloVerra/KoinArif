@@ -27,7 +27,7 @@ const quizSlice = createSlice({
         quizCompletionRecapData: {finished: false},
     }},
     reducers: {
-        advanceQuiz: (state, action) => { // TODO: budget logic when answer quiz
+        advanceQuiz: (state, action) => {
             const nextIndex = state.value.currentGeneratedQuizIndex + 1;
             if(nextIndex < state.value.generatedQuizes.length)
                 state.value.currentGeneratedQuizIndex = nextIndex;
@@ -118,6 +118,7 @@ const materialSlice = createSlice({
     name: 'material',
     initialState: { value: {
         materialLevel: 0,
+        accomplishedMaterialLevel: -1,
         submoduleRewardsTaken: [],
         familiarTerms: [],
     }},
@@ -128,7 +129,8 @@ const materialSlice = createSlice({
         },
 
         resetMaterialLevel: (state, action) => { // no payload
-            state.value.materialLevel = 0
+            state.value.materialLevel = 0;
+            state.value.accomplishedMaterialLevel = -1;
         },
 
         addFamiliarTerms: (state, action) => { // payload is a list of new terms
@@ -142,15 +144,20 @@ const materialSlice = createSlice({
             if (!state.value.submoduleRewardsTaken.includes(action.payload)) // if new term, then push
                 state.value.submoduleRewardsTaken.push(action.payload)
         },
+
+        addAccomplishedMaterial: (state, action) => { // payload =  material_id
+            state.value.accomplishedMaterialLevel = action.payload;
+        },
         
         resetMaterialState: (state, action) => {
             state.value.materialLevel = 0;
             state.value.submoduleRewardsTaken.length = 0;
             state.value.familiarTerms.length = 0;
+            state.value.accomplishedMaterialLevel = -1;
         },
     }
 });
-export const {unlockNextMaterial, resetMaterialLevel, addFamiliarTerms, addSubmoduleRewardClaimed, resetMaterialState, } = materialSlice.actions;
+export const {unlockNextMaterial, resetMaterialLevel, addFamiliarTerms, addSubmoduleRewardClaimed, addAccomplishedMaterial, resetMaterialState, } = materialSlice.actions;
 
 const userSlice = createSlice({
     name: 'user',
@@ -171,6 +178,10 @@ const userSlice = createSlice({
 
         addUserBudget: (state, action) => { // Adds certain amount of budget points
             state.value.budget += action.payload;
+        },
+        
+        spendUserBudget: (state, action) => {
+            state.value.budget -= action.payload;
         },
 
         resetUserBudget: (state, action) => { // No playload
@@ -195,7 +206,7 @@ const userSlice = createSlice({
         },
     }
 });
-export const {setUserHasStarted, setUserHasFinishTutorial, addUserBudget, resetUserBudget, addHistory, addEmptyHistory, resetHistory} = userSlice.actions;
+export const {setUserHasStarted, setUserHasFinishTutorial, addUserBudget, spendUserBudget, resetUserBudget, addHistory, addEmptyHistory, resetHistory} = userSlice.actions;
 
 
 

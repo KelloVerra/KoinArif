@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { HashRouter, Routes, Route } from 'react-router'
 
 
@@ -18,7 +18,7 @@ import Footer from './comps/Footer';
 import ScrollToTop from './comps/ScrollToTop';
 import Loading from './comps/Loading';
 import LogOutWarning from './comps/Popup/LogOutWarning';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster, useToasterStore } from 'react-hot-toast';
 
 
 
@@ -27,6 +27,16 @@ import { Toaster } from 'react-hot-toast';
 export default function App() {
   const userState = useSelector(state => state.user.value);
   const [logOutWarnVisible, setLogOutWarnVisible] = useState(false);
+
+  const { toasts } = useToasterStore();
+  const TOAST_LIMIT = 3
+
+  useEffect(() => {
+    toasts
+      .filter((t) => t.visible)
+      .filter((_, i) => i >= TOAST_LIMIT)
+      .forEach((t) => toast.dismiss(t.id));
+  }, [toasts]);
 
   return (
     <HashRouter>

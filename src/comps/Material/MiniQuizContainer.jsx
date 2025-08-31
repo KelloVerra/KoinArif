@@ -3,10 +3,12 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '../../pages/Material.module.css'
 import coinLogo from '/Budget3D.svg'
-import { useDispatch, useSelector } from 'react-redux';
+
+import { useDispatch } from 'react-redux';
 import { getMaterials } from '../../glob/materials/main';
-import { generateMaterialQuiz, generateSubmoduleQuiz, getQuizFormatProcessorByFormatIndex } from '../../glob/quizes.js';
+import { generateSubmoduleQuiz, getQuizFormatProcessorByFormatIndex } from '../../glob/quizes.js';
 import { addUserBudget } from '../../glob/state';
+
 import toast from 'react-hot-toast';
 
 

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getQuizFormatProcessorByFormatIndex } from '../glob/quizes.js'
-import { advanceQuiz, completeQuiz, addAnsweredQuizData, addUserBudget, addEmptyHistory, unlockNextMaterial } from '../glob/state';
+import { advanceQuiz, completeQuiz, addAnsweredQuizData, addUserBudget, addEmptyHistory, unlockNextMaterial, addAccomplishedMaterial } from '../glob/state';
 import { randomLength, useIsMobile } from '../glob/util';
 
 import styles from './QuizPage.module.css'
@@ -198,50 +198,53 @@ function Finish({onConfirmEnd}) {
   const dispatch = useDispatch();
   const isMobile = useIsMobile();
 
-  const msgs = [
-    <>
-      Waw! Kamu&nbsp;
-      <span className={styles["gradient-heading"]}>
-        Keren banget!
-      </span>
-    </>,
-    <>
-      Kerja bagus! Ini langkah kecil ke&nbsp;
-      <span className={styles["gradient-heading"]}>
-        hasil yang besar.
-      </span>
-    </>,
-    <>
-      Tuntas deh! siap untuk yang&nbsp;
-      <span className={styles["gradient-heading"]}>
-        berikutnya?
-      </span>
-    </>,
-    <>
-      Nilai tak segalanya,&nbsp;
-      <span className={styles["gradient-heading"]}>
-        usahamu-lah yang lebih berharga.
-      </span>
-    </>,
-    <>
-      Bangga dong, kamu sudah&nbsp;
-      <span className={styles["gradient-heading"]}>
-        satu langkah lebih pintar!
-      </span>
-    </>,
-    <>
-      Kesalahan itu&nbsp;
-      <span className={styles["gradient-heading"]}>
-        guru terbaik
-      </span>, terus belajar, terus tumbuh.
-    </>,
-    <>
-      Kamu nggak harus sempurna kok!&nbsp;
-      <span className={styles["gradient-heading"]}>
-        cukup terus berkembang.
-      </span>
-    </>,
-  ];
+  const motivationMsg = useRef((_=> {
+    const msgs = [
+      <>
+        Waw! Kamu&nbsp;
+        <span className={styles["gradient-heading"]}>
+          Keren banget!
+        </span>
+      </>,
+      <>
+        Kerja bagus! Ini langkah kecil ke&nbsp;
+        <span className={styles["gradient-heading"]}>
+          hasil yang besar.
+        </span>
+      </>,
+      <>
+        Tuntas deh! siap untuk yang&nbsp;
+        <span className={styles["gradient-heading"]}>
+          berikutnya?
+        </span>
+      </>,
+      <>
+        Nilai tak segalanya,&nbsp;
+        <span className={styles["gradient-heading"]}>
+          usahamu-lah yang lebih berharga.
+        </span>
+      </>,
+      <>
+        Bangga dong, kamu sudah&nbsp;
+        <span className={styles["gradient-heading"]}>
+          satu langkah lebih pintar!
+        </span>
+      </>,
+      <>
+        Kesalahan itu&nbsp;
+        <span className={styles["gradient-heading"]}>
+          guru terbaik
+        </span>, terus belajar, terus tumbuh.
+      </>,
+      <>
+        Kamu nggak harus sempurna kok!&nbsp;
+        <span className={styles["gradient-heading"]}>
+          cukup terus berkembang.
+        </span>
+      </>,
+    ];
+    return msgs[randomLength(msgs.length)];
+  })());
   const coins = quizState.quizCompletionRecapData.totalReward;
   const accuracy = quizState.quizCompletionRecapData.accuracy;
 
@@ -253,17 +256,17 @@ function Finish({onConfirmEnd}) {
   );
 
   const hadReloaded = useRef(false);
-  useEffect(_ => {
+  useEffect(_ => { // Finished quiz logic here
     if (hadReloaded.current) return;
     if (userState.history[0].type != 'quiz') return;
 
+    
     toast.success(
       `+${coins} Koin`,
       {
         icon: <img src={coinIcon} alt='[coinIcon]' width='5' style={{height:'1.618rem',width:'auto'}} />
       }
     );
-    
     if (userState.history[0].data.material.id === quizState.prevMaterialLvl)
       toast.success(
         `Level Up`,
@@ -271,6 +274,9 @@ function Finish({onConfirmEnd}) {
           icon: <img src={materialLevelIcon} alt='[levelIcon]' width='5' style={{height:'1.618rem',width:'auto'}} />
         }
       );
+    
+      
+    dispatch(addAccomplishedMaterial(userState.history[0].data.material.id));
     dispatch(addEmptyHistory());
     dispatch(addUserBudget(coins));
     hadReloaded.current = true;
@@ -281,7 +287,7 @@ function Finish({onConfirmEnd}) {
   return (<>
     <div className={styles['quiz-fin-header']}>
       <MascotQuizComplete scale={isMobile ? 1.75 : 1.25} className={styles['mascot']} />
-      <h2>{msgs[randomLength(msgs.length)]}</h2>
+      <h2>{motivationMsg.current}</h2>
     </div>
     <div className={styles['quiz-fin-content']}>
       <div className={styles['quiz-fin-stat-container']} style={{gridTemplateColumns: `repeat(${hasRaisedLevel ? 3 : 2}, 1fr)`}}>
