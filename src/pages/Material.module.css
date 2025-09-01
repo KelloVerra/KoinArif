@@ -218,6 +218,10 @@
 
 /* ======================================= MINIQUIZ CSS ======================================= */
 
+.miniquiz-container {
+    margin-bottom: 17.942rem;
+}
+
 .miniquiz-container h2 {
     margin: 0 0 1.618rem;
     font-family: var(--header-font);
@@ -242,11 +246,13 @@
     gap: 1rem;
     align-items: center;
 }
-.quiz-starter-content > p {
+.quiz-starter-content p {
     margin: 0;
     font-size: 1.272rem;
     font-weight: 500;
-    text-decoration: underline;
+}
+.quiz-starter-content img {
+    width: 1.272rem;
 }
 
 .quiz-container {
@@ -276,10 +282,11 @@
     font-weight: 400;
 }
 .quiz-reward-display {
-    padding: 0.236rem .618rem;
-    display: flex;
+    margin-left: 1.272rem;
+    padding: 0 .618rem;
+    display: inline-flex;
     align-items: center;
-    height: fit-content;
+    height: 2.25rem;
     gap: .5rem;
     color: var(--col-accent1);
     border-radius: 8px;
@@ -287,9 +294,10 @@
     border: solid 1.325px color-mix(in srgb, var(--col-accent1) 50%, transparent);
 }
 .quiz-reward-display p,img {
+    font-family: var(--paragraph-font);
     pointer-events: none;
     margin: 0;
-    height: 50%;
+    height: 100%;
     font-weight: 600;
     text-align: left;
 }
@@ -359,7 +367,11 @@
 }
 
 
-
+@media (max-width: 1140px) {
+    .quiz-reward-display {
+        height: 3rem;
+    }
+}
 
 @media (max-width: 725px) {
     .content {

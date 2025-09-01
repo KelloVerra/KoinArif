@@ -36,7 +36,7 @@ export default function MaterialWarning({visible}) {
                     Aku ingin Log Out
                 </a>
                 <a className={`${styles['btn']} ${styles['btn-primary']}`} onClick={onQuit}>
-                    Gak jadi deh
+                    Nggak jadi deh
                 </a>
             </div>
         </div>

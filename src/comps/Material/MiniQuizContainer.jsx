@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 
 import styles from '../../pages/Material.module.css'
+import chevronDown from '/SecondaryChevronDown.svg';
 import coinLogo from '/Budget3D.svg'
 
 import { useDispatch } from 'react-redux';
@@ -56,33 +57,40 @@ export default function MiniQuizContainer({id}) {
     const validStart = hasStarted && questionData;
     return (<>
         <div className={styles['miniquiz-container']}>
-            <h2>Mini Quiz</h2>
+            <h2>
+                Mini Quiz 
+                {
+                    hasAnswered ? 
+                    null :
+                    <div className={styles['quiz-reward-display']}>
+                        <img src={coinLogo} alt='coinLogo' width='20'/>
+                        <p>+{rewardOverview.current}</p>
+                    </div>
+                }
+            </h2>
             <div ref={containerRef} onClick={onStart} className={validStart ? styles['quiz-container'] : styles['quiz-starter-container']} style={{maxHeight: hasStarted ? `${containerHeight.current}px` : '4.236rem'}}>
             {
                 validStart ?
-                <QuizDisplay onAnswer={onAnswer} hasAnswered={hasAnswered} rewardOverview={rewardOverview.current} questionData={questionData} /> :
-                <QuizStarter rewardOverview={rewardOverview.current} />
+                <QuizDisplay onAnswer={onAnswer} questionData={questionData} /> :
+                <QuizStarter />
             }
             </div>
         </div>
     </>);
 }
 
-function QuizStarter({rewardOverview}) {
+function QuizStarter({}) {
     return (
         <>
             <div className={styles['quiz-starter-content']}>
                 <p>Mulai</p>
-                <div className={styles['quiz-reward-display']}>
-                    <img src={coinLogo} alt='coinLogo' width='20'/>
-                    <p>+{rewardOverview}</p>
-                </div>
+                <img src={chevronDown} alt='' width={20} />
             </div>
         </>
     );
 }
 
-function QuizDisplay({onAnswer, hasAnswered, rewardOverview, questionData}) {
+function QuizDisplay({onAnswer, questionData}) {
 
     const displayOptionLayout = _ => {
         switch(questionData.questionData.display_format) {
@@ -95,10 +103,6 @@ function QuizDisplay({onAnswer, hasAnswered, rewardOverview, questionData}) {
         <div className={styles['quiz-content']}>
             <div className={styles['quiz-header']}>
                 <p>{questionData.questionString}</p>
-                <div className={styles['quiz-reward-display']} style={{opacity: hasAnswered ? 0 : 1}}>
-                    <img src={coinLogo} alt='coinLogo' width='20'/>
-                    <p>+{rewardOverview}</p>
-                </div>
             </div>
             {displayOptionLayout()}
         </div>

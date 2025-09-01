@@ -3,6 +3,7 @@ import { resetStore, setUserHasStarted } from '../glob/state';
 
 import styles from './Footer.module.css'
 import logo from '/CompactLogo.svg'
+import logOutIcon from '/LogOut.svg'
 
 
 export default function Footer({setLogOutWarnVisible}) {
@@ -21,7 +22,10 @@ export default function Footer({setLogOutWarnVisible}) {
             <p>Koin Arif adalah platform financial education yang dapat mengasah pengetahuan literasimu dalam cara yang menyenangkan dan engaging.</p>
           </div>
           { userState.hasStarted ?
-            <a className={styles['quit']} onClick={logOut}>Log Out</a> :
+            <a className={styles['quit']} onClick={logOut}>
+              Log Out
+              <img src={logOutIcon} alt='' width={20} />
+            </a> :
             <a className={styles['start']} onClick={startLearning}>Mulai Belajar</a>
           }
           <hr />

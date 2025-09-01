@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
 
 import NotFound from './NotFound'
 import ArrowGoPrimary from '/PrimaryArrowGo.svg';
@@ -56,6 +57,12 @@ export default function Material() {
       },
     }));
 
+    toast.success(
+                `-${receivedMaterialData.current.requiredQuizCoins} Koin`,
+                {
+                    icon: <img src={coinLogo} alt='[coinIcon]' width='5' style={{height:'1.618rem',width:'auto'}} />
+                }
+            );
     dispatch(spendUserBudget(receivedMaterialData.current.requiredQuizCoins));
     dispatch(setPrevMaterialLvl(materialState.materialLevel));
     dispatch(resetQuiz());

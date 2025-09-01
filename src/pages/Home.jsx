@@ -10,11 +10,14 @@ import MascotGreetings from '../comps/MascotGreetings';
 import MaterialWarning from '../comps/Popup/MaterialWarning';
 import ArrowGoPurple from '/PurpleArrowGo.svg';
 import ArrowGoPrimary from '/PrimaryArrowGo.svg';
+import ChevronH from '/ChevronH.svg';
+import ChevronHOutline from '/ChevronHOutline.svg';
 import LockPurple from '/PurpleLock.svg';
 import LockPrimary from '/PrimaryLock.svg';
 import LockWhite from '/WhiteLock.svg';
 
 import styles from './Home.module.css'
+import { utils } from 'animejs';
 
 
 
@@ -25,6 +28,8 @@ export default function Home() {
   const isMobile = useIsMobile();
   const materials = useRef(getMaterials());
   const materialCardContainer = useRef(null);
+  const [materialCardContainerScroll, setMaterialCardContainerScroll] = useState(false);
+
   const [isMaterialWarningVisible, setIsMaterialWarningVisible] = useState({
     materialData: {},
     goTo : _ => {},
@@ -58,6 +63,7 @@ export default function Home() {
     if(materialCardContainer.current) {
       const act = e => {
         e.preventDefault();
+        setMaterialCardContainerScroll(materialCardContainer.current.scrollLeft + e.deltaY*2);
         materialCardContainer.current.scrollLeft += e.deltaY*2;
       };
 
@@ -68,6 +74,11 @@ export default function Home() {
       };
     }
   }, [materialCardContainer.current]);
+  const handleChevronClick = l => {
+    const s = utils.get(materialCardContainer.current, 'font-size', false) * 6 * (l ? -1 : 1);
+    materialCardContainer.current.scrollLeft += s;
+    setMaterialCardContainerScroll(materialCardContainer.current.scrollLeft + s);
+  };
 
 
 
@@ -91,6 +102,8 @@ export default function Home() {
 
         <div className={styles['material-container']}>
           <h1>Materi</h1>
+          <LevelSlideArrow scroll={materialCardContainerScroll} onClick={_ => handleChevronClick(true)} left={true} />
+          <LevelSlideArrow scroll={materialCardContainerScroll} scrollMax={materialCardContainer.current ? materialCardContainer.current.scrollLeftMax : 1000} onClick={_ => handleChevronClick(false)} left={false} />
           <div className={styles['material-card-container']} ref={materialCardContainer}>
             {materials.current.map(v => {
               const material = v();
@@ -102,6 +115,14 @@ export default function Home() {
         </div>
       </div>
     </main>
+  )
+}
+
+function LevelSlideArrow({scroll, scrollMax, onClick, left}) {
+
+  const isOutl = left ? scroll < 10 : scroll > scrollMax - 10;
+  return (
+    <img onClick={onClick} className={styles[`level-slide-arrow${left ? '' : '-r'}`]} src={isOutl ? ChevronHOutline : ChevronH} alt='' width='5' />
   )
 }
 

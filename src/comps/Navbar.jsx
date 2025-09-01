@@ -8,6 +8,7 @@ import styles from './Navbar.module.css'
 import logo from '/CompactLogo.svg'
 import budgetIcon from '/Budget3D.svg'
 import materialLevelIcon from '/Level.svg'
+import logOut from '/LogOut.svg'
 
 
 
@@ -18,9 +19,8 @@ export default function Navbar({setLogOutWarnVisible}) {
   const navRef = useRef(null);
   useEffect(_ => {
     const handle = _ => {
-      if(navRef) {
+      if(navRef)
         navRef.current.classList.toggle(styles['has-scrolled'], window.scrollY > 5)
-      }
     };
     window.addEventListener('scroll', handle);
 
@@ -54,7 +54,9 @@ function LoggedIn({warn}) {
   return (
     <div className={styles["right-content"]}>
       <UserStat />
-      <a className={styles["quit"]} onClick={_ => warn(true)}>Log Out</a>
+      <a className={styles["quit"]} onClick={_ => warn(true)}>
+        <img src={logOut} alt='Log Out' width={20} />
+      </a>
     </div>
   )
 }

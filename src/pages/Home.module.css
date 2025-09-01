@@ -76,6 +76,7 @@
 }
 
 .material-container {
+    position: relative;
     margin: 4rem 0 0;
 }
 .material-container > h1 {
@@ -95,6 +96,22 @@
     scroll-behavior: smooth;
     display: flex;
     gap: 1.618rem;
+}
+.level-slide-arrow {
+    pointer-events: all;
+    cursor: pointer;
+    position: absolute;
+    left: -2.618rem; top: 50%; transform: translateY(50%) rotate(180deg);
+    width: 1rem;
+    height: auto;
+}
+.level-slide-arrow-r {
+    pointer-events: all;
+    cursor: pointer;
+    position: absolute;
+    right: -2.618rem; top: 50%; transform: translateY(50%);
+    width: 1rem;
+    height: auto;
 }
 
 .material-card {

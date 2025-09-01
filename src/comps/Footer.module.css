@@ -90,8 +90,12 @@ hr {
 .quit {
     text-align: right;
     cursor: pointer;
-    text-decoration: underline;
     color: var(--col-accent0);
+}
+.quit img {
+    padding: 0;
+    margin-left: .272rem;
+    height: 1rem;
 }
 
 @media (max-width: 725px) {
