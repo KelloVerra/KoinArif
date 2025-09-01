@@ -4,7 +4,6 @@ import { HashRouter, Routes, Route } from 'react-router'
 
 // Import Pages
 const Landing = lazy(_ => import('./pages/Landing'));
-const CreditsAttributions = lazy(_ => import('./pages/CreditsAttributions'));
 const Home = lazy(_ => import('./pages/Home'));
 const Material = lazy(_ => import('./pages/Material'));
 const QuizPage = lazy(_ => import('./pages/QuizPage'));
@@ -71,7 +70,6 @@ export default function App() {
           <Route path='/' element={userState.hasStarted ? <Home /> : <Landing />} />
           <Route path='/material' element={<Material />} />
           <Route path='/quiz' element={<QuizPage />} />
-          <Route path='/credit' element={<CreditsAttributions />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Suspense>

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addHistory, } from '../glob/state';
 import { useNavigate } from 'react-router';
-import { getMaterials } from '../glob/materials/main';
+import { getMaterials, maximumMaterials } from '../glob/materials/main';
 import { randomLength, useIsMobile } from '../glob/util';
 import toast from 'react-hot-toast';
 
@@ -58,7 +58,7 @@ export default function Home() {
     if(materialCardContainer.current) {
       const act = e => {
         e.preventDefault();
-        materialCardContainer.current.scrollLeft += e.deltaY;
+        materialCardContainer.current.scrollLeft += e.deltaY*2;
       };
 
       materialCardContainer.current.addEventListener('wheel', act, { passive: false })
@@ -118,13 +118,17 @@ function ContinueLastActivityButton({}) {
 
       switch(history.type) {
         case 'empty':
-          txt = `Mari mulai Belajar ${getMaterials()[materialState.materialLevel]().title}!`
+          if (materialState.materialLevel >= maximumMaterials) {
+            txt = `Semua materi sudah kamu tuntaskan! Mari review materi secara acak!`;
+            break;
+          }
+          txt = `Mari mulai Belajar ${getMaterials()[materialState.materialLevel]().title}!`;
           break;
         case 'material':
-          txt = `Lanjut Bahas ${getMaterials()[history.data.material_id]().title}, gaskan!`
+          txt = `Lanjut Bahas ${getMaterials()[history.data.material_id]().title}, gaskan!`;
           break;
         case 'quiz':
-          txt = `Lanjutin Quiz ${getMaterials()[history.data.material.id]().title}, yuk!`
+          txt = `Lanjutin Quiz ${getMaterials()[history.data.material.id]().title}, yuk!`;
           break;
       }
       return txt;
@@ -137,7 +141,7 @@ function ContinueLastActivityButton({}) {
         dispatch(addHistory({
           type: 'material',
           data: {
-            material_id: materialState.materialLevel,
+            material_id: materialState.materialLevel < maximumMaterials ? materialState.materialLevel : randomLength(maximumMaterials),
           },
         }));
         navigate('/material');

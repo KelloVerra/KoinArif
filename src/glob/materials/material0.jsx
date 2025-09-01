@@ -13,11 +13,11 @@ export default function material0() {
         title: 'Dasar-Dasar Keuangan',
         displayTitle: <h1 className={materialStyles["header"]}>
             Dasar-Dasar
-            <h1 className={materialStyles["gradient-heading"]}> Keuangan</h1>
+            <span className={materialStyles["gradient-heading"]}> Keuangan</span>
         </h1>,
         desc: 'Membahas uang dari dasar, pembagian uang dengan bijak serta psikologi manusia terhadap uang.',
-        estimateDuration: '3 menit',
-        requiredQuizCoins: 35,
+        estimateDuration: '4 menit',
+        requiredQuizCoins: 30,
         submoduleData: [
             {
                 id: 0,
@@ -117,7 +117,7 @@ export default function material0() {
                     'false': [
                         'keinginan harus selalu diprioritaskan',
                         'jika keinginanmu tidak terpenuhi, hidupmu akan hancur',
-                        'tiket bioskop, villa dan drone ialah sebuah kebutuhan',
+                        'tiket bioskop, villa dan liburan keluar negeri ialah sebuah kebutuhan',
                         'agar kamu dapat hidup, kamu harus selalu mengprioritaskan keinginanmu',
                     ],
                 },

@@ -3,6 +3,7 @@ import unknown_material from "./unknown"
 import material0 from "./material0"
 import material1 from "./material1";
 import material2 from "./material2";
+import material3 from "./material3";
 
 
 // MATERIALS REGISTRY
@@ -10,10 +11,12 @@ const MATERIALS_REGISTRY = [
     _ => { return material0() },
     _ => { return material1() },
     _ => { return material2() },
+    _ => { return material3() },
 ];
 
 
 // GET
+export const maximumMaterials = MATERIALS_REGISTRY.length;
 export function getMaterialByIndex(index) {
     // Gatekeep unknown materials
     if(!Object.keys(MATERIALS_REGISTRY).includes(`${index}`)) return unknown_material()

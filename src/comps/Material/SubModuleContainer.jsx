@@ -19,7 +19,7 @@ export default function SubModuleContainer({children, id, minimizedMaxContentCou
     const [expanded, setExpanded] = useState(false);
     const [hasClaimed, setHasClaimed] = useState(
         materialState.submoduleRewardsTaken.some(v => 
-            v.module_id === id.module_id && v.submodule_id === id.submodule_id));
+            v.material_id === id.material_id && v.submodule_id === id.submodule_id));
             
     const containerHeight = useRef(100);
     const containerRef = useRef(null);
