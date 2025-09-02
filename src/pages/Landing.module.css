@@ -178,7 +178,7 @@ section p {
     flex-direction: column-reverse;
     gap: 1.618rem;
   }
-  section h1, h2 {
+  section h1, section h2 {
     padding: 0 1.618rem;
     text-align: center !important;
   }

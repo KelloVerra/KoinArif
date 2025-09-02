@@ -230,4 +230,13 @@
         font-size: 2.058rem;
         line-height: 2.058rem;
     }
+    
+    .level-slide-arrow {
+        width: .768rem;
+        left: -1.272rem;
+    }
+    .level-slide-arrow-r {
+        width: .768rem;
+        right: -1.272rem;
+    }
 }

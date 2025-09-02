@@ -120,7 +120,7 @@ export default function Home() {
 
 function LevelSlideArrow({scroll, scrollMax, onClick, left}) {
 
-  const isOutl = left ? scroll < 10 : scroll > scrollMax - 10;
+  const isOutl = left ? scroll < 10 : scroll > scrollMax - 50;
   return (
     <img onClick={onClick} className={styles[`level-slide-arrow${left ? '' : '-r'}`]} src={isOutl ? ChevronHOutline : ChevronH} alt='' width='5' />
   )
