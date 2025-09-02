@@ -146,6 +146,7 @@ const materialSlice = createSlice({
         },
 
         addAccomplishedMaterial: (state, action) => { // payload =  material_id
+            if(state.value.accomplishedMaterialLevel > action.payload) return;
             state.value.accomplishedMaterialLevel = action.payload;
         },
         
@@ -185,7 +186,7 @@ const userSlice = createSlice({
         },
 
         resetUserBudget: (state, action) => { // No playload
-            state.value.budget = 10;
+            state.value.budget = 20;
         },
         
         addHistory: (state, action) => { // Records user activity, maximum of 2 actions recorded

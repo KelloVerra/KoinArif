@@ -3,7 +3,10 @@ import SubModuleContainer from "../../comps/Material/SubModuleContainer"
 
 import materialStyles from '../../pages/Material.module.css';
 
-import imgdebgu from '/Level.svg';
+import imgarifImagine from '/material/arifImagine.svg';
+import imgarifSaving from '/material/arifSaving.svg';
+import imgasset from '/material/assetExample.svg';
+import imgdebt from '/material/debt.svg';
 
 export default function material1() {
     return {
@@ -17,7 +20,7 @@ export default function material1() {
             Pengenalan dengan
             <span className={materialStyles["gradient-heading"]}> Aset</span>
         </h1>,
-        requiredQuizCoins: 100,
+        requiredQuizCoins: 85,
         submoduleData: [
             {
                 id: 0,
@@ -70,14 +73,14 @@ export default function material1() {
                     'true': [
                         'liabilitas ialah kewajiban finansial, berupa tagihan yang harus dibayar',
                         'hutang dibayar dengan uang maupun jasa',
-                        'pengelolaan liabilitas harus bijak agar tidak membebani kodisi finansialmu',
+                        'pengelolaan liabilitas harus bijak agar tidak membebani kondisi finansialmu',
                         'memantau jatuh temponya utang termasuk strategi pengelolaan liabilitas',
                         'membuat anggaran khusus untuk membayar tagihan merupakan strategi pengelolaan liabilitas',
                     ],
                     'false': [
                         'mencatat pembayaran utang tidak termasuk strategi pengelolaan liabilitas',
                         'biaya hutang tidak wajib dibayar dan harus selalu dihindari',
-                        'bijak mengelola liabilitas agar kodisi finansialmu makin terbebani',
+                        'bijak mengelola liabilitas agar kondisi finansialmu makin terbebani',
                     ],
                 },
             },
@@ -148,27 +151,27 @@ export default function material1() {
                     <h2>Aset</h2>
                     <p>Aset adalah suatu harta, sumber daya maupun kekayaan yang dimiliki oleh seseorang, maupun suatu pihak.</p>
                     <p>Dengan memiliki Aset, kamu memiliki kesempatan untuk memanfaatkannya di masa mendatang.</p>
-                    <p>Salah satu contoh Aset ialah: Uang dan Benda berharga seperti emas & tanah.</p>
+                    <p>Salah satu contoh Aset ialah: Uang dan benda berharga seperti emas & tanah.</p>
                     <p>Aset-aset tersebut dapat ditukar dengan aset yang nilainya dianggap sesuai.</p>
                     <p>Uang dan Tabungan termasuk aset lancar.</p>
                     <p>Karena mudah dicairkan, alias gampang ditukar dengan nilai yang dianggap sama.</p>
                     <p>Rumah, Tanah dan Emas termasuk aset tetap.</p>
                     <p>Karena benda tersebut lebih sulit ditukar dengan benda lain serta memiliki nilai yang berbeda-beda.</p>
-                    <img src={imgdebgu} alt="Ilustrasi Contoh Aset" width="200px" />
+                    <img src={imgasset} alt="Ilustrasi Contoh Aset: Investasi, Rumah dan Kendaraan" width="200px" />
                     <p>Aset tidak selalu memiliki wujud fisik, loh!</p>
                     <p>Hak cipta, merek dagang ialah salah satu aset yang tak berwujud.</p>
                     <p>Namun ingat, Nilai tukar aset tidaklah tetap selamanya.</p>
-                    <p>Nilai tukar aset dapat naik maupun turun. tergantung dengan faktor-faktor tertentu.</p>
+                    <p>Nilai tukar aset dapat naik maupun turun. tergantung pada faktor-faktor tertentu.</p>
                 </SubModuleContainer>
                 <MiniQuizContainer id={{material_id:1,submodule_id:0}} />
-                <SubModuleContainer id={{material_id:1,submodule_id:1}} minimizedMaxContentCount={5} minimizedHeight={21}>
+                <SubModuleContainer id={{material_id:1,submodule_id:1}} minimizedMaxContentCount={6} minimizedHeight={21} additionalImgHeight={17}>
                     <h2>Liabilitas</h2>
                     <p>Liabilitas, alias Utang, ialah kewajiban finansial, berupa tagihan yang harus kamu bayar.</p>
                     <p>Dibayar dengan uang, barang berharga maupun jasa.</p>
                     <p>Singkatnya, Liabilitas adalah hal yang menguras asetmu.</p>
                     <p>Liabilitas tidak dapat dihindari sepenuhnya, namun kamu bisa memahami cara pengelolaannya.</p>
-                    <img src={imgdebgu} alt="Illustrasi dari contoh liabilitas yang umum" width="200px" />
-                    <p>Pengelolaan liabilitas harus bijak agar tidak membebani kodisi finansialmu.</p>
+                    <img src={imgdebt} alt="Illustrasi dari contoh liabilitas yang umum" width="200px" />
+                    <p>Pengelolaan liabilitas harus bijak agar tidak membebani kondisi finansialmu.</p>
                     <p>Beberapa cara mengelola liabilitas ialah:</p>
                     <p>Pantau utangmu, seperti jumlahnya dan jatuh temponya.</p>
                     <p>Catat pembayaran & transaksi utang, agar nggak kebingungan ya.</p>
@@ -176,13 +179,13 @@ export default function material1() {
                     <p>Intinya, liabilitas tidaklah selalu buruk, asal dikendali dan direncana dengan bijak!</p>
                 </SubModuleContainer>
                 <MiniQuizContainer id={{material_id:1,submodule_id:1}} />
-                <SubModuleContainer id={{material_id:1,submodule_id:2}} minimizedMaxContentCount={4} minimizedHeight={15}>
+                <SubModuleContainer id={{material_id:1,submodule_id:2}} minimizedMaxContentCount={5} minimizedHeight={18}>
                     <h2>Menabung</h2>
                     <p>Kamu simpan sekarang, dipakai nanti di masa depan, itulah menabung.</p>
                     <p>Kamu dapat menabung dimana saja.</p>
                     <p>Mulai dari tabungan pribadi, rekening bank dan dompet digital.</p>
                     <p>Yang penting, kamu punya jangka waktu dan tujuan menabung yang jelas bagimu.</p>
-                    <img src={imgdebgu} alt="Arif suka menabung, loh!" width="200px" />
+                    <img src={imgarifSaving} alt="Arif suka menabung, loh!" width="200px" data-is-big={true} />
                     <p>Jika tujuanmu untuk membeli gadget mahal, liburan, untuk jaga-jaga keadaan darurat.</p>
                     <p>Jangka waktu pendek, kurang dari 1 tahun atau hingga tabungan tersebut cukup untuk memenuhi tujuanmu.</p>
                     <p>Jika tujuanmu untuk membiayai pendidikan maupun menyimpan modal usaha awal.</p>
@@ -200,21 +203,21 @@ export default function material1() {
                     <p>Inflasi ialah kenaikan harga barang / jasa secara umum.</p>
                     <p>Artinya, nilai uangmu berkurang seiring waktu.</p>
                     <p>Contoh: </p>
-                    <p>Harga 1 Nasi goreng di tahun 2015 = Rp5.000</p>
-                    <p>Harga 1 Nasi goreng di tahun 2015 = Rp10.000</p>
-                    <p>Dalam 10 tahun, harga barang yang sama naik 100%</p>
-                    <p>Uang Rp 5K sudah tidak bisa membeli barang yang sama seperti dulu.</p>
-                    <img src={imgdebgu} alt="Nilai tukar nasi goreng" width="200px" />
-                    <p>Selain harga barang, dampak inflasi kepada keunganmu ialah:</p>
+                    <p data-is-list={true}>Harga 1 Nasi bungkus di tahun 2015 = Rp5.000</p>
+                    <p data-is-list={true}>Harga 1 Nasi bungkus di tahun 2025 = Rp10.000</p>
+                    <p data-is-list={true}>Dalam 10 tahun, harga barang yang sama naik 100%</p>
+                    <p data-is-list={true}>Uang Rp 5K sudah tidak bisa membeli barang yang sama seperti dulu.</p>
+                    <img src={imgarifImagine} alt="Arif yang sedang memikirkan harga belanja bulanan-nya tiap tahun" width="200px" />
+                    <p>Selain harga barang, dampak inflasi kepada keuanganmu ialah:</p>
                     <p>Jika tidak rajin menabung, nilai tabunganmu bisa “tergerus” nilainya.</p>
-                    <p>Pengeluaran belanja bulananmu akan terus naik seiring waktu</p>
-                    <img src={imgdebgu} alt="Arif suka menabung, loh!" width="200px" />
+                    <p>Pengeluaran belanja bulananmu akan terus naik seiring waktu.</p>
+                    <img src={imgarifSaving} alt="Arif bijak menyisihkan uang untuk menabung" width="200px" data-is-big={true} />
                     <p>Jangan cemas, kamu bisa melawan inflasi dengan strategi seperti:</p>
-                    <p>Mengelola pengeluaran & gaya hidupmu, kurangi pemborosan</p>
-                    <p>Memanfaatkan strategi penganggaran yang efektif</p>
-                    <p>Rajin menabung</p>
-                    <p>Memantau harga dengan rutin, agar kamu dapat menyesuaikan anggaranmu</p>
-                    <p>Memanfaatkan platform investasi, akan kita bahas lebih lanjut</p>
+                    <p data-is-list={true}>Mengelola pengeluaran & gaya hidupmu, kurangi pemborosan</p>
+                    <p data-is-list={true}>Memanfaatkan strategi penganggaran yang efektif</p>
+                    <p data-is-list={true}>Rajin menabung</p>
+                    <p data-is-list={true}>Memantau harga dengan rutin, agar kamu dapat menyesuaikan anggaranmu</p>
+                    <p data-is-list={true}>Memanfaatkan platform investasi, akan kita bahas lebih lanjut</p>
                     <p>Inflasi itu wajar, Jangan mau merasa dikalahkan, Lawanlah inflasi dengan disiplin & strategi secara finansial</p>
                 </SubModuleContainer>
                 <MiniQuizContainer id={{material_id:1,submodule_id:3}} />

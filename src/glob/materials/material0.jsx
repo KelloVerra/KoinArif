@@ -3,7 +3,10 @@ import SubModuleContainer from "../../comps/Material/SubModuleContainer"
 
 import materialStyles from '../../pages/Material.module.css';
 
-import imgdebgu from '/Level.svg';
+import imgexchangeVal from '/material/exchangeVal.svg';
+import imgarifAnalyze from '/material/arifAnalyze.svg';
+import imgkebutuhan from '/material/kebutuhan.svg';
+import imgkeinginan from '/material/keinginan.svg';
 
 export default function material0() {
     return {
@@ -131,9 +134,9 @@ export default function material0() {
                         <h2>Uang</h2>
                         <p>Uang adalah alat tukar pembayaran.</p>
                         <p>Uang juga digunakan sebagai Standar pengukur nilai (satuan hitung).</p>
-                        <p>Misal, 1 Nasi Kotak = 8k Rupiah, Sehingga 16k Rupiah = 2 Nasi Kotak</p>
-                        <img src={imgdebgu} alt="Ilustrasi nilai ukur antara Uang & Barang" width="200px" />
-                        <p>Wujudnya beragam, mulai dari Uang koin, Uang kertas, Simpanan Bank, E-Money dan sebagiannya.</p>
+                        <p>Misal, 1 Nasi bungkus = 8k Rupiah, Sehingga 16k Rupiah = 2 Nasi bungkus</p>
+                        <img src={imgexchangeVal} alt="Ilustrasi nilai ukur antara Uang & Barang" width="200px" />
+                        <p>Wujudnya beragam, mulai dari Uang koin, Uang kertas, Simpanan Bank, E-Money dan lainnya.</p>
                         <p>Uang koin, Uang kertas termasuk uang kartal yang dikeluarkan oleh negara.</p>
                         <p>Sebutan lain dari uang kartal ialah uang tunai.</p>
                         <p>Uang Simpanan di Bank, E-Money termasuk uang giral yang disimpan oleh jasa perbank-an.</p>
@@ -147,11 +150,10 @@ export default function material0() {
                         <h2>Anggaran & Penganggaran</h2>
                         <p>Anggaran (budget, atau dana) adalah perkiraan pemasukan & pengeluaran uang di periode tertentu.</p>
                         <p>Penganggaran (budgeting, atau pendanaan) adalah rencana anggaran (budget) di masa mendatang.</p>
-                        <img src={imgdebgu} alt="Ilustrasi perencanaan finansial" width="200px" />
+                        <img src={imgarifAnalyze} alt="Arif rajin menganalisa pengeluarannya" width="200px" />
                         <p>Penganggaran bertujuan untuk merencanakan dan mengevaluasi ekspektasi yang realistis dan sistematis.</p>
                         <p>Dengan penganggaran, kamu dapat membentuk ekspektasi realistis menyesuaikan dengan kondisi finansialmu.</p>
                         <p>Tanpa penganggaran, kamu akan mem-boros uang, bahkan lupa kemana kamu menghabiskan uangmu .</p>
-                        <img src={imgdebgu} alt="Ilustrasi pemborosan" width="200px" />
                         <p>Penganggaran yang efektif adalah penganggaran yang realistis, sesuai kebutuhan & keinginanmu dengan kondisi finansialmu.</p>
                         <p>Oleh karena itu, bijaklah membagi uangmu.</p>
 
@@ -159,20 +161,18 @@ export default function material0() {
 
                     <MiniQuizContainer id={{material_id:0,submodule_id:1}} />
 
-                    <SubModuleContainer id={{material_id:0,submodule_id:2}} minimizedMaxContentCount={4} minimizedHeight={25}>
+                    <SubModuleContainer id={{material_id:0,submodule_id:2}} minimizedMaxContentCount={4} minimizedHeight={12} additionalImgHeight={12}>
 
                         <h2>Kebutuhan vs Keinginan</h2>
                         <p>Kebutuhan adalah hal mutlak yang diperlukan untuk hidup.</p>
                         <p>Seperti Air Bersih, Nasi Kotak, Tempat tinggal layak dan lainnya..</p>
-                        <img src={imgdebgu} alt="Ilustrasi kebutuhan dasar" width="200px" />
+                        <img src={imgkebutuhan} alt="Ilustrasi kebutuhan pokok" width="200px" />
                         <p>Keinginan adalah dorongan untuk memiliki atau mengalami sesuatu yang tidak selalu dibutuhkan untuk hidup.</p>
-                        <p>Seperti Baju mewah, Makan di Restoran, Jalan-jalan keluar negri..</p>
-                        <img src={imgdebgu} alt="Ilustrasi keinginan mewah" width="200px" />
+                        <p>Seperti Baju mewah, Makan di Restoran, Jalan-jalan keluar negeri..</p>
+                        <img src={imgkeinginan} alt="Ilustrasi keinginan mewah" width="200px" />
                         <p>Kebutuhan harus selalu di prioritaskan terlebih dahulu sebelum memuaskan keinginan kita.</p>
                         <p>Jika kebutuhan tidak dipenuhi, kualitas hidup kita akan menurun.</p>
-                        <p>Jika keinginan tidak dipenuhi, kamu hanya akan merasakan sedikit kekecewaan.</p>
-                        <img src={imgdebgu} alt="Ilustrasi kualitas hidup" width="200px" />
-
+                        <p>Sebaliknya, Jika keinginan tidak dipenuhi, kamu hanya merasakan sedikit kekecewaan.</p>
                     </SubModuleContainer>
 
                     <MiniQuizContainer id={{material_id:0,submodule_id:2}} />

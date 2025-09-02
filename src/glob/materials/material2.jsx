@@ -3,7 +3,11 @@ import SubModuleContainer from "../../comps/Material/SubModuleContainer"
 
 import materialStyles from '../../pages/Material.module.css';
 
-import imgdebgu from '/Level.svg';
+import imgRisk from '/material/arifRiskManage.svg';
+import imgarifPrepare from '/material/arifPrepare.svg';
+import imgHappy from '/material/arifHappy.svg';
+
+
 
 export default function material1() {
     return {
@@ -12,13 +16,13 @@ export default function material1() {
         error: false,
         title: 'Risiko dan Urgensi',
         desc: 'Membahas mengenai pengelolaan Risiko, situasi Urgen maupun Darurat.',
-        estimateDuration: '7 menit',
+        estimateDuration: '8 menit',
         displayTitle: <h1 className={materialStyles["header"]}>
             <span className={materialStyles["gradient-heading"]}>Risiko </span>
             dan
             <span className={materialStyles["gradient-heading"]}> Urgensi</span>
         </h1>,
-        requiredQuizCoins: 175,
+        requiredQuizCoins: 125,
         submoduleData: [
             {
                 id: 0,
@@ -82,7 +86,7 @@ export default function material1() {
                 desc: 'asuransi',
                 terms: [
                     {
-                        name: ['asuransi', ],
+                        name: ['asuransi', 'jaminan asuransi', 'proteksi asuransi', ],
                         definition: [
                             'perlindungan finansial ketika adanya kerugian signifikan',
                             'alat untuk menghadapi risiko yang dampaknya signifikan',
@@ -110,17 +114,17 @@ export default function material1() {
         ],
         component: _ => (
             <>
-                <SubModuleContainer id={{material_id:2,submodule_id:0}} minimizedMaxContentCount={3} minimizedHeight={12}>
+                <SubModuleContainer id={{material_id:2,submodule_id:0}} minimizedMaxContentCount={4} minimizedHeight={12} additionalImgHeight={22}>
                     <h2>Risiko</h2>
                     <p>Risiko ialah kemungkinan kejadian tidak terduga, yang bisa merugikanmu</p>
                     <p>Seperti, sakit, kerusakan, kecelakaan, kematian, atau kehilangan aset</p>
-                    <img src={imgdebgu} alt="Illustrasi risiko" width="200px" />
+                    <img src={imgRisk} alt="Arif menimbangkan risiko" width="200px" />
                     <p>Risiko bersifat sulit diprediksi, datangnya kejadian tidak diketahui</p>
                     <p>Dampaknya beragam, bisa kecil, bisa besar</p>
                     <p>Tidak semua bisa dihindari sepenuhnya, namun bisa dikelola</p>
                     <p>Beberapa strategi mengelola risiko ialah:</p>
-                    <p>- Menyiapkan dana darurat, cocok untuk keadaan mendesak</p>
-                    <p>- Menggunakan asuransi, asuransi dapat melindungi kita & aset kita dari kerugian signifikan</p>
+                    <p data-is-list={true}>Menyiapkan dana darurat, cocok untuk keadaan mendesak</p>
+                    <p data-is-list={true}>Menggunakan asuransi, asuransi dapat melindungi kita & aset kita dari kerugian signifikan</p>
                     <p>Jangan merasa ditakuti oleh risiko.</p>
                     <p>Daripada panik, Sebaiknya meluangkan waktu menyusun strategi menghadapi risiko.</p>
                     <p>Selanjutnya, ayo bahas strategi-strategi tersebut!</p>
@@ -131,33 +135,33 @@ export default function material1() {
                     <p>Bayangkan Dana Darurat sebagai tabungan khusus untuk menghadapi risiko</p>
                     <p>Berbeda dengan tabungan biasa, dana ini hanya dapat dipakai saat keadaan mendesak.</p>
                     <p>Dengan dana darurat, tidak perlu khawatir lagi dengan risiko!</p>
-                    <p>Jika terjadinya kecelakaan atau kehilangan pekerjaan, tidap perlu pusing lagi.</p>
+                    <p>Jika terjadinya kecelakaan atau kehilangan pekerjaan, tidak perlu pusing lagi.</p>
                     <p>Kamu dapat menjalankan hidupmu seperti biasa, sambil memulihkan kerusakan yang terjadi.</p>
                     <p>Namun kamu harus banget disiplin menyisihkan dengan rutin, tiap bulan.</p>
                     <p>Dilarang banget dipakai untuk hal yang tidak terkait yah!</p>
                     <p>Gunakan jika ada kondisi darurat nyata.</p>
-                    <img src={imgdebgu} alt="Seperti kata pepatah, sedia payung sebelum hujan!" width="200px" />
+                    <img src={imgarifPrepare} alt="Seperti kata pepatah, sedia payung sebelum hujan!" width="200px" data-is-big={true} />
                 </SubModuleContainer>
                 <MiniQuizContainer id={{material_id:2,submodule_id:1}} />
-                <SubModuleContainer id={{material_id:2,submodule_id:2}} minimizedMaxContentCount={5} minimizedHeight={22}>
+                <SubModuleContainer id={{material_id:2,submodule_id:2}} minimizedMaxContentCount={5} minimizedHeight={20}>
                     <h2>Asuransi</h2>
                     <p>Asuransi adalah perlindungan finansial ketika adanya kerugian signifikan.</p>
                     <p>Asuransi cocok untuk menghadapi risiko yang lebih signifikan.</p>
-                    <p>Jika memiliki dana darurat saja tidak dapat menghadapinya risiko tersebut.</p>
+                    <p>Jika memiliki dana darurat saja tidak dapat menghadapi risiko tersebut.</p>
                     <p>Tanpa asuransi, kamu dapat mengalami kerugian total dan bahkan kehilangan segalanya.</p>
-                    <img src={imgdebgu} alt="Ilustrasi risiko" width="200px" />
+                    <img src={imgRisk} alt="Arif menimbangkan risiko" width="200px" />
                     <p>Asuransi diberikan oleh perusahaan asuransi kepada seseorang maupun suatu pihak.</p>
                     <p>Agar diberi bantuan finansial, kamu harus menaati perjanjian / polis-nya, dan wajib membayar premi.</p>
                     <p>Premi adalah sebutan lain dari jumlah uang yang perlu rutin dibayar.</p>
                     <p>Tergantung dengan jenisnya, tiap asuransi menanggung aspek yang berbeda.</p>
                     <p>Jenis-jenis asuransi yang umum :</p>
-                    <p>Asuransi Jiwa, melindungi keluarga/ahli waris saat pencari nafkah meninggal.</p>
-                    <p>Asuransi Kesehatan, menanggung biaya pengobatan dan rawat inap.</p>
-                    <p>Asuransi Kendaraan, menanggung kerusakan atau kehilangan kendaraan.</p>
-                    <p>Asuransi Properti, melindungi rumah atau bangunan dari kerusakan/kerugian.</p>
-                    <p>Asuransi Perjalanan, perlindungan selama bepergian (jika terjadinya kehilangan barang).</p>
+                    <p data-is-list={true}>Asuransi Jiwa, melindungi keluarga/ahli waris saat pencari nafkah meninggal.</p>
+                    <p data-is-list={true}>Asuransi Kesehatan, menanggung biaya pengobatan dan rawat inap.</p>
+                    <p data-is-list={true}>Asuransi Kendaraan, menanggung kerusakan atau kehilangan kendaraan.</p>
+                    <p data-is-list={true}>Asuransi Properti, melindungi rumah atau bangunan dari kerusakan/kerugian.</p>
+                    <p data-is-list={true}>Asuransi Perjalanan, perlindungan selama bepergian (jika terjadinya kehilangan barang).</p>
                     <p>Dengan asuransi, kamu dapat merasa aman, nyaman dan tidak lagi khawatir.</p>
-                    <img src={imgdebgu} alt="Bebas khawatir jika bijak pengelolaan risiko" width="200px" />
+                    <img src={imgHappy} alt="Bebas khawatir jika bijak pengelolaan risiko" width="200px" data-is-big={true} />
                 </SubModuleContainer>
                 <MiniQuizContainer id={{material_id:2,submodule_id:2}} />
             </>

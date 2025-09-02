@@ -11,7 +11,7 @@ import arrowDownYellow from '/YellowArrowDown.svg';
 import toast from 'react-hot-toast';
 
 
-export default function SubModuleContainer({children, id, minimizedMaxContentCount, minimizedHeight}) {
+export default function SubModuleContainer({children, id, minimizedMaxContentCount, minimizedHeight, additionalImgHeight = 0}) {
 
     const materialState = useSelector(stat => stat.material.value);
     const dispatch = useDispatch();
@@ -37,24 +37,33 @@ export default function SubModuleContainer({children, id, minimizedMaxContentCou
         if(elem.type === 'p' || elem.type === 'img')
             contentCount += 1;
 
+        if(elem.props['data-is-list']) elem = cloneElement(elem, {style:{marginLeft: '2rem', width: '95%'}})
+
         if(contentCount >= minimizedMaxContentCount && !expanded)
             return cloneElement(elem, {style:{opacity:0.0,transition:`opacity 200ms`}})
 
         //  auto header
         if(!hasHeader && elem.type === 'h2') {
             hasHeader = true;
-            return (<div className={styles['submodule-header']}>
-                <h2>{elem.props.children}</h2>
-                <p>M.{id.material_id}.{id.submodule_id}</p>
-            </div>);    
+            return (
+                <div className={styles['submodule-header']}>
+                    <h2>{elem.props.children}</h2>
+                    <p>M.{id.material_id}.{id.submodule_id}</p>
+                </div>
+            );
         }
             
-        // process img  
-        if(elem.type === 'img')
-            return (<div className={styles['submodule-attachment']}>
-                <img src={elem.props.src} alt={elem.props.alt} width={elem.props.width}/>
-                <p>{elem.props.alt}</p>
-            </div>);
+        // process img as attachment
+        if(elem.type === 'img'){
+            let large = '';
+            if(elem.props['data-is-big']) large = styles['large-img'];
+
+            return (
+                <div className={styles['submodule-attachment']}>
+                    <img className={large} src={elem.props.src} alt={elem.props.alt} width={elem.props.width}/>
+                    <p>{elem.props.alt}</p>
+                </div>
+            );}
 
         return elem;
     }), [expanded]);
@@ -85,7 +94,7 @@ export default function SubModuleContainer({children, id, minimizedMaxContentCou
 
     minimizedHeight = isMobile ? minimizedHeight * 1.618 : minimizedHeight;
     return (<>
-        <div className={styles['submodule-container']} ref={containerRef} style={{maxHeight: expanded ? `${containerHeight.current}px` : `${minimizedHeight}rem`}}>
+        <div className={styles['submodule-container']} ref={containerRef} style={{maxHeight: expanded ? `${containerHeight.current}px` : `${minimizedHeight + additionalImgHeight}rem`}}>
             {processedChildren}
             {   !hasClaimed ?
                 <button onClick={claimCoin} className={styles['submodule-coin-claim-btn']} >
