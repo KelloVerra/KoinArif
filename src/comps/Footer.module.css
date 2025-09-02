@@ -36,10 +36,6 @@ hr {
     margin: 0 0 0 auto;
     width: fit-content;
 }
-.content > .quit-button {
-    margin: 0 0 0 auto;
-    width: fit-content;
-}
 
 .content > .upper {
     height: 7rem;
@@ -107,6 +103,10 @@ hr {
         height: 50%;
     }
     
+    
+    .quit {
+        font-size: 1rem;
+    }
     .upper {
         margin-bottom: 4.236rem;
     }
