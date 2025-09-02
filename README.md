@@ -24,7 +24,7 @@
 ## Resources
 Kodchasan @GoogleFonts &copy; 2018 The Kodchasan Project Authors \
 Days One @GoogleFonts &copy; 2011, Jovanny Lemonad \
-HeroIcons &copy; Tailwind Labs, Inc.
+HeroIcons &copy; Tailwind Labs, Inc. \
 SVGRepo vector & icons
 
 
